@@ -17,7 +17,7 @@ Cấu hình tại: `GitHub Repository > Settings > Branches > Add branch protect
 | Require a pull request before merging | Bật | Bắt buộc tạo PR, cấm push trực tiếp |
 | Required number of approvals | `2` | Cần ít nhất 2 thành viên approve |
 | Require status checks to pass | Bật | Jenkins CI phải pass trước khi merge |
-| Require branches to be up to date before merging | Bật | Branch phải được sync với `main` |
+| Required branches to be up to date before merging | Bật | Branch phải được sync với `main` |
 | Do not allow bypassing above settings | Bật | Admin cũng phải tuân thủ quy tắc |
 
 ### 1.2 Hình Ảnh Minh Chứng
@@ -92,22 +92,10 @@ Yêu cầu tối thiểu: >= 70%
 
 ### 2.5 Hình Ảnh Minh Chứng
 
-**Hình 2.1 — Kết quả chạy test: tất cả test case PASS**
-
-```
-[HÌNH: Terminal output "Tests run: XX, Failures: 0, Errors: 0 — BUILD SUCCESS"]
-```
-
-**Hình 2.2 — Báo cáo JaCoCo Coverage cho service media**
+**Hình 2.1 — Báo cáo JaCoCo Coverage cho service media**
 
 ```
 [HÌNH: Trình duyệt mở file media/target/site/jacoco/index.html hiển thị tổng coverage]
-```
-
-**Hình 2.3 — Pull Request `test/media` trên GitHub**
-
-```
-[HÌNH: Trang PR với danh sách file test được thêm vào và trạng thái CI]
 ```
 
 ---
@@ -143,13 +131,7 @@ Yêu cầu tối thiểu: >= 70%
 
 ### 3.4 Hình Ảnh Minh Chứng
 
-**Hình 3.1 — Kết quả chạy test service product: BUILD SUCCESS**
-
-```
-[HÌNH: Terminal output BUILD SUCCESS cho module product]
-```
-
-**Hình 3.2 — Báo cáo JaCoCo Coverage cho service product**
+**Hình 3.1 — Báo cáo JaCoCo Coverage cho service product**
 
 ```
 [HÌNH: product/target/site/jacoco/index.html]
@@ -157,7 +139,89 @@ Yêu cầu tối thiểu: >= 70%
 
 ---
 
-## 4. Pull Request Demo (Trạng Thái Open)
+## 4. Unit Test — Service `order`
+
+### 4.1 Thông Tin Branch Và Pull Request
+
+| Thông tin | Giá trị |
+|-----------|---------|
+| Tên branch | `test/order` |
+| Branch gốc | `main` |
+| Link PR | `https://github.com/<ten-nhom>/yas/pull/<so>` |
+
+### 4.2 Danh Sách File Test (OrderService)
+
+Để đạt mục tiêu coverage >= 70%, lớp `OrderService` đã được chia thành các file test nhỏ để dễ quản lý (< 150 dòng/file):
+
+| File Test | Lớp/Phương thức được kiểm thử | Số test case |
+|-----------|-------------------------------|:------------:|
+| `OrderServiceCreateTest.java` | `createOrder` | 1 |
+| `OrderServiceGetTest.java` | `getOrderWithItemsById`, `getAllOrder`, `getLatestOrders`, `getMyOrders`, `findOrderVmByCheckoutId`, `findOrderByCheckoutId` | 11 |
+| `OrderServiceStatusTest.java` | `updateOrderPaymentStatus`, `rejectOrder`, `acceptOrder` | 7 |
+| `OrderServiceOtherTest.java` | `isOrderCompletedWithUserIdAndProductId`, `exportCsv` | 4 |
+| `CheckoutServiceTest.java` | `CheckoutService` | 8 |
+| **Tổng** | | **31+** |
+
+### 4.3 Kết Quả Coverage (order)
+
+| Package | Coverage (Instructions) | Coverage (Branches) |
+|---------|:-----------------------:|:-------------------:|
+| `com.yas.order.service` | 77% | 75% |
+| `com.yas.order.specification` | 43% | 34% |
+| `com.yas.order.mapper` | 76% | 44% |
+| **Tổng Module** | **76%** | **47%** |
+
+*Ghi chú: Lớp `OrderService` đạt **99%** Instruction Coverage.*
+
+### 4.4 Hình Ảnh Minh Chứng
+
+**Hình 4.1 — Báo cáo JaCoCo Coverage tổng quan module order (76%)**
+
+![order_coverage](../screenshots/04-order-service-coverage.png)
+
+---
+
+## 5. Unit Test — Service `inventory`
+
+### 5.1 Thông Tin Branch Và Pull Request
+
+| Thông tin | Giá trị |
+|-----------|---------|
+| Tên branch | `test/inventory` |
+| Branch gốc | `main` |
+| Link PR | `https://github.com/<ten-nhom>/yas/pull/<so>` |
+
+### 5.2 Danh Sách File Test
+
+| File Test | Lớp được kiểm thử | Số test case |
+|-----------|-------------------|:------------:|
+| `WarehouseServiceTest.java` | `WarehouseService` | 9 |
+| `StockServiceTest.java` | `StockService` | 6 |
+| `StockHistoryServiceTest.java` | `StockHistoryService` | 2 |
+| `LocationServiceTest.java` | `LocationService` (Có sẵn) | 4 |
+| `ProductServiceTest.java` | `ProductService` (Có sẵn) | 3 |
+| **Tổng** | | **24+** |
+
+### 5.3 Kết Quả Coverage (inventory)
+
+| Package | Coverage (Instructions) | Coverage (Branches) |
+|---------|:-----------------------:|:-------------------:|
+| `com.yas.inventory.service` | 84% | 66% |
+| **Tổng Module** | **89%** | **70%** |
+
+*Ghi chú: Lớp `WarehouseService`, `StockService` và `StockHistoryService` đều được bổ sung test để đạt coverage cao.*
+
+### 5.4 Hình Ảnh Minh Chứng
+
+**Hình 5.1 — Báo cáo JaCoCo Coverage tổng quan module inventory (89%)**
+
+```
+[HÌNH: inventory/target/site/jacoco/index.html hiển thị tổng 89%]
+```
+
+---
+
+## 6. Pull Request Demo (Trạng Thái Open)
 
 Theo yêu cầu nộp bài, nhóm duy trì ít nhất một PR ở trạng thái Open trên GitHub.
 
@@ -168,7 +232,7 @@ Theo yêu cầu nộp bài, nhóm duy trì ít nhất một PR ở trạng thái
 | Reviewer được gán | [Tên TV khác], [Tên TV khác] |
 | Trạng thái CI | Passing |
 
-**Hình 4.1 — Pull Request đang ở trạng thái Open, chờ review**
+**Hình 6.1 — Pull Request đang ở trạng thái Open, chờ review**
 
 ```
 [HÌNH: Trang PR trên GitHub với nhãn "Open", hiển thị reviewer và CI status]
@@ -176,7 +240,7 @@ Theo yêu cầu nộp bài, nhóm duy trì ít nhất một PR ở trạng thái
 
 ---
 
-## 5. Vấn Đề Gặp Phải Và Cách Giải Quyết
+## 7. Vấn Đề Gặp Phải Và Cách Giải Quyết
 
 | Vấn đề | Nguyên nhân | Giải pháp |
 |--------|-------------|-----------|
