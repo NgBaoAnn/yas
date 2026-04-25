@@ -1,7 +1,7 @@
 # Phần 2: Branch Protection và Unit Test (media, product)
 
 **Người thực hiện:** [Họ và tên] — MSSV: `XXXXXXXX`  
-**Phạm vi:** Cấu hình Branch Protection trên GitHub, viết unit test cho service `media` và `product`, tạo Pull Request demo.
+**Phạm vi:** Cấu hình Branch Protection trên GitHub, viết unit test cho service `media`, `product`, và `payment`, tạo Pull Request demo.
 
 ---
 
@@ -157,18 +157,64 @@ Yêu cầu tối thiểu: >= 70%
 
 ---
 
-## 4. Pull Request Demo (Trạng Thái Open)
+## 4. Unit Test — Service `payment`
+
+### 4.1 Thông Tin Branch Và Pull Request
+
+| Thông tin | Giá trị |
+|-----------|---------|
+| Tên branch | `test/payment` |
+| Branch gốc | `main` |
+| Link PR | `https://github.com/<ten-nhom>/yas/pull/<so>` |
+
+### 4.2 Danh Sách File Test
+
+| File Test | Lớp được kiểm thử | Số test case |
+|-----------|-------------------|:------------:|
+| `PaymentControllerTest.java` | `PaymentController` | 3 |
+| `PaymentProviderControllerTest.java` | `PaymentProviderController` | 3 |
+| `PaymentProviderServiceTest.java` | `PaymentProviderService` | 7 |
+| `OrderServiceTest.java` | `OrderService` | 2 |
+| `PaypalHandlerTest.java` | `PaypalHandler`, `AbstractPaymentHandler` | 3 |
+| `PaymentServiceTest.java` | `PaymentService` | 2 |
+| `MediaServiceTest.java` | `MediaService` | 2 |
+| **Tổng** | | **22** |
+
+### 4.3 Kết Quả Coverage (payment)
+
+| Package | Coverage (Instructions) |
+|---------|:-----------------------:|
+| `controller` | 100.00% |
+| `service` | 89.08% |
+| `service.provider.handler` | 100.00% |
+| `mapper` | 46.01% |
+| `viewmodel` | 77.78% |
+| `viewmodel.paymentprovider` | 100.00% |
+| `model.enumeration` | 100.00% |
+| **Tổng** | **72.33%** |
+
+Yêu cầu tối thiểu: >= 70% ✅
+
+### 4.4 Hình Ảnh Minh Chứng
+
+**Hình 4.1 — Báo cáo JaCoCo Coverage cho service payment đạt 72.33%**
+
+![Payment Service Coverage](../../docs/screenshots/05-payment-service-coverage.png)
+
+---
+
+## 5. Pull Request Demo (Trạng Thái Open)
 
 Theo yêu cầu nộp bài, nhóm duy trì ít nhất một PR ở trạng thái Open trên GitHub.
 
 | Thông tin | Giá trị |
 |-----------|---------|
-| Tiêu đề PR | `test(media): add unit tests for MediaController and utils` |
+| Tiêu đề PR | `test(payment): add unit tests for Payment and PaymentProvider` |
 | Trạng thái | Open |
 | Reviewer được gán | [Tên TV khác], [Tên TV khác] |
 | Trạng thái CI | Passing |
 
-**Hình 4.1 — Pull Request đang ở trạng thái Open, chờ review**
+**Hình 5.1 — Pull Request đang ở trạng thái Open, chờ review**
 
 ```
 [HÌNH: Trang PR trên GitHub với nhãn "Open", hiển thị reviewer và CI status]
@@ -176,13 +222,13 @@ Theo yêu cầu nộp bài, nhóm duy trì ít nhất một PR ở trạng thái
 
 ---
 
-## 5. Vấn Đề Gặp Phải Và Cách Giải Quyết
+## 6. Vấn Đề Gặp Phải Và Cách Giải Quyết
 
 | Vấn đề | Nguyên nhân | Giải pháp |
 |--------|-------------|-----------|
-| Lệnh `./mvnw test` báo lỗi `${revision} not found` | Chạy Maven từ sai thư mục, không đọc được root POM | Chạy `./mvnw -f ../pom.xml test -pl media -am` từ bên trong thư mục `media/` |
-| `@WebMvcTest` lỗi khi load ApplicationContext | OAuth2 tự động cấu hình gây xung đột trong môi trường test | Thêm `excludeAutoConfiguration = OAuth2ResourceServerAutoConfiguration.class` |
-| [Điền thêm nếu có] | | |
+| Lệnh `./mvnw test` báo lỗi `${revision} not found` | Chạy Maven từ sai thư mục, không đọc được root POM | Chạy `./mvnw -f ../pom.xml test -pl <module> -am` từ bên trong thư mục con |
+| Lỗi thiếu Annotation cho test MVC | Cấu hình `@WebMvcTest` mặc định của Spring Boot không đủ tương thích với Custom Security | Sử dụng class cấu hình import nội bộ dự án: `org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest` |
+| Lỗi lệch `ViewModel` Constructors | Constructor dùng trong unit test không khớp với các annotation Lombok hoặc Records thực tế của dự án | Thay đổi test để dùng đúng Object setters hoặc `ObjectMapper` cho các DTO (ví dụ `InitiatedPayment` và `CapturedPayment`) |
 
 ---
 
