@@ -177,9 +177,7 @@ Yêu cầu tối thiểu: >= 70%
 
 **Hình 4.1 — Báo cáo JaCoCo Coverage tổng quan module order (76%)**
 
-```
-[HÌNH: order/target/site/jacoco/index.html hiển thị tổng 76%]
-```
+![order_coverage](../screenshots/04-order-service-coverage.png)
 ---
 
 ## 5. Pull Request Demo (Trạng Thái Open)
