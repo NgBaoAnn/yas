@@ -107,18 +107,20 @@ Yêu cầu tối thiểu: >= 70% — **Đạt**
 
 | File Test | Lớp được kiểm thử | Số test case |
 |-----------|-------------------|:------------:|
-| (Có sẵn) `BrandControllerTest.java` | `BrandController` | |
-| (Có sẵn) `CategoryControllerTest.java` | `CategoryController` | |
-| (Bổ sung) [tên file] | [tên lớp] | |
-| **Tổng** | | |
+| (Có sẵn và bổ sung) `ProductService*Test.java` (được tách thành 10 file nhỏ) | `ProductService` | Nhiều test case |
+| (Có sẵn và bổ sung) `CategoryServiceTest.java` | `CategoryService` | Nhiều test case |
+| (Bổ sung) `MediaServiceTest.java` | `MediaService` trong product | ~4 |
+| (Bổ sung) `ProductConverterTest.java` | `ProductConverter` | Nhiều test case |
+| **Tổng** | Các file trong `src/test/java` | **178** |
 
 ### 3.3 Kết Quả Coverage (product)
 
 | Package | Coverage (Instructions) | Coverage (Branches) |
 |---------|:-----------------------:|:-------------------:|
-| `controller` | % | % |
-| `service` | % | % |
-| **Tổng** | **%** | **%** |
+| `com.yas.product.controller` | 87% | 58% |
+| `com.yas.product.service` | 64% | 46% |
+| `com.yas.product.validation` | 93% | 50% |
+| **Tổng** | **71%** | **47%** |
 
 Yêu cầu tối thiểu: >= 70%
 
@@ -127,14 +129,13 @@ Yêu cầu tối thiểu: >= 70%
 **Hình 3.1 — Kết quả chạy test service product: BUILD SUCCESS**
 
 ```
-[HÌNH: Terminal output BUILD SUCCESS cho module product]
+[INFO] Tests run: 178, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
 ```
 
-**Hình 3.2 — Báo cáo JaCoCo Coverage cho service product**
+**Hình 3.2 — Báo cáo JaCoCo Coverage cho service product (tổng 71%)**
 
-```
-[HÌNH: product/target/site/jacoco/index.html]
-```
+![Báo cáo JaCoCo Coverage — product service](../screenshots/test/04-product-coverage-report.pngproduct-coverage.png)
 
 ---
 
