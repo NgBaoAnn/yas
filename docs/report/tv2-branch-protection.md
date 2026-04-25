@@ -195,15 +195,21 @@ Yêu cầu tối thiểu: >= 70%
 
 **Hình 4.1 — Kết quả chạy test service order: BUILD SUCCESS**
 
-![order_test_success](/Users/nguyenbaoan/.gemini/antigravity/brain/f0f4903d-eb5e-46b7-9695-37b23632a62c/jacoco_main_coverage_1777114491533.png)
+```
+[HÌNH: Terminal output BUILD SUCCESS cho module order]
+```
 
 **Hình 4.2 — Báo cáo JaCoCo Coverage tổng quan module order (76%)**
 
-![order_total_coverage](/Users/nguyenbaoan/.gemini/antigravity/brain/f0f4903d-eb5e-46b7-9695-37b23632a62c/jacoco_main_coverage_1777114491533.png)
+```
+[HÌNH: order/target/site/jacoco/index.html hiển thị tổng 76%]
+```
 
 **Hình 4.3 — Chi tiết coverage cho OrderService (99%)**
 
-![order_service_coverage](/Users/nguyenbaoan/.gemini/antigravity/brain/f0f4903d-eb5e-46b7-9695-37b23632a62c/jacoco_order_service_coverage_1777114505387.png)
+```
+[HÌNH: Chi tiết coverage lớp OrderService đạt 99%]
+```
 
 ---
 
