@@ -157,7 +157,57 @@ Yêu cầu tối thiểu: >= 70%
 
 ---
 
-## 4. Pull Request Demo (Trạng Thái Open)
+## 4. Unit Test — Service `order`
+
+### 4.1 Thông Tin Branch Và Pull Request
+
+| Thông tin | Giá trị |
+|-----------|---------|
+| Tên branch | `test/order` |
+| Branch gốc | `main` |
+| Link PR | `https://github.com/<ten-nhom>/yas/pull/<so>` |
+
+### 4.2 Danh Sách File Test (OrderService)
+
+Để đạt mục tiêu coverage >= 70%, lớp `OrderService` đã được chia thành các file test nhỏ để dễ quản lý (< 150 dòng/file):
+
+| File Test | Lớp/Phương thức được kiểm thử | Số test case |
+|-----------|-------------------------------|:------------:|
+| `OrderServiceCreateTest.java` | `createOrder` | 1 |
+| `OrderServiceGetTest.java` | `getOrderWithItemsById`, `getAllOrder`, `getLatestOrders`, `getMyOrders`, `findOrderVmByCheckoutId`, `findOrderByCheckoutId` | 11 |
+| `OrderServiceStatusTest.java` | `updateOrderPaymentStatus`, `rejectOrder`, `acceptOrder` | 7 |
+| `OrderServiceOtherTest.java` | `isOrderCompletedWithUserIdAndProductId`, `exportCsv` | 4 |
+| `CheckoutServiceTest.java` | `CheckoutService` | 8 |
+| **Tổng** | | **31+** |
+
+### 4.3 Kết Quả Coverage (order)
+
+| Package | Coverage (Instructions) | Coverage (Branches) |
+|---------|:-----------------------:|:-------------------:|
+| `com.yas.order.service` | 77% | 75% |
+| `com.yas.order.specification` | 43% | 34% |
+| `com.yas.order.mapper` | 76% | 44% |
+| **Tổng Module** | **76%** | **47%** |
+
+*Ghi chú: Lớp `OrderService` đạt **99%** Instruction Coverage.*
+
+### 4.4 Hình Ảnh Minh Chứng
+
+**Hình 4.1 — Kết quả chạy test service order: BUILD SUCCESS**
+
+![order_test_success](/Users/nguyenbaoan/.gemini/antigravity/brain/f0f4903d-eb5e-46b7-9695-37b23632a62c/jacoco_main_coverage_1777114491533.png)
+
+**Hình 4.2 — Báo cáo JaCoCo Coverage tổng quan module order (76%)**
+
+![order_total_coverage](/Users/nguyenbaoan/.gemini/antigravity/brain/f0f4903d-eb5e-46b7-9695-37b23632a62c/jacoco_main_coverage_1777114491533.png)
+
+**Hình 4.3 — Chi tiết coverage cho OrderService (99%)**
+
+![order_service_coverage](/Users/nguyenbaoan/.gemini/antigravity/brain/f0f4903d-eb5e-46b7-9695-37b23632a62c/jacoco_order_service_coverage_1777114505387.png)
+
+---
+
+## 5. Pull Request Demo (Trạng Thái Open)
 
 Theo yêu cầu nộp bài, nhóm duy trì ít nhất một PR ở trạng thái Open trên GitHub.
 
@@ -168,7 +218,7 @@ Theo yêu cầu nộp bài, nhóm duy trì ít nhất một PR ở trạng thái
 | Reviewer được gán | [Tên TV khác], [Tên TV khác] |
 | Trạng thái CI | Passing |
 
-**Hình 4.1 — Pull Request đang ở trạng thái Open, chờ review**
+**Hình 5.1 — Pull Request đang ở trạng thái Open, chờ review**
 
 ```
 [HÌNH: Trang PR trên GitHub với nhãn "Open", hiển thị reviewer và CI status]
@@ -176,7 +226,7 @@ Theo yêu cầu nộp bài, nhóm duy trì ít nhất một PR ở trạng thái
 
 ---
 
-## 5. Vấn Đề Gặp Phải Và Cách Giải Quyết
+## 6. Vấn Đề Gặp Phải Và Cách Giải Quyết
 
 | Vấn đề | Nguyên nhân | Giải pháp |
 |--------|-------------|-----------|
