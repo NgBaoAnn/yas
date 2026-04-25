@@ -92,22 +92,10 @@ Yêu cầu tối thiểu: >= 70%
 
 ### 2.5 Hình Ảnh Minh Chứng
 
-**Hình 2.1 — Kết quả chạy test: tất cả test case PASS**
-
-```
-[HÌNH: Terminal output "Tests run: XX, Failures: 0, Errors: 0 — BUILD SUCCESS"]
-```
-
-**Hình 2.2 — Báo cáo JaCoCo Coverage cho service media**
+**Hình 2.1 — Báo cáo JaCoCo Coverage cho service media**
 
 ```
 [HÌNH: Trình duyệt mở file media/target/site/jacoco/index.html hiển thị tổng coverage]
-```
-
-**Hình 2.3 — Pull Request `test/media` trên GitHub**
-
-```
-[HÌNH: Trang PR với danh sách file test được thêm vào và trạng thái CI]
 ```
 
 ---
@@ -143,13 +131,7 @@ Yêu cầu tối thiểu: >= 70%
 
 ### 3.4 Hình Ảnh Minh Chứng
 
-**Hình 3.1 — Kết quả chạy test service product: BUILD SUCCESS**
-
-```
-[HÌNH: Terminal output BUILD SUCCESS cho module product]
-```
-
-**Hình 3.2 — Báo cáo JaCoCo Coverage cho service product**
+**Hình 3.1 — Báo cáo JaCoCo Coverage cho service product**
 
 ```
 [HÌNH: product/target/site/jacoco/index.html]
@@ -193,24 +175,11 @@ Yêu cầu tối thiểu: >= 70%
 
 ### 4.4 Hình Ảnh Minh Chứng
 
-**Hình 4.1 — Kết quả chạy test service order: BUILD SUCCESS**
-
-```
-[HÌNH: Terminal output BUILD SUCCESS cho module order]
-```
-
-**Hình 4.2 — Báo cáo JaCoCo Coverage tổng quan module order (76%)**
+**Hình 4.1 — Báo cáo JaCoCo Coverage tổng quan module order (76%)**
 
 ```
 [HÌNH: order/target/site/jacoco/index.html hiển thị tổng 76%]
 ```
-
-**Hình 4.3 — Chi tiết coverage cho OrderService (99%)**
-
-```
-[HÌNH: Chi tiết coverage lớp OrderService đạt 99%]
-```
-
 ---
 
 ## 5. Pull Request Demo (Trạng Thái Open)
