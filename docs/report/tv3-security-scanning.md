@@ -1,7 +1,7 @@
-# Phần 3: Security Scanning và Unit Test (cart)
+# Phần 3: Security Scanning
 
 **Người thực hiện:** [Họ và tên] — MSSV: `XXXXXXXX`  
-**Phạm vi:** Tích hợp Gitleaks, SonarQube, Snyk vào Jenkins pipeline; viết unit test cho service `cart`.
+**Phạm vi:** Tích hợp Gitleaks, SonarQube, Snyk vào Jenkins pipeline.
 
 ---
 
@@ -163,53 +163,9 @@ stage('Dependency Scan') {
 
 ---
 
-## 4. Unit Test — Service `cart`
+## 4. Tổng Hợp Pipeline Sau Khi Tích Hợp Security Stages
 
-### 4.1 Thông Tin Branch Và Pull Request
-
-| Thông tin | Giá trị |
-|-----------|---------|
-| Tên branch | `test/cart` |
-| Branch gốc | `main` |
-| Link PR | `https://github.com/<ten-nhom>/yas/pull/<so>` |
-
-### 4.2 Danh Sách File Test
-
-| File Test | Lớp được kiểm thử | Số test case |
-|-----------|-------------------|:------------:|
-| [Điền tên file] | [Điền tên lớp] | |
-| [Điền tên file] | [Điền tên lớp] | |
-| **Tổng** | | |
-
-### 4.3 Kết Quả Coverage (cart)
-
-| Package | Coverage (Instructions) | Coverage (Branches) |
-|---------|:-----------------------:|:-------------------:|
-| `controller` | % | % |
-| `service` | % | % |
-| **Tổng** | **%** | **%** |
-
-Yêu cầu tối thiểu: >= 70%
-
-### 4.4 Hình Ảnh Minh Chứng
-
-**Hình 4.1 — Kết quả chạy test service cart: BUILD SUCCESS**
-
-```
-[HÌNH: Terminal output "Tests run: XX, Failures: 0 — BUILD SUCCESS"]
-```
-
-**Hình 4.2 — Báo cáo JaCoCo Coverage cho service cart**
-
-```
-[HÌNH: cart/target/site/jacoco/index.html]
-```
-
----
-
-## 5. Tổng Hợp Pipeline Sau Khi Tích Hợp Security Stages
-
-**Hình 5.1 — Toàn bộ pipeline bao gồm các stage quét bảo mật**
+**Hình 4.1 — Toàn bộ pipeline bao gồm các stage quét bảo mật**
 
 ```
 [HÌNH: Blue Ocean hoặc Stage View thể hiện đầy đủ: Secret Scanning, Code Quality, Quality Gate, Dependency Scan]
@@ -217,7 +173,7 @@ Yêu cầu tối thiểu: >= 70%
 
 ---
 
-## 6. Vấn Đề Gặp Phải Và Cách Giải Quyết
+## 5. Vấn Đề Gặp Phải Và Cách Giải Quyết
 
 | Vấn đề | Nguyên nhân | Giải pháp |
 |--------|-------------|-----------|
