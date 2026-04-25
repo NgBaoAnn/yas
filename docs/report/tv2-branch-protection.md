@@ -215,9 +215,7 @@ Yêu cầu tối thiểu: >= 70%
 
 **Hình 5.1 — Báo cáo JaCoCo Coverage tổng quan module inventory (89%)**
 
-```
-[HÌNH: inventory/target/site/jacoco/index.html hiển thị tổng 89%]
-```
+![inventory_coverage](../screenshots/05-inventory-service-coverage.png)
 
 ---
 
