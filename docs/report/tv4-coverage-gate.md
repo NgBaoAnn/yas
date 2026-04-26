@@ -1,7 +1,7 @@
-# Phần 4: Coverage Gate và Unit Test (order)
+# Phần 4: Coverage Gate và Unit Test (6 modules)
 
 **Người thực hiện:** [Họ và tên] — MSSV: `XXXXXXXX`  
-**Phạm vi:** Cấu hình JaCoCo Coverage Gate (ngưỡng >= 70%), viết unit test cho service `order`, tổng hợp báo cáo cuối.
+**Phạm vi:** Cấu hình JaCoCo Coverage Gate (ngưỡng >= 70%), viết unit test cho 6 service module (customer, location, cart, tax, search, webhook), tổng hợp báo cáo cuối.
 
 ---
 
@@ -103,72 +103,162 @@ stage('Coverage Report') {
 
 ---
 
-## 2. Unit Test — Service `order`
+## 2. Unit Test — Chi Tiết Từng Module
 
-### 2.1 Thông Tin Branch Và Pull Request
+### 2.1 Hướng Dẫn Chung Chạy Test
 
-| Thông tin | Giá trị |
-|-----------|---------|
-| Tên branch | `test/order` |
-| Branch gốc | `main` |
-| Link PR | `https://github.com/<ten-nhom>/yas/pull/<so>` |
+Do project sử dụng cấu trúc monorepo với thuộc tính `${revision}`, lệnh phải chạy từ bên trong thư mục module tương ứng:
 
-### 2.2 Khảo Sát Cấu Trúc Service `order`
-
-> Danh sách các lớp chính trong service `order` cần viết unit test:
-
-```
-[Điền output của lệnh: find order/src/main/java -name "*.java" | sort]
+```bash
+cd /duong-dan/yas/<module>
+./mvnw -f ../pom.xml test -pl <module> -am
+./mvnw -f ../pom.xml test jacoco:report -pl <module> -am
+open target/site/jacoco/index.html
 ```
 
-### 2.3 Danh Sách File Test
+### 2.2 Module `customer`
 
-| File Test | Lớp được kiểm thử | Mô tả | Số test case |
-|-----------|-------------------|-------|:------------:|
-| [Điền tên file] | [Điền tên lớp] | | |
-| [Điền tên file] | [Điền tên lớp] | | |
-| **Tổng** | | | |
+- **Branch:** `test/customer`
+- **Pull Request:** `[Link PR]`
 
-### 2.4 Kết Quả Coverage (order)
+**Danh Sách File Test:**
+| File Test | Lớp được kiểm thử | Số test case |
+|-----------|-------------------|:------------:|
+| [Tên file] | [Tên lớp] | |
 
-| Package | Coverage (Instructions) | Coverage (Branches) |
-|---------|:-----------------------:|:-------------------:|
-| `controller` | % | % |
-| `service` | % | % |
-| **Tổng** | **%** | **%** |
+**Kết Quả Coverage:** Instructions % | Branches %
+
+**Hình Ảnh Minh Chứng:**
+```
+[HÌNH: Terminal output BUILD SUCCESS cho customer]
+[HÌNH: Báo cáo JaCoCo coverage cho customer]
+```
+
+### 2.3 Module `location`
+
+- **Branch:** `test/location`
+- **Pull Request:** `[Link PR]`
+
+**Danh Sách File Test:**
+| File Test | Lớp được kiểm thử | Số test case |
+|-----------|-------------------|:------------:|
+| [Tên file] | [Tên lớp] | |
+
+**Kết Quả Coverage:** Instructions % | Branches %
+
+**Hình Ảnh Minh Chứng:**
+```
+[HÌNH: Terminal output BUILD SUCCESS cho location]
+[HÌNH: Báo cáo JaCoCo coverage cho location]
+```
+
+### 2.4 Module `cart`
+
+- **Branch:** `test/cart`
+- **Pull Request:** `[Link PR]`
+
+**Danh Sách File Test:**
+| File Test | Lớp được kiểm thử | Số test case |
+|-----------|-------------------|:------------:|
+| [Tên file] | [Tên lớp] | |
+
+**Kết Quả Coverage:** Instructions % | Branches %
+
+**Hình Ảnh Minh Chứng:**
+```
+[HÌNH: Terminal output BUILD SUCCESS cho cart]
+[HÌNH: Báo cáo JaCoCo coverage cho cart]
+```
+
+### 2.5 Module `tax`
+
+- **Branch:** `test/tax`
+- **Pull Request:** `[Link PR]`
+
+**Danh Sách File Test:**
+| File Test | Lớp được kiểm thử | Số test case |
+|-----------|-------------------|:------------:|
+| [Tên file] | [Tên lớp] | |
+
+**Kết Quả Coverage:** Instructions % | Branches %
+
+**Hình Ảnh Minh Chứng:**
+```
+[HÌNH: Terminal output BUILD SUCCESS cho tax]
+[HÌNH: Báo cáo JaCoCo coverage cho tax]
+```
+
+### 2.6 Module `search`
+
+- **Branch:** `test/search`
+- **Pull Request:** `[Link PR]`
+
+**Danh Sách File Test:**
+| File Test | Lớp được kiểm thử | Số test case |
+|-----------|-------------------|:------------:|
+| [Tên file] | [Tên lớp] | |
+
+**Kết Quả Coverage:** Instructions % | Branches %
+
+**Hình Ảnh Minh Chứng:**
+```
+[HÌNH: Terminal output BUILD SUCCESS cho search]
+[HÌNH: Báo cáo JaCoCo coverage cho search]
+```
+
+### 2.7 Module `webhook`
+
+- **Branch:** `test/webhook`
+- **Pull Request:** `[Link PR]`
+
+**Danh Sách File Test:**
+| File Test | Lớp được kiểm thử | Số test case |
+|-----------|-------------------|:------------:|
+| [Tên file] | [Tên lớp] | |
+
+**Kết Quả Coverage:** Instructions % | Branches %
+
+**Hình Ảnh Minh Chứng:**
+```
+[HÌNH: Terminal output BUILD SUCCESS cho webhook]
+[HÌNH: Báo cáo JaCoCo coverage cho webhook]
+```
+
+### 2.8 Bảng Tổng Hợp Kết Quả Coverage (6 modules)
 
 Yêu cầu tối thiểu: >= 70%
 
-### 2.5 Hình Ảnh Minh Chứng
-
-**Hình 2.1 — Kết quả chạy test service order: BUILD SUCCESS**
-
-```
-[HÌNH: Terminal output "Tests run: XX, Failures: 0, Errors: 0 — BUILD SUCCESS"]
-```
-
-**Hình 2.2 — Báo cáo JaCoCo Coverage cho service order**
-
-```
-[HÌNH: order/target/site/jacoco/index.html hiển thị tổng coverage]
-```
-
-**Hình 2.3 — Pull Request `test/order` trên GitHub**
-
-```
-[HÌNH: Trang PR với danh sách file test và trạng thái CI]
-```
+| Module | Coverage (Instructions) | Coverage (Branches) | Đạt >= 70% |
+|--------|:-----------------------:|:-------------------:|:----------:|
+| `customer` | % | % | |
+| `location` | % | % | |
+| `cart` | % | % | |
+| `tax` | % | % | |
+| `search` | % | % | |
+| `webhook` | % | % | |
 
 ---
 
-## 3. Tổng Hợp Coverage Toàn Dự Án
+## 3. Tổng Hợp Coverage Toàn Dự Án (16 Modules)
 
 | Service | Coverage (Instructions) | Coverage (Branches) | Đạt >= 70% |
 |---------|:-----------------------:|:-------------------:|:----------:|
 | media   | %                       | %                   |            |
 | product | %                       | %                   |            |
-| cart    | %                       | %                   |            |
 | order   | %                       | %                   |            |
+| inventory| %                       | %                   |            |
+| payment | %                       | %                   |            |
+| promotion| %                       | %                   |            |
+| rating  | %                       | %                   |            |
+| delivery| %                       | %                   |            |
+| sampledata| %                      | %                   |            |
+| recommendation| %                  | %                   |            |
+| customer| %                       | %                   |            |
+| location| %                       | %                   |            |
+| cart    | %                       | %                   |            |
+| tax     | %                       | %                   |            |
+| search  | %                       | %                   |            |
+| webhook | %                       | %                   |            |
 
 ---
 
