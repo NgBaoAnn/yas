@@ -142,15 +142,21 @@ open target/site/jacoco/index.html
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
 |-----------|-------------------|:------------:|
-| [Tên file] | [Tên lớp] | |
+| `AddressControllerTest.java` | `AddressController` | 6 |
+| `CountryControllerTest.java` | `CountryController` | 6 |
+| `StateOrProvinceControllerTest.java` | `StateOrProvinceController` | 6 |
+| `AddressServiceTest.java` | `AddressService` | 9 |
+| `CountryServiceTest.java` | `CountryService` | 13 |
+| `DistrictServiceTest.java` | `DistrictService` | 1 |
+| `StateOrProvinceServiceTest.java` | `StateOrProvinceService` | 14 |
 
-**Kết Quả Coverage:** Instructions % | Branches %
+**Kết Quả Coverage:** Instructions **88%** | Branches **88%**
 
 **Hình Ảnh Minh Chứng:**
 ```
-[HÌNH: Terminal output BUILD SUCCESS cho location]
-[HÌNH: Báo cáo JaCoCo coverage cho location]
+[HÌNH: Terminal output "Tests run: 55, Failures: 0, Errors: 0, Skipped: 0 — BUILD SUCCESS"]
 ```
+![Báo cáo JaCoCo coverage cho location](../screenshots/test/location-coverage-report.png)
 
 ### 2.4 Module `cart`
 
@@ -231,7 +237,7 @@ Yêu cầu tối thiểu: >= 70%
 | Module | Coverage (Instructions) | Coverage (Branches) | Đạt >= 70% |
 |--------|:-----------------------:|:-------------------:|:----------:|
 | `customer` | % | % | |
-| `location` | % | % | |
+| `location` | 88% | 88% | Đạt |
 | `cart` | % | % | |
 | `tax` | % | % | |
 | `search` | % | % | |
@@ -254,7 +260,7 @@ Yêu cầu tối thiểu: >= 70%
 | sampledata| %                      | %                   |            |
 | recommendation| %                  | %                   |            |
 | customer| %                       | %                   |            |
-| location| %                       | %                   |            |
+| location| 88%                     | 88%                 | Đạt        |
 | cart    | %                       | %                   |            |
 | tax     | %                       | %                   |            |
 | search  | %                       | %                   |            |
