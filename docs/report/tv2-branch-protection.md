@@ -189,15 +189,18 @@ open target/site/jacoco/index.html
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
 |-----------|-------------------|:------------:|
-| [Tên file] | [Tên lớp] | |
+| `DeliveryApplicationTests.java` | `DeliveryApplication` | 1 |
+| `DeliveryControllerTest.java` | `DeliveryController` | 1 |
+| `DeliveryServiceTest.java` | `DeliveryService` | 1 |
+| **Tổng** | | **3** |
 
-**Kết Quả Coverage:** Instructions % | Branches %
+**Kết Quả Coverage:** 100.00% (Instructions) | 0.00% (Branches - N/A)
 
 **Hình Ảnh Minh Chứng:**
-```
-[HÌNH: Terminal output BUILD SUCCESS cho delivery]
-[HÌNH: Báo cáo JaCoCo coverage cho delivery]
-```
+
+**Hình 2.1 — Báo cáo JaCoCo Coverage cho service delivery đạt 100%**
+
+![Delivery Service Coverage](../../docs/screenshots/test/08-delivery-service-coverage.png)
 
 ### 2.10 Module `sampledata`
 
@@ -248,7 +251,7 @@ Yêu cầu tối thiểu: >= 70%
 | `payment` | % | % | |
 | `promotion` | % | % | |
 | `rating` | % | % | |
-| `delivery` | % | % | |
+| `delivery` | 100.00% | 0.00% | ✅ |
 | `sampledata` | % | % | |
 | `recommendation` | % | % | |
 
