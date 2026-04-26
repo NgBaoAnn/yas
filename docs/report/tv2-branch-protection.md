@@ -1,7 +1,7 @@
-# Phần 2: Branch Protection và Unit Test (media, product)
+# Phần 2: Branch Protection và Unit Test (10 modules)
 
 **Người thực hiện:** [Họ và tên] — MSSV: `XXXXXXXX`  
-**Phạm vi:** Cấu hình Branch Protection trên GitHub, viết unit test cho service `media` và `product`, tạo Pull Request demo.
+**Phạm vi:** Cấu hình Branch Protection trên GitHub, viết unit test cho 10 service module, tạo Pull Request demo.
 
 ---
 
@@ -17,24 +17,42 @@ Cấu hình tại: `GitHub Repository > Settings > Branches > Add branch protect
 | Require a pull request before merging | Bật | Bắt buộc tạo PR, cấm push trực tiếp |
 | Required number of approvals | `2` | Cần ít nhất 2 thành viên approve |
 | Require status checks to pass | Bật | Jenkins CI phải pass trước khi merge |
-| Required branches to be up to date before merging | Bật | Branch phải được sync với `main` |
+| Require branches to be up to date before merging | Bật | Branch phải được sync với `main` |
 | Do not allow bypassing above settings | Bật | Admin cũng phải tuân thủ quy tắc |
 
 ### 1.2 Hình Ảnh Minh Chứng
 
-**Hình 1.1 — Trang cấu hình Branch Protection Rules trên GitHub**
+**Hình 1.1 — Cấu hình bắt buộc tạo Pull Request và số lượng Approval**
 
 ```
-[HÌNH: GitHub > Repository > Settings > Branches > Protection rules cho nhánh main]
+[HÌNH: Ảnh chụp màn hình tích chọn "Require a pull request before merging" và "Require approvals"]
 ```
 
-**Hình 1.2 — Push trực tiếp vào nhánh `main` bị từ chối**
+**Hình 1.2 — Cấu hình bắt buộc Status Checks (Jenkins CI) phải pass**
+
+```
+[HÌNH: Ảnh chụp màn hình tích chọn "Require status checks to pass"]
+```
+
+**Hình 1.3 — Cấu hình bắt buộc cập nhật nhánh trước khi merge**
+
+```
+[HÌNH: Ảnh chụp màn hình tích chọn "Require branches to be up to date before merging"]
+```
+
+**Hình 1.4 — Cấu hình không cho phép Admin lách luật**
+
+```
+[HÌNH: Ảnh chụp màn hình tích chọn "Do not allow bypassing the above settings"]
+```
+
+**Hình 1.5 — Push trực tiếp vào nhánh `main` bị từ chối**
 
 ```
 [HÌNH: Terminal output với thông báo "remote: error: GH006: Protected branch update failed"]
 ```
 
-**Hình 1.3 — Pull Request hiển thị yêu cầu 2 lượt approve và CI check phải pass**
+**Hình 1.6 — Pull Request hiển thị yêu cầu 2 lượt approve và CI check phải pass**
 
 ```
 [HÌNH: Trang PR trên GitHub với phần "Review required" và "Checks" đang chờ]
@@ -42,157 +60,107 @@ Cấu hình tại: `GitHub Repository > Settings > Branches > Add branch protect
 
 ---
 
-## 2. Unit Test — Service `media`
+## 2. Unit Test — Chi Tiết Từng Module
 
-### 2.1 Thông Tin Branch Và Pull Request
+### 2.1 Hướng Dẫn Chung Chạy Test
 
-| Thông tin | Giá trị |
-|-----------|---------|
-| Tên branch | `test/media` |
-| Branch gốc | `main` |
-| Link PR | `https://github.com/<ten-nhom>/yas/pull/<so>` |
-
-### 2.2 Danh Sách File Test
-
-| File Test | Lớp được kiểm thử | Số test case |
-|-----------|-------------------|:------------:|
-| `MediaControllerTest.java` | `MediaController` — tất cả endpoints | 8 |
-| `MediaServiceUnitTest.java` | `MediaService` — logic nghiệp vụ | 13 |
-| `StringUtilsTest.java` | `StringUtils` — tiện ích xử lý chuỗi | 7 |
-| `FileTypeValidatorTest.java` | `FileTypeValidator` — xác thực loại file | 6 |
-| **Tổng** | | **34+** |
-
-### 2.3 Lệnh Chạy Test
-
-Do project sử dụng cấu trúc monorepo với thuộc tính `${revision}`, lệnh phải chạy từ bên trong thư mục `media/`:
+Do project sử dụng cấu trúc monorepo với thuộc tính `${revision}`, lệnh phải chạy từ bên trong thư mục module tương ứng:
 
 ```bash
-cd /duong-dan/yas/media
-./mvnw -f ../pom.xml test -pl media -am
-```
-
-Để sinh báo cáo JaCoCo:
-
-```bash
-./mvnw -f ../pom.xml test jacoco:report -pl media -am
+cd /duong-dan/yas/<module>
+./mvnw -f ../pom.xml test -pl <module> -am
+./mvnw -f ../pom.xml test jacoco:report -pl <module> -am
 open target/site/jacoco/index.html
 ```
 
-### 2.4 Kết Quả Coverage (media)
+### 2.2 Module `media`
 
-| Package | Coverage (Instructions) | Coverage (Branches) |
-|---------|:-----------------------:|:-------------------:|
-| `controller` | % | % |
-| `service` | % | % |
-| `utils` | % | % |
-| `repository` | % | % |
-| **Tổng** | **%** | **%** |
+- **Branch:** `test/media`
+- **Pull Request:** `[Link PR]`
 
-Yêu cầu tối thiểu: >= 70%
-
-### 2.5 Hình Ảnh Minh Chứng
-
-**Hình 2.1 — Báo cáo JaCoCo Coverage cho service media**
-
-```
-[HÌNH: Trình duyệt mở file media/target/site/jacoco/index.html hiển thị tổng coverage]
-```
-
----
-
-## 3. Unit Test — Service `product`
-
-### 3.1 Thông Tin Branch Và Pull Request
-
-| Thông tin | Giá trị |
-|-----------|---------|
-| Tên branch | `test/product` |
-| Branch gốc | `main` |
-| Link PR | `https://github.com/<ten-nhom>/yas/pull/<so>` |
-
-### 3.2 Danh Sách File Test
-
+**Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
 |-----------|-------------------|:------------:|
-| (Có sẵn) `BrandControllerTest.java` | `BrandController` | |
-| (Có sẵn) `CategoryControllerTest.java` | `CategoryController` | |
-| (Bổ sung) [tên file] | [tên lớp] | |
-| **Tổng** | | |
+| `MediaControllerTest.java` | `MediaController` — tất cả 5 endpoints | 8 |
+| `MediaServiceUnitTest.java` | `MediaService` — logic nghiệp vụ | 13 |
+| `FileSystemRepositoryTest.java` | `FileSystemRepository` — thao tác lưu/đọc file | 4 |
+| `StringUtilsTest.java` | `StringUtils` — xác thực chuỗi văn bản | 11 |
+| `FileTypeValidatorTest.java` | `FileTypeValidator` — xác thực loại và nội dung file ảnh | 6 |
+| **Tổng** | | **42** |
 
-### 3.3 Kết Quả Coverage (product)
-
-| Package | Coverage (Instructions) | Coverage (Branches) |
-|---------|:-----------------------:|:-------------------:|
-| `controller` | % | % |
-| `service` | % | % |
-| **Tổng** | **%** | **%** |
-
-Yêu cầu tối thiểu: >= 70%
-
-### 3.4 Hình Ảnh Minh Chứng
-
-**Hình 3.1 — Báo cáo JaCoCo Coverage cho service product**
-
-```
-[HÌNH: product/target/site/jacoco/index.html]
+**Lưu Ý Kỹ Thuật:**
+Annotation `@WebMvcTest` cần loại trừ `OAuth2ResourceServerAutoConfiguration` để tránh lỗi load ApplicationContext trong môi trường test không có server OAuth2:
+```java
+@WebMvcTest(controllers = MediaController.class,
+    excludeAutoConfiguration = OAuth2ResourceServerAutoConfiguration.class)
+@AutoConfigureMockMvc(addFilters = false)
+class MediaControllerTest { ... }
 ```
 
----
-
-## 4. Unit Test — Service `order`
-
-### 4.1 Thông Tin Branch Và Pull Request
-
-| Thông tin | Giá trị |
-|-----------|---------|
-| Tên branch | `test/order` |
-| Branch gốc | `main` |
-| Link PR | `https://github.com/<ten-nhom>/yas/pull/<so>` |
-
-### 4.2 Danh Sách File Test (OrderService)
-
-Để đạt mục tiêu coverage >= 70%, lớp `OrderService` đã được chia thành các file test nhỏ để dễ quản lý (< 150 dòng/file):
-
-| File Test | Lớp/Phương thức được kiểm thử | Số test case |
-|-----------|-------------------------------|:------------:|
-| `OrderServiceCreateTest.java` | `createOrder` | 1 |
-| `OrderServiceGetTest.java` | `getOrderWithItemsById`, `getAllOrder`, `getLatestOrders`, `getMyOrders`, `findOrderVmByCheckoutId`, `findOrderByCheckoutId` | 11 |
-| `OrderServiceStatusTest.java` | `updateOrderPaymentStatus`, `rejectOrder`, `acceptOrder` | 7 |
-| `OrderServiceOtherTest.java` | `isOrderCompletedWithUserIdAndProductId`, `exportCsv` | 4 |
-| `CheckoutServiceTest.java` | `CheckoutService` | 8 |
-| **Tổng** | | **31+** |
-
-### 4.3 Kết Quả Coverage (order)
-
+**Kết Quả Coverage:** 
 | Package | Coverage (Instructions) | Coverage (Branches) |
 |---------|:-----------------------:|:-------------------:|
-| `com.yas.order.service` | 77% | 75% |
-| `com.yas.order.specification` | 43% | 34% |
-| `com.yas.order.mapper` | 76% | 44% |
-| **Tổng Module** | **76%** | **47%** |
+| `com.yas.media.controller` | 100% | 100% |
+| `com.yas.media.service` | 89% | 90% |
+| `com.yas.media.utils` | 92% | 100% |
+| `com.yas.media.viewmodel` | 86% | n/a |
+| `com.yas.media.repository` | 73% | 62% |
+| `com.yas.media.model` | 100% | n/a |
+| `com.yas.media.mapper` | 38% | 7% |
+| **Tổng** | **80%** | **65%** |
 
-*Ghi chú: Lớp `OrderService` đạt **99%** Instruction Coverage.*
+*(Đạt yêu cầu tối thiểu >= 70%)*
 
-### 4.4 Hình Ảnh Minh Chứng
+**Hình Ảnh Minh Chứng:**
+- **Kết quả chạy test (42 test case PASS, 0 Failures):**
+```
+[HÌNH: Terminal output "Tests run: 42, Failures: 0, Errors: 0 — BUILD SUCCESS"]
+```
+- **Báo cáo JaCoCo Coverage cho service media (tổng 80%):**
+![Báo cáo JaCoCo Coverage — media service](../screenshots/test/03-media-coverage-report.png)
 
-**Hình 4.1 — Báo cáo JaCoCo Coverage tổng quan module order (76%)**
+### 2.3 Module `product`
 
-![order_coverage](../screenshots/04-order-service-coverage.png)
+- **Branch:** `test/product`
+- **Pull Request:** `[Link PR]`
 
----
+**Danh Sách File Test:**
+| File Test | Lớp được kiểm thử | Số test case |
+|-----------|-------------------|:------------:|
+| [Tên file] | [Tên lớp] | |
 
-## 5. Unit Test — Service `inventory`
+**Kết Quả Coverage:** Instructions % | Branches %
 
-### 5.1 Thông Tin Branch Và Pull Request
+**Hình Ảnh Minh Chứng:**
+```
+[HÌNH: Terminal output BUILD SUCCESS cho product]
+[HÌNH: Báo cáo JaCoCo coverage cho product]
+```
 
-| Thông tin | Giá trị |
-|-----------|---------|
-| Tên branch | `test/inventory` |
-| Branch gốc | `main` |
-| Link PR | `https://github.com/<ten-nhom>/yas/pull/<so>` |
+### 2.4 Module `order`
 
-### 5.2 Danh Sách File Test
+- **Branch:** `test/order`
+- **Pull Request:** `[Link PR]`
 
+**Danh Sách File Test:**
+| File Test | Lớp được kiểm thử | Số test case |
+|-----------|-------------------|:------------:|
+| [Tên file] | [Tên lớp] | |
+
+**Kết Quả Coverage:** Instructions % | Branches %
+
+**Hình Ảnh Minh Chứng:**
+```
+[HÌNH: Terminal output BUILD SUCCESS cho order]
+[HÌNH: Báo cáo JaCoCo coverage cho order]
+```
+
+### 2.5 Module `inventory`
+
+- **Branch:** `test/inventory`
+- **Pull Request:** `https://github.com/<ten-nhom>/yas/pull/<so>`
+
+**Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
 |-----------|-------------------|:------------:|
 | `WarehouseServiceTest.java` | `WarehouseService` | 9 |
@@ -202,24 +170,147 @@ Yêu cầu tối thiểu: >= 70%
 | `ProductServiceTest.java` | `ProductService` (Có sẵn) | 3 |
 | **Tổng** | | **24+** |
 
-### 5.3 Kết Quả Coverage (inventory)
-
+**Kết Quả Coverage:** 
 | Package | Coverage (Instructions) | Coverage (Branches) |
 |---------|:-----------------------:|:-------------------:|
 | `com.yas.inventory.service` | 84% | 66% |
 | **Tổng Module** | **89%** | **70%** |
 
-*Ghi chú: Lớp `WarehouseService`, `StockService` và `StockHistoryService` đều được bổ sung test để đạt coverage cao.*
+*(Đạt yêu cầu tối thiểu >= 70%)*
 
-### 5.4 Hình Ảnh Minh Chứng
-
-**Hình 5.1 — Báo cáo JaCoCo Coverage tổng quan module inventory (89%)**
+**Hình Ảnh Minh Chứng:**
+- **Báo cáo JaCoCo Coverage tổng quan module inventory (89%)**
 
 ![inventory_coverage](../screenshots/05-inventory-service-coverage.png)
 
+### 2.6 Module `payment`
+
+- **Branch:** `test/payment`
+- **Pull Request:** `[Link PR]`
+
+**Danh Sách File Test:**
+| File Test | Lớp được kiểm thử | Số test case |
+|-----------|-------------------|:------------:|
+| [Tên file] | [Tên lớp] | |
+
+**Kết Quả Coverage:** Instructions % | Branches %
+
+**Hình Ảnh Minh Chứng:**
+```
+[HÌNH: Terminal output BUILD SUCCESS cho payment]
+[HÌNH: Báo cáo JaCoCo coverage cho payment]
+```
+
+### 2.7 Module `promotion`
+
+- **Branch:** `test/promotion`
+- **Pull Request:** `[Link PR]`
+
+**Danh Sách File Test:**
+| File Test | Lớp được kiểm thử | Số test case |
+|-----------|-------------------|:------------:|
+| [Tên file] | [Tên lớp] | |
+
+**Kết Quả Coverage:** Instructions % | Branches %
+
+**Hình Ảnh Minh Chứng:**
+```
+[HÌNH: Terminal output BUILD SUCCESS cho promotion]
+[HÌNH: Báo cáo JaCoCo coverage cho promotion]
+```
+
+### 2.8 Module `rating`
+
+- **Branch:** `test/rating`
+- **Pull Request:** `[Link PR]`
+
+**Danh Sách File Test:**
+| File Test | Lớp được kiểm thử | Số test case |
+|-----------|-------------------|:------------:|
+| [Tên file] | [Tên lớp] | |
+
+**Kết Quả Coverage:** Instructions % | Branches %
+
+**Hình Ảnh Minh Chứng:**
+```
+[HÌNH: Terminal output BUILD SUCCESS cho rating]
+[HÌNH: Báo cáo JaCoCo coverage cho rating]
+```
+
+### 2.9 Module `delivery`
+
+- **Branch:** `test/delivery`
+- **Pull Request:** `[Link PR]`
+
+**Danh Sách File Test:**
+| File Test | Lớp được kiểm thử | Số test case |
+|-----------|-------------------|:------------:|
+| [Tên file] | [Tên lớp] | |
+
+**Kết Quả Coverage:** Instructions % | Branches %
+
+**Hình Ảnh Minh Chứng:**
+```
+[HÌNH: Terminal output BUILD SUCCESS cho delivery]
+[HÌNH: Báo cáo JaCoCo coverage cho delivery]
+```
+
+### 2.10 Module `sampledata`
+
+- **Branch:** `test/sampledata`
+- **Pull Request:** `[Link PR]`
+
+**Danh Sách File Test:**
+| File Test | Lớp được kiểm thử | Số test case |
+|-----------|-------------------|:------------:|
+| [Tên file] | [Tên lớp] | |
+
+**Kết Quả Coverage:** Instructions % | Branches %
+
+**Hình Ảnh Minh Chứng:**
+```
+[HÌNH: Terminal output BUILD SUCCESS cho sampledata]
+[HÌNH: Báo cáo JaCoCo coverage cho sampledata]
+```
+
+### 2.11 Module `recommendation`
+
+- **Branch:** `test/recommendation`
+- **Pull Request:** `[Link PR]`
+
+**Danh Sách File Test:**
+| File Test | Lớp được kiểm thử | Số test case |
+|-----------|-------------------|:------------:|
+| [Tên file] | [Tên lớp] | |
+
+**Kết Quả Coverage:** Instructions % | Branches %
+
+**Hình Ảnh Minh Chứng:**
+```
+[HÌNH: Terminal output BUILD SUCCESS cho recommendation]
+[HÌNH: Báo cáo JaCoCo coverage cho recommendation]
+```
+
+### 2.12 Bảng Tổng Hợp Kết Quả Coverage (10 modules)
+
+Yêu cầu tối thiểu: >= 70%
+
+| Module | Coverage (Instructions) | Coverage (Branches) | Đạt >= 70% |
+|--------|:-----------------------:|:-------------------:|:----------:|
+| `media` | 80% | 65% | Đạt |
+| `product` | % | % | |
+| `order` | % | % | |
+| `inventory` | % | % | |
+| `payment` | % | % | |
+| `promotion` | % | % | |
+| `rating` | % | % | |
+| `delivery` | % | % | |
+| `sampledata` | % | % | |
+| `recommendation` | % | % | |
+
 ---
 
-## 6. Pull Request Demo (Trạng Thái Open)
+## 3. Pull Request Demo (Trạng Thái Open)
 
 Theo yêu cầu nộp bài, nhóm duy trì ít nhất một PR ở trạng thái Open trên GitHub.
 
@@ -228,9 +319,9 @@ Theo yêu cầu nộp bài, nhóm duy trì ít nhất một PR ở trạng thái
 | Tiêu đề PR | `test(media): add unit tests for MediaController and utils` |
 | Trạng thái | Open |
 | Reviewer được gán | [Tên TV khác], [Tên TV khác] |
-| Trạng thái CI | Passing |
+| Trạng thái CI | Pending (chờ Jenkins) |
 
-**Hình 6.1 — Pull Request đang ở trạng thái Open, chờ review**
+**Hình 3.1 — Pull Request đang ở trạng thái Open, chờ review**
 
 ```
 [HÌNH: Trang PR trên GitHub với nhãn "Open", hiển thị reviewer và CI status]
@@ -238,13 +329,13 @@ Theo yêu cầu nộp bài, nhóm duy trì ít nhất một PR ở trạng thái
 
 ---
 
-## 7. Vấn Đề Gặp Phải Và Cách Giải Quyết
+## 4. Vấn Đề Gặp Phải Và Cách Giải Quyết
 
 | Vấn đề | Nguyên nhân | Giải pháp |
 |--------|-------------|-----------|
 | Lệnh `./mvnw test` báo lỗi `${revision} not found` | Chạy Maven từ sai thư mục, không đọc được root POM | Chạy `./mvnw -f ../pom.xml test -pl media -am` từ bên trong thư mục `media/` |
-| `@WebMvcTest` lỗi khi load ApplicationContext | OAuth2 tự động cấu hình gây xung đột trong môi trường test | Thêm `excludeAutoConfiguration = OAuth2ResourceServerAutoConfiguration.class` |
-| [Điền thêm nếu có] | | |
+| `@WebMvcTest` lỗi khi load ApplicationContext | OAuth2 tự động cấu hình gây xung đột trong môi trường test | Thêm `excludeAutoConfiguration = OAuth2ResourceServerAutoConfiguration.class` vào annotation `@WebMvcTest` |
+| Test POST `/medias` trả về 400 thay vì 200 | Annotation `@ValidFileType` kiểm tra nội dung thực của file ảnh | Tạo ảnh PNG thật bằng `BufferedImage` + `ImageIO.write()` thay vì dùng byte giả |
 
 ---
 
