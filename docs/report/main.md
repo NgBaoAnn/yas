@@ -12,9 +12,9 @@
 | Thành viên | MSSV | Phần phụ trách |
 |------------|:----:|----------------|
 | [Họ và tên TV1] | `XXXXXXXX` | Jenkins Infrastructure và Pipeline |
-| [Họ và tên TV2] | `XXXXXXXX` | Branch Protection và Unit Test (media, product) |
-| [Họ và tên TV3] | `XXXXXXXX` | Security Scanning và Unit Test (cart) |
-| [Họ và tên TV4] | `XXXXXXXX` | Coverage Gate và Unit Test (order) |
+| [Họ và tên TV2] | `XXXXXXXX` | Branch Protection và Unit Test (10 modules) |
+| [Họ và tên TV3] | `XXXXXXXX` | Security Scanning |
+| [Họ và tên TV4] | `XXXXXXXX` | Coverage Gate và Unit Test (6 modules) |
 
 **Link GitHub Repository:** `https://github.com/<ten-nhom>/yas`
 
@@ -54,9 +54,9 @@ Developer Push / Pull Request
 | Thành viên | Nội dung thực hiện | File báo cáo chi tiết |
 |:----------:|--------------------|-----------------------|
 | TV1 | Cài đặt Jenkins Server, cấu hình Webhook, tạo Multibranch Pipeline, viết Jenkinsfile với logic Monorepo | [tv1-jenkins.md](./tv1-jenkins.md) |
-| TV2 | Cấu hình Branch Protection trên GitHub, viết unit test cho service `media` và `product` | [tv2-branch-protection.md](./tv2-branch-protection.md) |
-| TV3 | Tích hợp Gitleaks, SonarQube, Snyk vào pipeline; viết unit test cho service `cart` | [tv3-security-scanning.md](./tv3-security-scanning.md) |
-| TV4 | Cấu hình JaCoCo Coverage Gate (>= 70%); viết unit test cho service `order`; tổng hợp báo cáo | [tv4-coverage-gate.md](./tv4-coverage-gate.md) |
+| TV2 | Cấu hình Branch Protection trên GitHub, viết unit test cho 10 service module | [tv2-branch-protection.md](./tv2-branch-protection.md) |
+| TV3 | Tích hợp Gitleaks, SonarQube, Snyk vào pipeline | [tv3-security-scanning.md](./tv3-security-scanning.md) |
+| TV4 | Cấu hình JaCoCo Coverage Gate (>= 70%); viết unit test cho 6 service module; tổng hợp báo cáo | [tv4-coverage-gate.md](./tv4-coverage-gate.md) |
 
 ---
 
@@ -98,8 +98,20 @@ Developer Push / Pull Request
 |---------|:-----------------------:|:-------------------:|:----------:|
 | media   | %                       | %                   |            |
 | product | %                       | %                   |            |
-| cart    | %                       | %                   |            |
 | order   | %                       | %                   |            |
+| inventory| %                       | %                   |            |
+| payment | %                       | %                   |            |
+| promotion| %                       | %                   |            |
+| rating  | %                       | %                   |            |
+| delivery| %                       | %                   |            |
+| sampledata| %                      | %                   |            |
+| recommendation| %                  | %                   |            |
+| customer| %                       | %                   |            |
+| location| %                       | %                   |            |
+| cart    | %                       | %                   |            |
+| tax     | %                       | %                   |            |
+| search  | %                       | %                   |            |
+| webhook | %                       | %                   |            |
 
 ---
 
