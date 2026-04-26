@@ -1,7 +1,7 @@
 # Phần 2: Branch Protection và Unit Test (10 modules)
 
 **Người thực hiện:** [Họ và tên] — MSSV: `XXXXXXXX`  
-**Phạm vi:** Cấu hình Branch Protection trên GitHub, viết unit test cho 10 service module, tạo Pull Request demo.
+**Phạm vi:** Cấu hình Branch Protection trên GitHub, viết unit test cho service `media`, `product`, và `rating`, tạo Pull Request demo.
 
 ---
 
@@ -254,18 +254,61 @@ Yêu cầu tối thiểu: >= 70%
 
 ---
 
-## 3. Pull Request Demo (Trạng Thái Open)
+## 4. Unit Test — Service `rating`
+
+### 4.1 Thông Tin Branch Và Pull Request
+
+| Thông tin | Giá trị |
+|-----------|---------|
+| Tên branch | `test/rating` |
+| Branch gốc | `main` |
+| Link PR | `https://github.com/<ten-nhom>/yas/pull/<so>` |
+
+### 4.2 Danh Sách File Test
+
+| File Test | Lớp được kiểm thử | Số test case |
+|-----------|-------------------|:------------:|
+| `RatingServiceTest.java` | `RatingService` | 14 |
+| `OrderServiceTest.java` | `OrderService` | 2 |
+| `AuthenticationUtilsTest.java` | `AuthenticationUtils` | 2 |
+| `ConstantsTest.java` | `Constants` | 1 |
+| `MessagesUtilsTest.java` | `MessagesUtils` | 2 |
+| `RatingTest.java` | `Rating` (model) | 2 |
+| **Tổng** | | **23** |
+
+### 4.3 Kết Quả Coverage (rating)
+
+| Package | Coverage (Instructions) |
+|---------|:-----------------------:|
+| `model` | 100.00% |
+| `controller` | 100.00% |
+| `utils` | 73.77% |
+| `service` | 83.66% |
+| `viewmodel` | 83.33% |
+| **Tổng** | **84.56%** |
+
+Yêu cầu tối thiểu: >= 70% ✅
+
+### 4.4 Hình Ảnh Minh Chứng
+
+**Hình 4.1 — Báo cáo JaCoCo Coverage cho service rating đạt 84.56%**
+
+![Rating Service Coverage](../../docs/screenshots/test/07-rating-service-coverage.png)
+
+---
+
+## 5. Pull Request Demo (Trạng Thái Open)
 
 Theo yêu cầu nộp bài, nhóm duy trì ít nhất một PR ở trạng thái Open trên GitHub.
 
 | Thông tin | Giá trị |
 |-----------|---------|
-| Tiêu đề PR | `test(media): add unit tests for MediaController and utils` |
+| Tiêu đề PR | `test(rating): add unit tests for utils and model in rating module` |
 | Trạng thái | Open |
 | Reviewer được gán | [Tên TV khác], [Tên TV khác] |
 | Trạng thái CI | Passing |
 
-**Hình 3.1 — Pull Request đang ở trạng thái Open, chờ review**
+**Hình 5.1 — Pull Request đang ở trạng thái Open, chờ review**
 
 ```
 [HÌNH: Trang PR trên GitHub với nhãn "Open", hiển thị reviewer và CI status]
@@ -273,13 +316,12 @@ Theo yêu cầu nộp bài, nhóm duy trì ít nhất một PR ở trạng thái
 
 ---
 
-## 4. Vấn Đề Gặp Phải Và Cách Giải Quyết
+## 6. Vấn Đề Gặp Phải Và Cách Giải Quyết
 
 | Vấn đề | Nguyên nhân | Giải pháp |
 |--------|-------------|-----------|
-| Lệnh `./mvnw test` báo lỗi `${revision} not found` | Chạy Maven từ sai thư mục, không đọc được root POM | Chạy `./mvnw -f ../pom.xml test -pl <module> -am` từ bên trong thư mục module |
+| Lệnh `./mvnw test` báo lỗi `${revision} not found` | Chạy Maven từ sai thư mục, không đọc được root POM | Chạy `./mvnw -f ../pom.xml test -pl rating -am` từ bên trong thư mục `rating/` |
 | `@WebMvcTest` lỗi khi load ApplicationContext | OAuth2 tự động cấu hình gây xung đột trong môi trường test | Thêm `excludeAutoConfiguration = OAuth2ResourceServerAutoConfiguration.class` |
-| [Điền thêm nếu có] | | |
 
 ---
 
