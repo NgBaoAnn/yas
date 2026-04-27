@@ -214,15 +214,20 @@ open target/site/jacoco/index.html
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
 |-----------|-------------------|:------------:|
-| [Tên file] | [Tên lớp] | |
+| `WebhookControllerTest.java` | `WebhookController` | 6 |
+| `WebhookServiceTest.java` | `WebhookService` | 11 |
+| `EventServiceTest.java` | `EventService` | 1 |
+| `OrderEventServiceTest.java` | `OrderEventService` | 4 |
+| `ProductEventServiceTest.java` | `ProductEventService` | 2 |
+| `WebhookMapperTest.java` | `WebhookMapper` | 7 |
 
-**Kết Quả Coverage:** Instructions % | Branches %
+**Kết Quả Coverage:** Instructions **78%** | Branches **65%**
 
 **Hình Ảnh Minh Chứng:**
 ```
-[HÌNH: Terminal output BUILD SUCCESS cho webhook]
-[HÌNH: Báo cáo JaCoCo coverage cho webhook]
+[HÌNH: Terminal output "Tests run: 31, Failures: 0, Errors: 0, Skipped: 0 — BUILD SUCCESS"]
 ```
+![Báo cáo JaCoCo coverage cho webhook](../screenshots/test/webhook-coverage-report.png)
 
 ### 2.8 Bảng Tổng Hợp Kết Quả Coverage (6 modules)
 
@@ -230,12 +235,12 @@ Yêu cầu tối thiểu: >= 70%
 
 | Module | Coverage (Instructions) | Coverage (Branches) | Đạt >= 70% |
 |--------|:-----------------------:|:-------------------:|:----------:|
-| `customer` | % | % | |
-| `location` | % | % | |
-| `cart` | % | % | |
-| `tax` | % | % | |
-| `search` | % | % | |
-| `webhook` | % | % | |
+| `customer` | 87% | 87% | Đạt |
+| `location` | 88% | 88% | Đạt |
+| `cart` | 100% | 100% | Đạt |
+| `tax` | 100% | 100% | Đạt |
+| `search` | 84% | 46% | Đạt |
+| `webhook` | 78% | 65% | Đạt |
 
 ---
 
@@ -253,12 +258,12 @@ Yêu cầu tối thiểu: >= 70%
 | delivery| %                       | %                   |            |
 | sampledata| %                      | %                   |            |
 | recommendation| %                  | %                   |            |
-| customer| %                       | %                   |            |
-| location| %                       | %                   |            |
-| cart    | %                       | %                   |            |
-| tax     | %                       | %                   |            |
-| search  | %                       | %                   |            |
-| webhook | %                       | %                   |            |
+| customer| 87%                     | 87%                 | Đạt        |
+| location| 88%                     | 88%                 | Đạt        |
+| cart    | 100%                    | 100%                | Đạt        |
+| tax     | 100%                    | 100%                | Đạt        |
+| search  | 84%                     | 46%                 | Đạt        |
+| webhook | 78%                     | 65%                 | Đạt        |
 
 ---
 
