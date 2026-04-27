@@ -22,19 +22,37 @@ Cấu hình tại: `GitHub Repository > Settings > Branches > Add branch protect
 
 ### 1.2 Hình Ảnh Minh Chứng
 
-**Hình 1.1 — Trang cấu hình Branch Protection Rules trên GitHub**
+**Hình 1.1 — Cấu hình bắt buộc tạo Pull Request và số lượng Approval**
 
 ```
-[HÌNH: GitHub > Repository > Settings > Branches > Protection rules cho nhánh main]
+[HÌNH: Ảnh chụp màn hình tích chọn "Require a pull request before merging" và "Require approvals"]
 ```
 
-**Hình 1.2 — Push trực tiếp vào nhánh `main` bị từ chối**
+**Hình 1.2 — Cấu hình bắt buộc Status Checks (Jenkins CI) phải pass**
+
+```
+[HÌNH: Ảnh chụp màn hình tích chọn "Require status checks to pass"]
+```
+
+**Hình 1.3 — Cấu hình bắt buộc cập nhật nhánh trước khi merge**
+
+```
+[HÌNH: Ảnh chụp màn hình tích chọn "Require branches to be up to date before merging"]
+```
+
+**Hình 1.4 — Cấu hình không cho phép Admin lách luật**
+
+```
+[HÌNH: Ảnh chụp màn hình tích chọn "Do not allow bypassing the above settings"]
+```
+
+**Hình 1.5 — Push trực tiếp vào nhánh `main` bị từ chối**
 
 ```
 [HÌNH: Terminal output với thông báo "remote: error: GH006: Protected branch update failed"]
 ```
 
-**Hình 1.3 — Pull Request hiển thị yêu cầu 2 lượt approve và CI check phải pass**
+**Hình 1.6 — Pull Request hiển thị yêu cầu 2 lượt approve và CI check phải pass**
 
 ```
 [HÌNH: Trang PR trên GitHub với phần "Review required" và "Checks" đang chờ]
@@ -63,15 +81,43 @@ open target/site/jacoco/index.html
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
 |-----------|-------------------|:------------:|
-| [Tên file] | [Tên lớp] | |
+| `MediaControllerTest.java` | `MediaController` — tất cả 5 endpoints | 8 |
+| `MediaServiceUnitTest.java` | `MediaService` — logic nghiệp vụ | 13 |
+| `FileSystemRepositoryTest.java` | `FileSystemRepository` — thao tác lưu/đọc file | 4 |
+| `StringUtilsTest.java` | `StringUtils` — xác thực chuỗi văn bản | 11 |
+| `FileTypeValidatorTest.java` | `FileTypeValidator` — xác thực loại và nội dung file ảnh | 6 |
+| **Tổng** | | **42** |
 
-**Kết Quả Coverage:** Instructions % | Branches %
+**Lưu Ý Kỹ Thuật:**
+Annotation `@WebMvcTest` cần loại trừ `OAuth2ResourceServerAutoConfiguration` để tránh lỗi load ApplicationContext trong môi trường test không có server OAuth2:
+```java
+@WebMvcTest(controllers = MediaController.class,
+    excludeAutoConfiguration = OAuth2ResourceServerAutoConfiguration.class)
+@AutoConfigureMockMvc(addFilters = false)
+class MediaControllerTest { ... }
+```
+
+**Kết Quả Coverage:** 
+| Package | Coverage (Instructions) | Coverage (Branches) |
+|---------|:-----------------------:|:-------------------:|
+| `com.yas.media.controller` | 100% | 100% |
+| `com.yas.media.service` | 89% | 90% |
+| `com.yas.media.utils` | 92% | 100% |
+| `com.yas.media.viewmodel` | 86% | n/a |
+| `com.yas.media.repository` | 73% | 62% |
+| `com.yas.media.model` | 100% | n/a |
+| `com.yas.media.mapper` | 38% | 7% |
+| **Tổng** | **80%** | **65%** |
+
+*(Đạt yêu cầu tối thiểu >= 70%)*
 
 **Hình Ảnh Minh Chứng:**
+- **Kết quả chạy test (42 test case PASS, 0 Failures):**
 ```
-[HÌNH: Terminal output BUILD SUCCESS cho media]
-[HÌNH: Báo cáo JaCoCo coverage cho media]
+[HÌNH: Terminal output "Tests run: 42, Failures: 0, Errors: 0 — BUILD SUCCESS"]
 ```
+- **Báo cáo JaCoCo Coverage cho service media (tổng 80%):**
+![Báo cáo JaCoCo Coverage — media service](../screenshots/test/03-media-coverage-report.png)
 
 ### 2.3 Module `product`
 
@@ -241,7 +287,7 @@ Yêu cầu tối thiểu: >= 70%
 
 | Module | Coverage (Instructions) | Coverage (Branches) | Đạt >= 70% |
 |--------|:-----------------------:|:-------------------:|:----------:|
-| `media` | % | % | |
+| `media` | 80% | 65% | Đạt |
 | `product` | % | % | |
 | `order` | % | % | |
 | `inventory` | % | % | |
@@ -263,7 +309,7 @@ Theo yêu cầu nộp bài, nhóm duy trì ít nhất một PR ở trạng thái
 | Tiêu đề PR | `test(media): add unit tests for MediaController and utils` |
 | Trạng thái | Open |
 | Reviewer được gán | [Tên TV khác], [Tên TV khác] |
-| Trạng thái CI | Passing |
+| Trạng thái CI | Pending (chờ Jenkins) |
 
 **Hình 3.1 — Pull Request đang ở trạng thái Open, chờ review**
 
@@ -277,9 +323,9 @@ Theo yêu cầu nộp bài, nhóm duy trì ít nhất một PR ở trạng thái
 
 | Vấn đề | Nguyên nhân | Giải pháp |
 |--------|-------------|-----------|
-| Lệnh `./mvnw test` báo lỗi `${revision} not found` | Chạy Maven từ sai thư mục, không đọc được root POM | Chạy `./mvnw -f ../pom.xml test -pl <module> -am` từ bên trong thư mục module |
-| `@WebMvcTest` lỗi khi load ApplicationContext | OAuth2 tự động cấu hình gây xung đột trong môi trường test | Thêm `excludeAutoConfiguration = OAuth2ResourceServerAutoConfiguration.class` |
-| [Điền thêm nếu có] | | |
+| Lệnh `./mvnw test` báo lỗi `${revision} not found` | Chạy Maven từ sai thư mục, không đọc được root POM | Chạy `./mvnw -f ../pom.xml test -pl media -am` từ bên trong thư mục `media/` |
+| `@WebMvcTest` lỗi khi load ApplicationContext | OAuth2 tự động cấu hình gây xung đột trong môi trường test | Thêm `excludeAutoConfiguration = OAuth2ResourceServerAutoConfiguration.class` vào annotation `@WebMvcTest` |
+| Test POST `/medias` trả về 400 thay vì 200 | Annotation `@ValidFileType` kiểm tra nội dung thực của file ảnh | Tạo ảnh PNG thật bằng `BufferedImage` + `ImageIO.write()` thay vì dùng byte giả |
 
 ---
 
