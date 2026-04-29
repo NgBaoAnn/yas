@@ -8,6 +8,7 @@ pipeline {
                     echo "Checking environment..."
                     sh 'java -version'
                     sh 'mvn -version'
+                    sh 'gitleaks version'
                 }
             }
         }
