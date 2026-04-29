@@ -18,6 +18,7 @@ stage('Secret Scanning') {
     steps {
         sh '''
             gitleaks detect --source . \
+                --config gitleaks.toml \
                 --report-format json \
                 --report-path gitleaks-report.json \
                 --exit-code 1
@@ -25,7 +26,8 @@ stage('Secret Scanning') {
     }
     post {
         always {
-            archiveArtifacts artifacts: 'gitleaks-report.json', allowEmptyArchive: true
+            archiveArtifacts artifacts: 'gitleaks-report.json',
+                             allowEmptyArchive: true
         }
     }
 }
@@ -33,27 +35,45 @@ stage('Secret Scanning') {
 
 > Pipeline sẽ dừng lại (FAIL) ngay tại stage này nếu Gitleaks phát hiện secret bị lộ.
 
-### 1.3 Cấu Hình File `.gitleaksignore` (Nếu Có)
+### 1.3 Xử Lý False Positive
 
-> Trong trường hợp phát sinh false positive (cảnh báo nhầm), thêm exception vào file `.gitleaksignore`:
+Sau lần chạy đầu tiên, Gitleaks phát hiện **13 findings** trong lịch sử commit — tất cả đều là Keycloak client secret từ **upstream repository** (nashtech-garage/yas), không phải secret thật của nhóm. Các giá trị này là credential cố định dùng cho môi trường dev/demo.
 
+Xử lý bằng cách thêm `commits` vào `allowlist` trong `gitleaks.toml`:
+
+```toml
+[allowlist]
+description = "global allow list"
+paths = [
+  '''test-realm.json''',
+  '''realm-export''',
+  '''keycloak-yas-realm-import.yaml''',
+  '''target'''
+]
+# False positives from upstream YAS repository (dev/demo Keycloak credentials, not real secrets)
+commits = [
+  "af2c9421030761ec4eccb0994a6c576592be113b",
+  "8dc5e08456e8fa8c970b7b0cadcffdcd15d77e39",
+  "f3d6c4a83259ca06fc9bc1889b9369d11b423256",
+  "2192b03da8ca22e188ecf17f693fb9fbe9376811",
+  "b2294a232aa1eea10b9814cf6ece03c5871b98d7",
+  "e8fb3139974eb1a27b224416742c6902300ffee3",
+  "0cac9558db4e4aa004d72e47e652384d6f32a666",
+  "14f0528e9d235c13db92db3bf5e9f3b1cf5b1a7e"
+]
 ```
-[Điền nội dung file .gitleaksignore nếu nhóm có cấu hình]
-```
+
+Sử dụng `commits` allowlist thay vì `paths` để đảm bảo chính xác — chỉ bỏ qua đúng các commit từ upstream, không bỏ qua các secret thật có thể xuất hiện trong tương lai tại cùng file đó.
 
 ### 1.4 Hình Ảnh Minh Chứng
 
 **Hình 1.1 — Stage Secret Scanning chạy thành công (không phát hiện secret)**
 
-```
-[HÌNH: Jenkins Console Output — Gitleaks chạy và kết thúc với trạng thái SUCCESS]
-```
+![Gitleaks Success](../images/tv3/gitleak_success.png)
 
-**Hình 1.2 — Pipeline thất bại khi Gitleaks phát hiện secret (trường hợp demo)**
+**Hình 1.2 — Pipeline thất bại khi Gitleaks phát hiện secret**
 
-```
-[HÌNH: Jenkins build FAIL với thông báo Gitleaks tìm thấy secret trong commit]
-```
+![Gitleaks Failed](../images/tv3/gitleaks_failed.png)
 
 ---
 
