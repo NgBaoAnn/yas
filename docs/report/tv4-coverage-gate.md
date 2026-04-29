@@ -172,15 +172,17 @@ open target/site/jacoco/index.html
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
 |-----------|-------------------|:------------:|
-| [Tên file] | [Tên lớp] | |
+| `CartItemServiceTest.java` | `CartItemService` | 10 |
+| `ProductServiceTest.java` | `ProductService` | 1 |
+| `CartItemControllerTest.java` | `CartItemController` | 12 |
 
-**Kết Quả Coverage:** Instructions % | Branches %
+**Kết Quả Coverage:** Instructions **88%** | Branches **68%**
 
 **Hình Ảnh Minh Chứng:**
 ```
-[HÌNH: Terminal output BUILD SUCCESS cho cart]
-[HÌNH: Báo cáo JaCoCo coverage cho cart]
+[HÌNH: Terminal output "Tests run: 23, Failures: 0, Errors: 0 — BUILD SUCCESS"]
 ```
+![Báo cáo JaCoCo coverage cho cart](../screenshots/test/cart-coverage-report.png.png)
 
 ### 2.5 Module `tax`
 
@@ -190,15 +192,18 @@ open target/site/jacoco/index.html
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
 |-----------|-------------------|:------------:|
-| [Tên file] | [Tên lớp] | |
+| `TaxClassServiceTest.java` | `TaxClassService` | 8 |
+| `TaxRateServiceTest.java` | `TaxRateService` | 15 |
+| `TaxClassControllerTest.java` | `TaxClassController` | 6 |
+| `TaxRateControllerTest.java` | `TaxRateController` | 7 |
 
-**Kết Quả Coverage:** Instructions % | Branches %
+**Kết Quả Coverage:** Instructions **87%** | Branches **100%**
 
 **Hình Ảnh Minh Chứng:**
 ```
-[HÌNH: Terminal output BUILD SUCCESS cho tax]
-[HÌNH: Báo cáo JaCoCo coverage cho tax]
+[HÌNH: Terminal output "Tests run: 44, Failures: 0, Errors: 0 — BUILD SUCCESS"]
 ```
+[HÌNH: Báo cáo JaCoCo coverage cho tax]
 
 ### 2.6 Module `search`
 
@@ -229,15 +234,20 @@ open target/site/jacoco/index.html
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
 |-----------|-------------------|:------------:|
-| [Tên file] | [Tên lớp] | |
+| `WebhookControllerTest.java` | `WebhookController` | 6 |
+| `WebhookServiceTest.java` | `WebhookService` | 11 |
+| `EventServiceTest.java` | `EventService` | 1 |
+| `OrderEventServiceTest.java` | `OrderEventService` | 4 |
+| `ProductEventServiceTest.java` | `ProductEventService` | 2 |
+| `WebhookMapperTest.java` | `WebhookMapper` | 7 |
 
-**Kết Quả Coverage:** Instructions % | Branches %
+**Kết Quả Coverage:** Instructions **78%** | Branches **65%**
 
 **Hình Ảnh Minh Chứng:**
 ```
-[HÌNH: Terminal output BUILD SUCCESS cho webhook]
-[HÌNH: Báo cáo JaCoCo coverage cho webhook]
+[HÌNH: Terminal output "Tests run: 31, Failures: 0, Errors: 0, Skipped: 0 — BUILD SUCCESS"]
 ```
+![Báo cáo JaCoCo coverage cho webhook](../screenshots/test/webhook-coverage-report.png)
 
 ### 2.8 Bảng Tổng Hợp Kết Quả Coverage (6 modules)
 
@@ -246,11 +256,11 @@ Yêu cầu tối thiểu: >= 70%
 | Module | Coverage (Instructions) | Coverage (Branches) | Đạt >= 70% |
 |--------|:-----------------------:|:-------------------:|:----------:|
 | `customer` | 87% | 87% | Đạt |
-| `location` | % | % | |
-| `cart` | % | % | |
-| `tax` | % | % | |
-| `search` | 85% | 61% | Đạt |
-| `webhook` | % | % | |
+| `location` | 88% | 88% | Đạt |
+| `cart` | 100% | 100% | Đạt |
+| `tax` | 100% | 100% | Đạt |
+| `search` | 84% | 46% | Đạt |
+| `webhook` | 78% | 65% | Đạt |
 
 ---
 
@@ -269,11 +279,11 @@ Yêu cầu tối thiểu: >= 70%
 | sampledata| %                      | %                   |            |
 | recommendation| %                  | %                   |            |
 | customer| 87%                     | 87%                 | Đạt        |
-| location| %                       | %                   |            |
-| cart    | %                       | %                   |            |
-| tax     | %                       | %                   |            |
-| search  | 85%                     | 61%                 | Đạt        |
-| webhook | %                       | %                   |            |
+| location| 88%                     | 88%                 | Đạt        |
+| cart    | 100%                    | 100%                | Đạt        |
+| tax     | 100%                    | 100%                | Đạt        |
+| search  | 84%                     | 46%                 | Đạt        |
+| webhook | 78%                     | 65%                 | Đạt        |
 
 ---
 
