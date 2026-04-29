@@ -217,20 +217,38 @@ class MediaControllerTest { ... }
 ### 2.6 Module `payment`
 
 - **Branch:** `test/payment`
-- **Pull Request:** `[Link PR]`
+- **Pull Request:** `https://github.com/<ten-nhom>/yas/pull/<so>`
 
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
 |-----------|-------------------|:------------:|
-| [Tên file] | [Tên lớp] | |
+| `PaymentControllerTest.java` | `PaymentController` | 3 |
+| `PaymentProviderControllerTest.java` | `PaymentProviderController` | 3 |
+| `PaymentProviderServiceTest.java` | `PaymentProviderService` | 7 |
+| `OrderServiceTest.java` | `OrderService` | 2 |
+| `PaypalHandlerTest.java` | `PaypalHandler`, `AbstractPaymentHandler` | 3 |
+| `PaymentServiceTest.java` | `PaymentService` | 2 |
+| `MediaServiceTest.java` | `MediaService` | 2 |
+| **Tổng** | | **22** |
 
-**Kết Quả Coverage:** Instructions % | Branches %
+**Kết Quả Coverage:** 
+| Package | Coverage (Instructions) |
+|---------|:-----------------------:|
+| `controller` | 100.00% |
+| `service` | 89.08% |
+| `service.provider.handler` | 100.00% |
+| `mapper` | 46.01% |
+| `viewmodel` | 77.78% |
+| `viewmodel.paymentprovider` | 100.00% |
+| `model.enumeration` | 100.00% |
+| **Tổng** | **72.33%** |
+
+*(Đạt yêu cầu tối thiểu >= 70%)*
 
 **Hình Ảnh Minh Chứng:**
-```
-[HÌNH: Terminal output BUILD SUCCESS cho payment]
-[HÌNH: Báo cáo JaCoCo coverage cho payment]
-```
+- **Báo cáo JaCoCo Coverage cho service payment đạt 72.33%**
+
+![Payment Service Coverage](../../docs/screenshots/05-payment-service-coverage.png)
 
 ### 2.7 Module `promotion`
 
