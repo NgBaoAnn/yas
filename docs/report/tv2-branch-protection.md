@@ -64,7 +64,7 @@ Cấu hình tại: `GitHub Repository > Settings > Branches > Add branch protect
 
 ### 2.1 Hướng Dẫn Chung Chạy Test
 
-Do project sử dụng cấu trúc monorepo với thuộc tính `${revision}`, lệnh phải chạy từ bên trong thư mục module tương ứng (ví dụ `media/`):
+Do project sử dụng cấu trúc monorepo với thuộc tính `${revision}`, lệnh phải chạy từ bên trong thư mục module tương ứng:
 
 ```bash
 cd /duong-dan/yas/<module>
@@ -253,20 +253,43 @@ class MediaControllerTest { ... }
 ### 2.7 Module `promotion`
 
 - **Branch:** `test/promotion`
-- **Pull Request:** `[Link PR]`
+- **Pull Request:** `https://github.com/<ten-nhom>/yas/pull/<so>`
 
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
 |-----------|-------------------|:------------:|
-| [Tên file] | [Tên lớp] | |
+| `PromotionControllerTest.java` | `PromotionController` | 11 |
+| `PromotionServiceTest.java` | `PromotionService` | 14 |
+| `ProductServiceTest.java` | `ProductService` | 5 |
+| `PromotionValidatorTest.java` | `PromotionValidator` | 8 |
+| `ErrorVmTest.java` | `ErrorVm` | 2 |
+| `PromotionPutVmTest.java` | `PromotionPutVm` | 3 |
+| `PromotionUsageVmTest.java` | `PromotionUsageVm` | 1 |
+| `PromotionVmTest.java` | `PromotionVm` | 1 |
+| `AuthenticationUtilsTest.java`| `AuthenticationUtils` | 3 |
+| `MessagesUtilsTest.java` | `MessagesUtils` | 2 |
+| `ConstantsTest.java` | `Constants` | 1 |
+| **Tổng** | | **51** |
 
-**Kết Quả Coverage:** Instructions % | Branches %
+**Kết Quả Coverage:** 
+| Package | Coverage (Instructions) |
+|---------|:-----------------------:|
+| `validation` | 100.00% |
+| `controller` | 89.06% |
+| `model.enumeration` | 100.00% |
+| `service` | 73.91% |
+| `viewmodel` | 93.64% |
+| `model` | 37.78% |
+| `utils` | 88.06% |
+| `viewmodel.error` | 100.00% |
+| **Tổng** | **82.07%** |
+
+*(Đạt yêu cầu tối thiểu >= 70%)*
 
 **Hình Ảnh Minh Chứng:**
-```
-[HÌNH: Terminal output BUILD SUCCESS cho promotion]
-[HÌNH: Báo cáo JaCoCo coverage cho promotion]
-```
+- **Báo cáo JaCoCo Coverage cho service promotion đạt 82.07%**
+
+![Promotion Service Coverage](../../docs/screenshots/06-promotion-service-coverage.png)
 
 ### 2.8 Module `rating`
 
