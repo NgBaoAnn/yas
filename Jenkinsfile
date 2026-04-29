@@ -90,6 +90,7 @@ pipeline {
                 withCredentials([string(credentialsId: 'snyk-token', variable: 'SNYK_TOKEN')]) {
                     sh 'snyk auth $SNYK_TOKEN'
                     sh 'snyk test --all-projects --json > snyk-report.json || true'
+                    sh 'snyk monitor --all-projects || true'
                 }
             }
             post {
