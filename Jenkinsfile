@@ -1,0 +1,46 @@
+pipeline {
+    agent { label 'individual-agent' }
+
+    stages {
+        stage('Pre-check') {
+            steps {
+                script {
+                    echo "Checking environment..."
+                    sh 'java -version'
+                    sh 'mvn -version'
+                }
+            }
+        }
+        stage('Monorepo Execution') {
+            steps {
+                script {
+                    def changedFiles = sh(script: 'git diff --name-only HEAD~1 HEAD', returnStdout: true).trim().split('\n')
+                    def services = ['media', 'product', 'order', 'inventory', 'cart', 'customer'] 
+
+                    for (service in services) {
+                        if (changedFiles.any { it.startsWith("${service}/") }) {
+                            echo "Processing service: ${service}"
+                            sh "mvn test -pl ${service} -am"
+                            junit testResults: "${service}/target/surefire-reports/*.xml", allowEmptyResults: true
+                            sh "mvn package -DskipTests -pl ${service} -am"
+                        } else {
+                            echo "${service} no change, skip."
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "✅ Pipeline Succeeded"
+        }
+        failure {
+            echo "❌ Pipeline Failed"
+        }
+        always {
+            cleanWs()
+        }
+    }
+}

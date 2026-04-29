@@ -64,7 +64,7 @@ Cấu hình tại: `GitHub Repository > Settings > Branches > Add branch protect
 
 ### 2.1 Hướng Dẫn Chung Chạy Test
 
-Do project sử dụng cấu trúc monorepo với thuộc tính `${revision}`, lệnh phải chạy từ bên trong thư mục module tương ứng:
+Do project sử dụng cấu trúc monorepo với thuộc tính `${revision}`, lệnh phải chạy từ bên trong thư mục module tương ứng (ví dụ `media/`):
 
 ```bash
 cd /duong-dan/yas/<module>
