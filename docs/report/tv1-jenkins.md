@@ -81,15 +81,11 @@ Webhook được tạo tại: `Repository > Settings > Webhooks > Add webhook`
 
 **Hình 3.1 — Multibranch Pipeline Job — danh sách branch được Jenkins phát hiện**
 
-```
-[HÌNH: Jenkins > yas-pipeline > danh sách branches đã quét]
-```
+![Jenkins Webhook](../images/tv1/scan.jpg)
 
 **Hình 3.2 — Pipeline tự động kích hoạt sau khi push code**
 
-```
-[HÌNH: Build history hiển thị build mới sau khi push lên GitHub]
-```
+![Jenkins Webhook](../images/tv1/trigger_push.jpg)
 
 ---
 
@@ -101,14 +97,16 @@ Pipeline gồm các stage theo thứ tự:
 
 ```groovy
 pipeline {
-    agent any
+    agent { label 'individual-agent' }
     stages {
-        stage('Detect Changes') { ... }   // Phát hiện service có thay đổi
-        stage('Test')           { ... }   // Chạy mvn test + publish JUnit report
-        stage('Coverage Report'){ ... }   // Publish JaCoCo report
-        stage('Build')          { ... }   // Chạy mvn package -DskipTests
+        stage('Pre-check')          { ... } // Kiểm tra môi trường (Java, Maven, Gitleaks)
+        stage('Secret Scanning')    { ... } // Quét lộ bí mật (Secret) bằng Gitleaks
+        stage('Monorepo Execution') { ... } // Tự động phát hiện thay đổi và Build/Test service tương ứng
+        stage('Coverage Report')    { ... } // Tổng hợp báo cáo độ phủ code JaCoCo
     }
 }
+
+
 ```
 
 ### 4.2 Logic Phát Hiện Thay Đổi (Monorepo Optimization)
