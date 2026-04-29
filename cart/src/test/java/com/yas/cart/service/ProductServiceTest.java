@@ -37,32 +37,32 @@ class ProductServiceTest {
         responseSpec = Mockito.mock(RestClient.ResponseSpec.class);
     }
 
-    // @Test
-    // void getProducts_NormalCase_ReturnProductThumbnailVms() {
+    @Test
+    void getProducts_NormalCase_ReturnProductThumbnailVms() {
 
-    //     List<Long> ids = List.of(1L, 2L, 3L);
-    //     URI url = UriComponentsBuilder
-    //         .fromUriString("http://api.yas.local/media")
-    //         .path("/storefront/products/list-featured")
-    //         .queryParam("productId", ids)
-    //         .build()
-    //         .toUri();
+        List<Long> ids = List.of(1L, 2L, 3L);
+        URI url = UriComponentsBuilder
+            .fromUriString("http://api.yas.local/media")
+            .path("/storefront/products/list-featured")
+            .queryParam("productId", ids)
+            .build()
+            .toUri();
 
-    //     when(serviceUrlConfig.product()).thenReturn("http://api.yas.local/media");
-    //     when(restClient.get()).thenReturn(requestHeadersUriSpec);
-    //     when(requestHeadersUriSpec.uri(url)).thenReturn(requestHeadersUriSpec);
-    //     when(requestHeadersUriSpec.retrieve()).thenReturn(responseSpec);
-    //     when(responseSpec.toEntity(new ParameterizedTypeReference<List<ProductThumbnailVm>>() {
-    //     }))
-    //         .thenReturn(ResponseEntity.ok(getProductThumbnailVms()));
+        when(serviceUrlConfig.product()).thenReturn("http://api.yas.local/media");
+        when(restClient.get()).thenReturn(requestHeadersUriSpec);
+        when(requestHeadersUriSpec.uri(url)).thenReturn(requestHeadersUriSpec);
+        when(requestHeadersUriSpec.retrieve()).thenReturn(responseSpec);
+        when(responseSpec.toEntity(new ParameterizedTypeReference<List<ProductThumbnailVm>>() {
+        }))
+            .thenReturn(ResponseEntity.ok(getProductThumbnailVms()));
 
-    //     List<ProductThumbnailVm> result = productService.getProducts(ids);
+        List<ProductThumbnailVm> result = productService.getProducts(ids);
 
-    //     assertThat(result).hasSize(3);
-    //     assertThat(result.get(0).id()).isEqualTo(1);
-    //     assertThat(result.get(1).id()).isEqualTo(2);
-    //     assertThat(result.get(2).id()).isEqualTo(3);
-    // }
+        assertThat(result).hasSize(3);
+        assertThat(result.get(0).id()).isEqualTo(1);
+        assertThat(result.get(1).id()).isEqualTo(2);
+        assertThat(result.get(2).id()).isEqualTo(3);
+    }
 
     private List<ProductThumbnailVm> getProductThumbnailVms() {
 
