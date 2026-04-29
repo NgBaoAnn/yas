@@ -124,15 +124,21 @@ open target/site/jacoco/index.html
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
 |-----------|-------------------|:------------:|
-| [Tên file] | [Tên lớp] | |
+| `CustomerControllerTest.java` | `CustomerController` | 7 |
+| `LocationControllerTest.java` | `LocationController` | 5 |
+| `UserAddressControllerTest.java` | `UserAddressController` | 5 |
+| `CustomerServiceTest.java` | `CustomerService` | 15 |
+| `LocationServiceTest.java` | `LocationService` | 3 |
+| `UserAddressServiceTest.java` | `UserAddressService` | 10 |
+| `MessagesUtilsTest.java` | `MessagesUtils` | 2 |
 
-**Kết Quả Coverage:** Instructions % | Branches %
+**Kết Quả Coverage:** Instructions **87%** | Branches **87%**
 
 **Hình Ảnh Minh Chứng:**
 ```
-[HÌNH: Terminal output BUILD SUCCESS cho customer]
-[HÌNH: Báo cáo JaCoCo coverage cho customer]
+[HÌNH: Terminal output "Tests run: 42, Failures: 0, Errors: 0, Skipped: 0 — BUILD SUCCESS"]
 ```
+![Báo cáo JaCoCo coverage cho customer](../screenshots/test/customer-coverage-report.png)
 
 ### 2.3 Module `location`
 
@@ -239,8 +245,8 @@ Yêu cầu tối thiểu: >= 70%
 
 | Module | Coverage (Instructions) | Coverage (Branches) | Đạt >= 70% |
 |--------|:-----------------------:|:-------------------:|:----------:|
-| `customer` | % | % | |
-| `location` | 88% | 88% | Đạt |
+| `customer` | 87% | 87% | Đạt |
+| `location` | % | % | |
 | `cart` | % | % | |
 | `tax` | % | % | |
 | `search` | 85% | 61% | Đạt |
@@ -262,8 +268,8 @@ Yêu cầu tối thiểu: >= 70%
 | delivery| %                       | %                   |            |
 | sampledata| %                      | %                   |            |
 | recommendation| %                  | %                   |            |
-| customer| %                       | %                   |            |
-| location| 88%                     | 88%                 | Đạt        |
+| customer| 87%                     | 87%                 | Đạt        |
+| location| %                       | %                   |            |
 | cart    | %                       | %                   |            |
 | tax     | %                       | %                   |            |
 | search  | 85%                     | 61%                 | Đạt        |
