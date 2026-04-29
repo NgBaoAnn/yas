@@ -361,15 +361,20 @@ class MediaControllerTest { ... }
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
 |-----------|-------------------|:------------:|
-| [Tên file] | [Tên lớp] | |
+| `EmbeddingQueryControllerTest.java` | `EmbeddingQueryController` | 3 |
+| `VectorQueryTest.java` | `VectorQuery` | 2 |
+| `BaseVectorRepositoryTest.java` | `BaseVectorRepository` | 3 |
+| `ProductVectorRepositoryTest.java` | `ProductVectorRepository` | 4 |
+| `DefaultDocumentFormatterTest.java` | `DefaultDocumentFormatter` | 1 |
+| **Tổng** | | **13** |
 
-**Kết Quả Coverage:** Instructions % | Branches %
+**Kết Quả Coverage:** 86.32% (Instructions) | 48.05% (Branches)
 
 **Hình Ảnh Minh Chứng:**
-```
-[HÌNH: Terminal output BUILD SUCCESS cho recommendation]
-[HÌNH: Báo cáo JaCoCo coverage cho recommendation]
-```
+
+**Hình 2.3 — Báo cáo JaCoCo Coverage cho service recommendation đạt 86.32%**
+
+![Recommendation Service Coverage](../../docs/screenshots/test/10-recommendation-service-coverage.png)
 
 ### 2.12 Bảng Tổng Hợp Kết Quả Coverage (10 modules)
 
@@ -386,7 +391,7 @@ Yêu cầu tối thiểu: >= 70%
 | `rating` | % | % | |
 | `delivery` | 100.00% | 0.00% | ✅ |
 | `sampledata` | 81.37% | 0.00% | ✅ |
-| `recommendation` | % | % | |
+| `recommendation` | 86.32% | 48.05% | ✅ |
 
 ---
 
