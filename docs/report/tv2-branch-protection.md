@@ -64,7 +64,7 @@ Cấu hình tại: `GitHub Repository > Settings > Branches > Add branch protect
 
 ### 2.1 Hướng Dẫn Chung Chạy Test
 
-Do project sử dụng cấu trúc monorepo với thuộc tính `${revision}`, lệnh phải chạy từ bên trong thư mục module tương ứng:
+Do project sử dụng cấu trúc monorepo với thuộc tính `${revision}`, lệnh phải chạy từ bên trong thư mục module tương ứng (ví dụ `media/`):
 
 ```bash
 cd /duong-dan/yas/<module>
@@ -158,7 +158,7 @@ class MediaControllerTest { ... }
 ### 2.5 Module `inventory`
 
 - **Branch:** `test/inventory`
-- **Pull Request:** `https://github.com/<ten-nhom>/yas/pull/<so>`
+- **Pull Request:** `[Link PR]`
 
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
