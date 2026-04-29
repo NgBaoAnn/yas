@@ -159,20 +159,32 @@ class MediaControllerTest { ... }
 ### 2.4 Module `order`
 
 - **Branch:** `test/order`
-- **Pull Request:** `[Link PR]`
+- **Pull Request:** `https://github.com/<ten-nhom>/yas/pull/<so>`
 
 **Danh Sách File Test:**
-| File Test | Lớp được kiểm thử | Số test case |
-|-----------|-------------------|:------------:|
-| [Tên file] | [Tên lớp] | |
+| File Test | Lớp/Phương thức được kiểm thử | Số test case |
+|-----------|-------------------------------|:------------:|
+| `OrderServiceCreateTest.java` | `createOrder` | 1 |
+| `OrderServiceGetTest.java` | `getOrderWithItemsById`, `getAllOrder`, `getLatestOrders`, `getMyOrders`, `findOrderVmByCheckoutId`, `findOrderByCheckoutId` | 11 |
+| `OrderServiceStatusTest.java` | `updateOrderPaymentStatus`, `rejectOrder`, `acceptOrder` | 7 |
+| `OrderServiceOtherTest.java` | `isOrderCompletedWithUserIdAndProductId`, `exportCsv` | 4 |
+| `CheckoutServiceTest.java` | `CheckoutService` | 8 |
+| **Tổng** | | **31+** |
 
-**Kết Quả Coverage:** Instructions % | Branches %
+**Kết Quả Coverage:** 
+| Package | Coverage (Instructions) | Coverage (Branches) |
+|---------|:-----------------------:|:-------------------:|
+| `com.yas.order.service` | 77% | 75% |
+| `com.yas.order.specification` | 43% | 34% |
+| `com.yas.order.mapper` | 76% | 44% |
+| **Tổng Module** | **76%** | **47%** |
+
+*(Đạt yêu cầu tối thiểu >= 70%)*
 
 **Hình Ảnh Minh Chứng:**
-```
-[HÌNH: Terminal output BUILD SUCCESS cho order]
-[HÌNH: Báo cáo JaCoCo coverage cho order]
-```
+- **Báo cáo JaCoCo Coverage tổng quan module order (76%)**
+
+![order_coverage](../screenshots/04-order-service-coverage.png)
 
 ### 2.5 Module `inventory`
 
