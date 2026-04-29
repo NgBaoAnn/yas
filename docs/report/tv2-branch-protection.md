@@ -194,15 +194,25 @@ class MediaControllerTest { ... }
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
 |-----------|-------------------|:------------:|
-| [Tên file] | [Tên lớp] | |
+| `WarehouseServiceTest.java` | `WarehouseService` | 9 |
+| `StockServiceTest.java` | `StockService` | 6 |
+| `StockHistoryServiceTest.java` | `StockHistoryService` | 2 |
+| `LocationServiceTest.java` | `LocationService` (Có sẵn) | 4 |
+| `ProductServiceTest.java` | `ProductService` (Có sẵn) | 3 |
+| **Tổng** | | **24+** |
 
-**Kết Quả Coverage:** Instructions % | Branches %
+**Kết Quả Coverage:** 
+| Package | Coverage (Instructions) | Coverage (Branches) |
+|---------|:-----------------------:|:-------------------:|
+| `com.yas.inventory.service` | 84% | 66% |
+| **Tổng Module** | **89%** | **70%** |
+
+*(Đạt yêu cầu tối thiểu >= 70%)*
 
 **Hình Ảnh Minh Chứng:**
-```
-[HÌNH: Terminal output BUILD SUCCESS cho inventory]
-[HÌNH: Báo cáo JaCoCo coverage cho inventory]
-```
+- **Báo cáo JaCoCo Coverage tổng quan module inventory (89%)**
+
+![inventory_coverage](../screenshots/05-inventory-service-coverage.png)
 
 ### 2.6 Module `payment`
 
