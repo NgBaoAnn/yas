@@ -338,15 +338,20 @@ class MediaControllerTest { ... }
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
 |-----------|-------------------|:------------:|
-| [Tên file] | [Tên lớp] | |
+| `ErrorVmTest.java` | `ErrorVm` | 2 |
+| `SampleDataVmTest.java` | `SampleDataVm` | 1 |
+| `MessagesUtilsTest.java` | `MessagesUtils` | 1 |
+| `SampleDataControllerTest.java` | `SampleDataController` | 1 |
+| `SampleDataServiceTest.java` | `SampleDataService` | 1 |
+| **Tổng** | | **6** |
 
-**Kết Quả Coverage:** Instructions % | Branches %
+**Kết Quả Coverage:** 81.37% (Instructions) | 0.00% (Branches - N/A)
 
 **Hình Ảnh Minh Chứng:**
-```
-[HÌNH: Terminal output BUILD SUCCESS cho sampledata]
-[HÌNH: Báo cáo JaCoCo coverage cho sampledata]
-```
+
+**Hình 2.2 — Báo cáo JaCoCo Coverage cho service sampledata đạt 81.37%**
+
+![SampleData Service Coverage](../../docs/screenshots/test/09-sampledata-service-coverage.png)
 
 ### 2.11 Module `recommendation`
 
@@ -385,7 +390,7 @@ Yêu cầu tối thiểu: >= 70%
 | `promotion` | % | % | |
 | `rating` | % | % | |
 | `delivery` | 100.00% | 0.00% | ✅ |
-| `sampledata` | % | % | |
+| `sampledata` | 81.37% | 0.00% | ✅ |
 | `recommendation` | 86.32% | 48.05% | ✅ |
 
 ---
