@@ -362,6 +362,8 @@
                             <exclude>com/yas/**/config/**</exclude>
                             <exclude>com/yas/**/exception/**</exclude>
                             <exclude>com/yas/**/constants/**</exclude>
+                            <exclude>com/yas/**/model/**</exclude>
+                            <exclude>com/yas/**/mapper/**</exclude>
                         </excludes>
                     </configuration>
                 </plugin>
