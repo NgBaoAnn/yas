@@ -456,7 +456,9 @@ Theo yêu cầu nộp bài, nhóm duy trì ít nhất một PR ở trạng thái
 
 | Vấn đề | Nguyên nhân | Giải pháp |
 |--------|-------------|-----------|
+
 | Lệnh `./mvnw test` báo lỗi `${revision} not found` | Chạy Maven từ sai thư mục, không đọc được root POM | Chạy `./mvnw -f ../pom.xml test -pl rating -am` từ bên trong thư mục `rating/` |
+
 | `@WebMvcTest` lỗi khi load ApplicationContext | OAuth2 tự động cấu hình gây xung đột trong môi trường test | Thêm `excludeAutoConfiguration = OAuth2ResourceServerAutoConfiguration.class` vào annotation `@WebMvcTest` |
 | Test POST `/medias` trả về 400 thay vì 200 | Annotation `@ValidFileType` kiểm tra nội dung thực của file ảnh | Tạo ảnh PNG thật bằng `BufferedImage` + `ImageIO.write()` thay vì dùng byte giả |
 
