@@ -122,38 +122,69 @@ class MediaControllerTest { ... }
 ### 2.3 Module `product`
 
 - **Branch:** `test/product`
-- **Pull Request:** `[Link PR]`
+- **Pull Request:** `https://github.com/<ten-nhom>/yas/pull/<so>`
 
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
 |-----------|-------------------|:------------:|
-| [Tên file] | [Tên lớp] | |
+| (Có sẵn và bổ sung) `ProductService*Test.java` (được tách thành 10 file nhỏ) | `ProductService` | Nhiều test case |
+| (Có sẵn và bổ sung) `CategoryServiceTest.java` | `CategoryService` | Nhiều test case |
+| (Bổ sung) `MediaServiceTest.java` | `MediaService` trong product | ~4 |
+| (Bổ sung) `ProductConverterTest.java` | `ProductConverter` | Nhiều test case |
+| **Tổng** | Các file trong `src/test/java` | **178** |
 
-**Kết Quả Coverage:** Instructions % | Branches %
+**Kết Quả Coverage:** 
+| Package | Coverage (Instructions) | Coverage (Branches) |
+|---------|:-----------------------:|:-------------------:|
+| `com.yas.product.controller` | 87% | 58% |
+| `com.yas.product.service` | 64% | 46% |
+| `com.yas.product.validation` | 93% | 50% |
+| **Tổng** | **71%** | **47%** |
+
+*(Đạt yêu cầu tối thiểu >= 70%)*
 
 **Hình Ảnh Minh Chứng:**
+- **Kết quả chạy test service product: BUILD SUCCESS**
+
 ```
-[HÌNH: Terminal output BUILD SUCCESS cho product]
-[HÌNH: Báo cáo JaCoCo coverage cho product]
+[INFO] Tests run: 178, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
 ```
+
+- **Báo cáo JaCoCo Coverage cho service product (tổng 71%)**
+
+![Báo cáo JaCoCo Coverage — product service](../screenshots/test/04-product-coverage-report.png)
+
 
 ### 2.4 Module `order`
 
 - **Branch:** `test/order`
-- **Pull Request:** `[Link PR]`
+- **Pull Request:** `https://github.com/<ten-nhom>/yas/pull/<so>`
 
 **Danh Sách File Test:**
-| File Test | Lớp được kiểm thử | Số test case |
-|-----------|-------------------|:------------:|
-| [Tên file] | [Tên lớp] | |
+| File Test | Lớp/Phương thức được kiểm thử | Số test case |
+|-----------|-------------------------------|:------------:|
+| `OrderServiceCreateTest.java` | `createOrder` | 1 |
+| `OrderServiceGetTest.java` | `getOrderWithItemsById`, `getAllOrder`, `getLatestOrders`, `getMyOrders`, `findOrderVmByCheckoutId`, `findOrderByCheckoutId` | 11 |
+| `OrderServiceStatusTest.java` | `updateOrderPaymentStatus`, `rejectOrder`, `acceptOrder` | 7 |
+| `OrderServiceOtherTest.java` | `isOrderCompletedWithUserIdAndProductId`, `exportCsv` | 4 |
+| `CheckoutServiceTest.java` | `CheckoutService` | 8 |
+| **Tổng** | | **31+** |
 
-**Kết Quả Coverage:** Instructions % | Branches %
+**Kết Quả Coverage:** 
+| Package | Coverage (Instructions) | Coverage (Branches) |
+|---------|:-----------------------:|:-------------------:|
+| `com.yas.order.service` | 77% | 75% |
+| `com.yas.order.specification` | 43% | 34% |
+| `com.yas.order.mapper` | 76% | 44% |
+| **Tổng Module** | **76%** | **47%** |
+
+*(Đạt yêu cầu tối thiểu >= 70%)*
 
 **Hình Ảnh Minh Chứng:**
-```
-[HÌNH: Terminal output BUILD SUCCESS cho order]
-[HÌNH: Báo cáo JaCoCo coverage cho order]
-```
+- **Báo cáo JaCoCo Coverage tổng quan module order (76%)**
+
+![order_coverage](../screenshots/04-order-service-coverage.png)
 
 ### 2.5 Module `inventory`
 
@@ -163,15 +194,25 @@ class MediaControllerTest { ... }
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
 |-----------|-------------------|:------------:|
-| [Tên file] | [Tên lớp] | |
+| `WarehouseServiceTest.java` | `WarehouseService` | 9 |
+| `StockServiceTest.java` | `StockService` | 6 |
+| `StockHistoryServiceTest.java` | `StockHistoryService` | 2 |
+| `LocationServiceTest.java` | `LocationService` (Có sẵn) | 4 |
+| `ProductServiceTest.java` | `ProductService` (Có sẵn) | 3 |
+| **Tổng** | | **24+** |
 
-**Kết Quả Coverage:** Instructions % | Branches %
+**Kết Quả Coverage:** 
+| Package | Coverage (Instructions) | Coverage (Branches) |
+|---------|:-----------------------:|:-------------------:|
+| `com.yas.inventory.service` | 84% | 66% |
+| **Tổng Module** | **89%** | **70%** |
+
+*(Đạt yêu cầu tối thiểu >= 70%)*
 
 **Hình Ảnh Minh Chứng:**
-```
-[HÌNH: Terminal output BUILD SUCCESS cho inventory]
-[HÌNH: Báo cáo JaCoCo coverage cho inventory]
-```
+- **Báo cáo JaCoCo Coverage tổng quan module inventory (89%)**
+
+![inventory_coverage](../screenshots/05-inventory-service-coverage.png)
 
 ### 2.6 Module `payment`
 
@@ -306,7 +347,7 @@ Yêu cầu tối thiểu: >= 70%
 | Module | Coverage (Instructions) | Coverage (Branches) | Đạt >= 70% |
 |--------|:-----------------------:|:-------------------:|:----------:|
 | `media` | 80% | 65% | Đạt |
-| `product` | % | % | |
+| `product` | 71% | 47% | Đạt |
 | `order` | % | % | |
 | `inventory` | % | % | |
 | `payment` | % | % | |
