@@ -64,7 +64,7 @@ Cấu hình tại: `GitHub Repository > Settings > Branches > Add branch protect
 
 ### 2.1 Hướng Dẫn Chung Chạy Test
 
-Do project sử dụng cấu trúc monorepo với thuộc tính `${revision}`, lệnh phải chạy từ bên trong thư mục module tương ứng:
+Do project sử dụng cấu trúc monorepo với thuộc tính `${revision}`, lệnh phải chạy từ bên trong thư mục module tương ứng (ví dụ `media/`):
 
 ```bash
 cd /duong-dan/yas/<module>
@@ -153,7 +153,8 @@ class MediaControllerTest { ... }
 
 - **Báo cáo JaCoCo Coverage cho service product (tổng 71%)**
 
-![Báo cáo JaCoCo Coverage — product service](../screenshots/test/04-product-coverage-report.pngproduct-coverage.png)
+![Báo cáo JaCoCo Coverage — product service](../screenshots/test/04-product-coverage-report.png)
+
 
 ### 2.4 Module `order`
 
@@ -306,7 +307,7 @@ Yêu cầu tối thiểu: >= 70%
 | Module | Coverage (Instructions) | Coverage (Branches) | Đạt >= 70% |
 |--------|:-----------------------:|:-------------------:|:----------:|
 | `media` | 80% | 65% | Đạt |
-| `product` | % | % | |
+| `product` | 71% | 47% | Đạt |
 | `order` | % | % | |
 | `inventory` | % | % | |
 | `payment` | % | % | |
