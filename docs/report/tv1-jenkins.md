@@ -9,39 +9,31 @@
 
 ### 1.1 Môi Trường Triển Khai
 
-| Thông số | Giá trị |
-|----------|---------|
-| Phương thức triển khai | [Docker / Bare-metal / VM] |
-| Phiên bản Jenkins | `X.X.X` |
-| Hệ điều hành | |
-| Phiên bản Java | |
+| Thông số               | Giá trị                                                                     |
+| ---------------------- | --------------------------------------------------------------------------- |
+| Phương thức triển khai | Virtual Machine Amazon EC2                                                  |
+| Phiên bản Jenkins      | `2.555.1`                                                                   |
+| Hệ điều hành           | Amazon Linux 2023 (kernel 6.1 AMI, architecture: arm64, instance: t3.small) |
+| Phiên bản Java         | Amazon Corretto 21 (OpenJDK 21.0.10 LTS)                                    |
 
 ### 1.2 Plugin Đã Cài Đặt
 
-| Plugin | Mục đích |
-|--------|----------|
-| Git Plugin | Kết nối với GitHub repository |
-| Pipeline | Chạy Jenkinsfile dạng Declarative/Scripted |
-| Multibranch Pipeline | Tự động quét và build nhiều branch |
-| JaCoCo Plugin | Publish báo cáo độ phủ unit test |
-| Warnings Next Generation | Hiển thị kết quả phân tích tĩnh |
-| GitHub Integration Plugin | Nhận sự kiện từ GitHub Webhook |
+| Plugin                    | Mục đích                                   |
+| ------------------------- | ------------------------------------------ |
+| Git Plugin                | Kết nối với GitHub repository              |
+| Pipeline                  | Chạy Jenkinsfile dạng Declarative/Scripted |
+| Multibranch Pipeline      | Tự động quét và build nhiều branch         |
+| JaCoCo Plugin             | Publish báo cáo độ phủ unit test           |
+| Warnings Next Generation  | Hiển thị kết quả phân tích tĩnh            |
+| GitHub Integration Plugin | Nhận sự kiện từ GitHub Webhook             |
+
+- Ngoài ra còn một số plugin được jenkins recommend khi setup lần đầu tiên.
 
 ### 1.3 Hình Ảnh Minh Chứng
 
 **Hình 1.1 — Jenkins Dashboard sau khi cài đặt thành công**
 
-```
-[HÌNH: Chụp màn hình Jenkins Dashboard tại địa chỉ http://<url>:8080]
-```
-
-**Hình 1.2 — Danh sách plugin đã cài đặt**
-
-```
-[HÌNH: Manage Jenkins > Plugins > Installed plugins]
-```
-
----
+![Jenkins Dashboard](../images/tv1/jenkins_dashboard.jpg)
 
 ## 2. Cấu Hình GitHub Webhook
 
@@ -49,28 +41,26 @@
 
 Webhook được tạo tại: `Repository > Settings > Webhooks > Add webhook`
 
-| Cấu hình | Giá trị |
-|----------|---------|
-| Payload URL | `http://<jenkins-url>:8080/github-webhook/` |
-| Content type | `application/json` |
-| Trigger events | Push events, Pull request events |
-| Trạng thái | Active |
-
-> Lưu ý: Nếu Jenkins chạy local, sử dụng ngrok hoặc Cloudflare Tunnel để tạo đường dẫn công khai.
+| Cấu hình       | Giá trị                                     |
+| -------------- | ------------------------------------------- |
+| Payload URL    | `http://18.143.92.157:8080/github-webhook/` |
+| Content type   | `application/json`                          |
+| Trigger events | Push events, Pull request events            |
+| Trạng thái     | Active                                      |
 
 ### 2.2 Hình Ảnh Minh Chứng
 
 **Hình 2.1 — Cấu hình Webhook trên GitHub**
 
-```
-[HÌNH: GitHub > Repository > Settings > Webhooks > chi tiết webhook]
-```
+![Jenkins Webhook](../images/tv1/webhook.jpg)
 
-**Hình 2.2 — Webhook delivery thành công (ping event trả về HTTP 200)**
+**Hình 2.2 — Cấu hình Webhook trên GitHub**
 
-```
-[HÌNH: Recent Deliveries > ping > Response 200 OK]
-```
+![Jenkins Webhook](../images/tv1/webhook_pr.jpg)
+
+**Hình 2.3 — Webhook delivery thành công (ping event trả về HTTP 200)**
+
+![Jenkins Webhook](../images/tv1/webhook_ping.jpg)
 
 ---
 
@@ -78,14 +68,14 @@ Webhook được tạo tại: `Repository > Settings > Webhooks > Add webhook`
 
 ### 3.1 Cấu Hình Job
 
-| Cấu hình | Giá trị |
-|----------|---------|
-| Tên job | `yas-pipeline` |
-| Loại job | Multibranch Pipeline |
-| Branch Source | GitHub |
-| URL Repository | `https://github.com/<ten-nhom>/yas` |
-| Scan interval | 1 minute |
-| Đường dẫn Jenkinsfile | `Jenkinsfile` (tại root) |
+| Cấu hình              | Giá trị                                      |
+| --------------------- | -------------------------------------------- |
+| Tên job               | `YAS`                                        |
+| Loại job              | Multibranch Pipeline                         |
+| Branch Source         | GitHub                                       |
+| URL Repository        | `https://github.com/com-suon-bi-cha/yas.git` |
+| Scan interval         | 2 minute                                     |
+| Đường dẫn Jenkinsfile | `Jenkinsfile` (tại root)                     |
 
 ### 3.2 Hình Ảnh Minh Chứng
 
@@ -171,10 +161,10 @@ if ('media' in changedServices) {
 
 ## 6. Vấn Đề Gặp Phải Và Cách Giải Quyết
 
-| Vấn đề | Nguyên nhân | Giải pháp |
-|--------|-------------|-----------|
-| [Điền vào] | | |
+| Vấn đề     | Nguyên nhân | Giải pháp |
+| ---------- | ----------- | --------- |
+| [Điền vào] |             |           |
 
 ---
 
-*Phần này do TV1 thực hiện và chịu trách nhiệm nội dung.*
+_Phần này do TV1 thực hiện và chịu trách nhiệm nội dung._
