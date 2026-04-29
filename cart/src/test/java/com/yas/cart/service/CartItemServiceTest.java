@@ -79,7 +79,6 @@ class CartItemServiceTest {
             assertThrows(NotFoundException.class, () -> cartItemService.addCartItem(cartItemPostVm));
         }
 
-        /* 
         @Test
         void testAddCartItem_whenCartItemExists_shouldUpdateQuantity() {
             CartItemPostVm cartItemPostVm = cartItemPostVmBuilder.build();
@@ -122,7 +121,6 @@ class CartItemServiceTest {
             assertEquals(cartItemPostVm.productId(), cartItem.productId());
             assertEquals(cartItemPostVm.quantity(), cartItem.quantity());
         }
-        */
 
         @Test
         void testAddCartItem_whenAcquireLockFailed_shouldThrowInternalServerErrorException() {
@@ -197,7 +195,6 @@ class CartItemServiceTest {
     @Nested
     class DeleteOrAdjustCartItemTest {
 
-        /*
         @Test
         void testDeleteOrAdjustCartItem_whenCartItemDeleteVmsDuplicated_shouldThrowBadRequestException() {
             CartItemDeleteVm cartItemDeleteVm1 = new CartItemDeleteVm(PRODUCT_ID_SAMPLE, 1);
@@ -250,7 +247,6 @@ class CartItemServiceTest {
             assertEquals(1, cartItemGetVms.size());
             assertEquals(expectedQuantity, cartItemGetVms.getFirst().quantity());
         }
-        */
     }
 
     private void mockCurrentUserId(String userIdToMock) {
