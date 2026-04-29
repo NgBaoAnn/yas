@@ -64,7 +64,7 @@ Cấu hình tại: `GitHub Repository > Settings > Branches > Add branch protect
 
 ### 2.1 Hướng Dẫn Chung Chạy Test
 
-Do project sử dụng cấu trúc monorepo với thuộc tính `${revision}`, lệnh phải chạy từ bên trong thư mục module tương ứng (ví dụ `media/`):
+Do project sử dụng cấu trúc monorepo với thuộc tính `${revision}`, lệnh phải chạy từ bên trong thư mục module tương ứng:
 
 ```bash
 cd /duong-dan/yas/<module>
@@ -122,38 +122,69 @@ class MediaControllerTest { ... }
 ### 2.3 Module `product`
 
 - **Branch:** `test/product`
-- **Pull Request:** `[Link PR]`
+- **Pull Request:** `https://github.com/<ten-nhom>/yas/pull/<so>`
 
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
 |-----------|-------------------|:------------:|
-| [Tên file] | [Tên lớp] | |
+| (Có sẵn và bổ sung) `ProductService*Test.java` (được tách thành 10 file nhỏ) | `ProductService` | Nhiều test case |
+| (Có sẵn và bổ sung) `CategoryServiceTest.java` | `CategoryService` | Nhiều test case |
+| (Bổ sung) `MediaServiceTest.java` | `MediaService` trong product | ~4 |
+| (Bổ sung) `ProductConverterTest.java` | `ProductConverter` | Nhiều test case |
+| **Tổng** | Các file trong `src/test/java` | **178** |
 
-**Kết Quả Coverage:** Instructions % | Branches %
+**Kết Quả Coverage:** 
+| Package | Coverage (Instructions) | Coverage (Branches) |
+|---------|:-----------------------:|:-------------------:|
+| `com.yas.product.controller` | 87% | 58% |
+| `com.yas.product.service` | 64% | 46% |
+| `com.yas.product.validation` | 93% | 50% |
+| **Tổng** | **71%** | **47%** |
+
+*(Đạt yêu cầu tối thiểu >= 70%)*
 
 **Hình Ảnh Minh Chứng:**
+- **Kết quả chạy test service product: BUILD SUCCESS**
+
 ```
-[HÌNH: Terminal output BUILD SUCCESS cho product]
-[HÌNH: Báo cáo JaCoCo coverage cho product]
+[INFO] Tests run: 178, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
 ```
+
+- **Báo cáo JaCoCo Coverage cho service product (tổng 71%)**
+
+![Báo cáo JaCoCo Coverage — product service](../screenshots/test/04-product-coverage-report.png)
+
 
 ### 2.4 Module `order`
 
 - **Branch:** `test/order`
-- **Pull Request:** `[Link PR]`
+- **Pull Request:** `https://github.com/<ten-nhom>/yas/pull/<so>`
 
 **Danh Sách File Test:**
-| File Test | Lớp được kiểm thử | Số test case |
-|-----------|-------------------|:------------:|
-| [Tên file] | [Tên lớp] | |
+| File Test | Lớp/Phương thức được kiểm thử | Số test case |
+|-----------|-------------------------------|:------------:|
+| `OrderServiceCreateTest.java` | `createOrder` | 1 |
+| `OrderServiceGetTest.java` | `getOrderWithItemsById`, `getAllOrder`, `getLatestOrders`, `getMyOrders`, `findOrderVmByCheckoutId`, `findOrderByCheckoutId` | 11 |
+| `OrderServiceStatusTest.java` | `updateOrderPaymentStatus`, `rejectOrder`, `acceptOrder` | 7 |
+| `OrderServiceOtherTest.java` | `isOrderCompletedWithUserIdAndProductId`, `exportCsv` | 4 |
+| `CheckoutServiceTest.java` | `CheckoutService` | 8 |
+| **Tổng** | | **31+** |
 
-**Kết Quả Coverage:** Instructions % | Branches %
+**Kết Quả Coverage:** 
+| Package | Coverage (Instructions) | Coverage (Branches) |
+|---------|:-----------------------:|:-------------------:|
+| `com.yas.order.service` | 77% | 75% |
+| `com.yas.order.specification` | 43% | 34% |
+| `com.yas.order.mapper` | 76% | 44% |
+| **Tổng Module** | **76%** | **47%** |
+
+*(Đạt yêu cầu tối thiểu >= 70%)*
 
 **Hình Ảnh Minh Chứng:**
-```
-[HÌNH: Terminal output BUILD SUCCESS cho order]
-[HÌNH: Báo cáo JaCoCo coverage cho order]
-```
+- **Báo cáo JaCoCo Coverage tổng quan module order (76%)**
+
+![order_coverage](../screenshots/04-order-service-coverage.png)
 
 ### 2.5 Module `inventory`
 
@@ -163,51 +194,102 @@ class MediaControllerTest { ... }
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
 |-----------|-------------------|:------------:|
-| [Tên file] | [Tên lớp] | |
+| `WarehouseServiceTest.java` | `WarehouseService` | 9 |
+| `StockServiceTest.java` | `StockService` | 6 |
+| `StockHistoryServiceTest.java` | `StockHistoryService` | 2 |
+| `LocationServiceTest.java` | `LocationService` (Có sẵn) | 4 |
+| `ProductServiceTest.java` | `ProductService` (Có sẵn) | 3 |
+| **Tổng** | | **24+** |
 
-**Kết Quả Coverage:** Instructions % | Branches %
+**Kết Quả Coverage:** 
+| Package | Coverage (Instructions) | Coverage (Branches) |
+|---------|:-----------------------:|:-------------------:|
+| `com.yas.inventory.service` | 84% | 66% |
+| **Tổng Module** | **89%** | **70%** |
+
+*(Đạt yêu cầu tối thiểu >= 70%)*
 
 **Hình Ảnh Minh Chứng:**
-```
-[HÌNH: Terminal output BUILD SUCCESS cho inventory]
-[HÌNH: Báo cáo JaCoCo coverage cho inventory]
-```
+- **Báo cáo JaCoCo Coverage tổng quan module inventory (89%)**
+
+![inventory_coverage](../screenshots/05-inventory-service-coverage.png)
 
 ### 2.6 Module `payment`
 
 - **Branch:** `test/payment`
-- **Pull Request:** `[Link PR]`
+- **Pull Request:** `https://github.com/<ten-nhom>/yas/pull/<so>`
 
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
 |-----------|-------------------|:------------:|
-| [Tên file] | [Tên lớp] | |
+| `PaymentControllerTest.java` | `PaymentController` | 3 |
+| `PaymentProviderControllerTest.java` | `PaymentProviderController` | 3 |
+| `PaymentProviderServiceTest.java` | `PaymentProviderService` | 7 |
+| `OrderServiceTest.java` | `OrderService` | 2 |
+| `PaypalHandlerTest.java` | `PaypalHandler`, `AbstractPaymentHandler` | 3 |
+| `PaymentServiceTest.java` | `PaymentService` | 2 |
+| `MediaServiceTest.java` | `MediaService` | 2 |
+| **Tổng** | | **22** |
 
-**Kết Quả Coverage:** Instructions % | Branches %
+**Kết Quả Coverage:** 
+| Package | Coverage (Instructions) |
+|---------|:-----------------------:|
+| `controller` | 100.00% |
+| `service` | 89.08% |
+| `service.provider.handler` | 100.00% |
+| `mapper` | 46.01% |
+| `viewmodel` | 77.78% |
+| `viewmodel.paymentprovider` | 100.00% |
+| `model.enumeration` | 100.00% |
+| **Tổng** | **72.33%** |
+
+*(Đạt yêu cầu tối thiểu >= 70%)*
 
 **Hình Ảnh Minh Chứng:**
-```
-[HÌNH: Terminal output BUILD SUCCESS cho payment]
-[HÌNH: Báo cáo JaCoCo coverage cho payment]
-```
+- **Báo cáo JaCoCo Coverage cho service payment đạt 72.33%**
+
+![Payment Service Coverage](../../docs/screenshots/05-payment-service-coverage.png)
 
 ### 2.7 Module `promotion`
 
 - **Branch:** `test/promotion`
-- **Pull Request:** `[Link PR]`
+- **Pull Request:** `https://github.com/<ten-nhom>/yas/pull/<so>`
 
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
 |-----------|-------------------|:------------:|
-| [Tên file] | [Tên lớp] | |
+| `PromotionControllerTest.java` | `PromotionController` | 11 |
+| `PromotionServiceTest.java` | `PromotionService` | 14 |
+| `ProductServiceTest.java` | `ProductService` | 5 |
+| `PromotionValidatorTest.java` | `PromotionValidator` | 8 |
+| `ErrorVmTest.java` | `ErrorVm` | 2 |
+| `PromotionPutVmTest.java` | `PromotionPutVm` | 3 |
+| `PromotionUsageVmTest.java` | `PromotionUsageVm` | 1 |
+| `PromotionVmTest.java` | `PromotionVm` | 1 |
+| `AuthenticationUtilsTest.java`| `AuthenticationUtils` | 3 |
+| `MessagesUtilsTest.java` | `MessagesUtils` | 2 |
+| `ConstantsTest.java` | `Constants` | 1 |
+| **Tổng** | | **51** |
 
-**Kết Quả Coverage:** Instructions % | Branches %
+**Kết Quả Coverage:** 
+| Package | Coverage (Instructions) |
+|---------|:-----------------------:|
+| `validation` | 100.00% |
+| `controller` | 89.06% |
+| `model.enumeration` | 100.00% |
+| `service` | 73.91% |
+| `viewmodel` | 93.64% |
+| `model` | 37.78% |
+| `utils` | 88.06% |
+| `viewmodel.error` | 100.00% |
+| **Tổng** | **82.07%** |
+
+*(Đạt yêu cầu tối thiểu >= 70%)*
 
 **Hình Ảnh Minh Chứng:**
-```
-[HÌNH: Terminal output BUILD SUCCESS cho promotion]
-[HÌNH: Báo cáo JaCoCo coverage cho promotion]
-```
+- **Báo cáo JaCoCo Coverage cho service promotion đạt 82.07%**
+
+![Promotion Service Coverage](../../docs/screenshots/06-promotion-service-coverage.png)
 
 ### 2.8 Module `rating`
 
@@ -291,7 +373,7 @@ Yêu cầu tối thiểu: >= 70%
 | Module | Coverage (Instructions) | Coverage (Branches) | Đạt >= 70% |
 |--------|:-----------------------:|:-------------------:|:----------:|
 | `media` | 80% | 65% | Đạt |
-| `product` | % | % | |
+| `product` | 71% | 47% | Đạt |
 | `order` | % | % | |
 | `inventory` | % | % | |
 | `payment` | % | % | |
