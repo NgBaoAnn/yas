@@ -196,15 +196,18 @@ open target/site/jacoco/index.html
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
 |-----------|-------------------|:------------:|
-| [Tên file] | [Tên lớp] | |
+| `ProductServiceTest.java` | `ProductService` | 4 |
+| `ProductSyncDataServiceTest.java` | `ProductSyncDataService` | 7 |
+| `ProductControllerTest.java` | `ProductController` | 2 |
+| `ProductSyncDataConsumerTest.java` | `ProductSyncDataConsumer` | 3 |
 
-**Kết Quả Coverage:** Instructions % | Branches %
+**Kết Quả Coverage:** Instructions **85%** | Branches **61%**
 
 **Hình Ảnh Minh Chứng:**
 ```
-[HÌNH: Terminal output BUILD SUCCESS cho search]
-[HÌNH: Báo cáo JaCoCo coverage cho search]
+[HÌNH: Terminal output "Tests run: 16, Failures: 0, Errors: 0, Skipped: 2 — BUILD SUCCESS"]
 ```
+![Báo cáo JaCoCo coverage cho search](../screenshots/test/search-coverage-report.png)
 
 ### 2.7 Module `webhook`
 
@@ -234,7 +237,7 @@ Yêu cầu tối thiểu: >= 70%
 | `location` | % | % | |
 | `cart` | % | % | |
 | `tax` | % | % | |
-| `search` | % | % | |
+| `search` | 85% | 61% | Đạt |
 | `webhook` | % | % | |
 
 ---
@@ -257,7 +260,7 @@ Yêu cầu tối thiểu: >= 70%
 | location| %                       | %                   |            |
 | cart    | %                       | %                   |            |
 | tax     | %                       | %                   |            |
-| search  | %                       | %                   |            |
+| search  | 85%                     | 61%                 | Đạt        |
 | webhook | %                       | %                   |            |
 
 ---
