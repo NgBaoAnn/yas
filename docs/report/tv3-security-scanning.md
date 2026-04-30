@@ -83,18 +83,24 @@ Sử dụng `commits` allowlist thay vì `paths` để đảm bảo chính xác 
 
 | Thông số | Giá trị |
 |----------|---------|
-| Phương thức triển khai | Docker |
-| Phiên bản SonarQube | `X.X` |
-| Địa chỉ truy cập | `http://<url>:9000` |
+| Phương thức triển khai | Docker (TV1 deploy trên Jenkins server) |
+| Phiên bản SonarQube | `v26.4.0.121862` (Community Build) |
+| Địa chỉ truy cập | `http://18.140.115.86:9000` |
 | Project Key | `yas` |
 
 ### 2.2 Kết Nối Jenkins Với SonarQube
 
 Các bước cấu hình:
-1. Cài plugin **SonarQube Scanner** trên Jenkins.
-2. Vào `Manage Jenkins > Configure System > SonarQube servers`: thêm URL và token xác thực.
-3. Tạo token trên SonarQube: `My Account > Security > Generate Token`.
-4. Lưu token vào Jenkins Credentials.
+1. Cài plugin **SonarQube Scanner** trên Jenkins: `Manage Jenkins > Plugins > Available plugins`
+2. Tạo token trên SonarQube: `My Account > Security > Generate Tokens` → tên `jenkins-token`
+3. Lưu token vào Jenkins Credentials: `Manage Jenkins > Credentials > Global > Add Credentials`
+   - Kind: `Secret text`, ID: `sonarqube-token`
+4. Thêm SonarQube server: `Manage Jenkins > System > SonarQube servers`
+   - Name: `SonarQube`
+   - Server URL: `http://18.140.115.86:9000`
+   - Token: chọn `sonarqube-token`
+5. Tạo webhook từ SonarQube về Jenkins: `Administration > Configuration > Webhooks`
+   - Name: `jenkins`, URL: `${JENKINS_URL}/sonarqube-webhook/` (ví dụ: `https://jenkins.example.com/sonarqube-webhook/`)
 
 ### 2.3 Cấu Hình Stage Trong Jenkinsfile
 
@@ -102,7 +108,7 @@ Các bước cấu hình:
 stage('Code Quality') {
     steps {
         withSonarQubeEnv('SonarQube') {
-            sh './mvnw sonar:sonar -Dsonar.projectKey=yas'
+            sh 'mvn sonar:sonar -Dsonar.projectKey=yas -Dsonar.java.binaries=.'
         }
     }
 }
@@ -115,25 +121,33 @@ stage('Quality Gate') {
 }
 ```
 
-### 2.4 Hình Ảnh Minh Chứng
+> `-Dsonar.java.binaries=.` chỉ định nơi SonarQube tìm **bytecode `.class` đã được compile sẵn`** trong workspace; tham số này **không tự build/compile thêm**. Với monorepo mà pipeline chỉ build một số module, cần bảo đảm các module Java cần phân tích đã được compile trước khi chạy `sonar:sonar`, hoặc giới hạn phạm vi phân tích vào đúng các module đã build.
 
-**Hình 2.1 — SonarQube Dashboard: tổng quan chất lượng code**
+### 2.4 Kết Quả Phân Tích
 
-```
-[HÌNH: SonarQube tại http://<url>:9000 — hiển thị Bugs, Vulnerabilities, Code Smells, Coverage]
-```
+SonarQube phân tích toàn bộ monorepo `yas` với **21k Lines of Code** (Java, XML). Kết quả Quality Gate: **Passed**.
 
-**Hình 2.2 — Chi tiết kết quả phân tích project**
+| Chỉ số | Kết quả |
+|--------|---------|
+| Security | 0 issues |
+| Reliability | 45 issues |
+| Maintainability | 152 issues |
+| Coverage | 0.0% |
+| Duplications | 3.5% |
 
-```
-[HÌNH: SonarQube > Projects > yas > Overview với các chỉ số đánh giá]
-```
+### 2.5 Hình Ảnh Minh Chứng
 
-**Hình 2.3 — Stage Code Quality và Quality Gate trong Jenkins pipeline**
+**Hình 2.1 — SonarQube Dashboard: project `yas` với Quality Gate Passed**
 
-```
-[HÌNH: Jenkins Stage View hoặc Console Output của hai stage SonarQube]
-```
+![SonarQube Dashboard](../images/tv3/sonar_monitor.png)
+
+**Hình 2.2 — Jenkins pipeline: stage Code Quality (29s) và Quality Gate (23s) chạy thành công**
+
+![SonarQube Pipeline](../images/tv3/sonar_pipeline.png)
+
+**Hình 2.3 — Jenkins build summary: pipeline hoàn thành thành công**
+
+![SonarQube Success](../images/tv3/sonar_success.png)
 
 ---
 
