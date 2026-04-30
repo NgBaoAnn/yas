@@ -59,7 +59,7 @@ pipeline {
         stage('Code Quality') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh 'mvn sonar:sonar -Dsonar.projectKey=yas'
+                    sh 'mvn sonar:sonar -Dsonar.projectKey=yas -Dsonar.java.binaries=.'
                 }
             }
         }
