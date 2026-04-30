@@ -93,6 +93,10 @@ pipeline {
                                 minimumBranchCoverage: '0',
                                 changeBuildStatus: true
                             )
+                            // Explicitly fail if JaCoCo marked build as UNSTABLE
+                            if (currentBuild.result == 'UNSTABLE' || currentBuild.result == 'FAILURE') {
+                                error("Coverage gate FAILED for ${service}: Instruction coverage is below 70%!")
+                            }
                         }
                     }
                 }
