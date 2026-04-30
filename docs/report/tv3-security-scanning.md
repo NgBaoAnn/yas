@@ -181,7 +181,7 @@ Pre-check → Secret Scanning → Monorepo Execution → Coverage Report → Dep
 
 **Hình 4.1 — Toàn bộ pipeline chạy thành công với stage Dependency Scan**
 
-![Snyk Success](../images/tv3/snyk_success.png)
+![Snyk Success](../images/tv3/snyk_pipeline.png)
 
 ---
 
