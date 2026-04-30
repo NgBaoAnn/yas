@@ -80,7 +80,7 @@ Các bước cấu hình:
    - Server URL: `http://18.140.115.86:9000`
    - Token: chọn `sonarqube-token`
 5. Tạo webhook từ SonarQube về Jenkins: `Administration > Configuration > Webhooks`
-   - Name: `jenkins`, URL: `http://18.143.92.157:8080/sonarqube-webhook/`
+   - Name: `jenkins`, URL: `${JENKINS_URL}/sonarqube-webhook/` (ví dụ: `https://jenkins.example.com/sonarqube-webhook/`)
 
 ### 2.3 Cấu Hình Stage Trong Jenkinsfile
 
