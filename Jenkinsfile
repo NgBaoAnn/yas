@@ -9,6 +9,7 @@ pipeline {
                     sh 'java -version'
                     sh 'mvn -version'
                     sh 'gitleaks version'
+                    sh 'snyk --version'
                 }
             }
         }
@@ -84,6 +85,22 @@ pipeline {
                             }
                         }
                     }
+                }
+            }
+        }
+
+        stage('Dependency Scan') {
+            steps {
+                withCredentials([string(credentialsId: 'snyk-token', variable: 'SNYK_TOKEN')]) {
+                    sh 'snyk auth $SNYK_TOKEN'
+                    sh 'snyk test --all-projects --json > snyk-report.json || true'
+                    sh 'snyk monitor --all-projects || true'
+                }
+            }
+            post {
+                always {
+                    archiveArtifacts artifacts: 'snyk-report.json',
+                                     allowEmptyArchive: true
                 }
             }
         }
