@@ -101,7 +101,7 @@ stage('Quality Gate') {
 }
 ```
 
-> `-Dsonar.java.binaries=.` cho phép SonarQube tìm compiled classes ở bất kỳ đâu trong project — cần thiết vì Monorepo Execution chỉ compile các service có thay đổi, không phải toàn bộ project.
+> `-Dsonar.java.binaries=.` chỉ định nơi SonarQube tìm **bytecode `.class` đã được compile sẵn`** trong workspace; tham số này **không tự build/compile thêm**. Với monorepo mà pipeline chỉ build một số module, cần bảo đảm các module Java cần phân tích đã được compile trước khi chạy `sonar:sonar`, hoặc giới hạn phạm vi phân tích vào đúng các module đã build.
 
 ### 2.4 Kết Quả Phân Tích
 
