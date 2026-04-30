@@ -144,8 +144,14 @@ stage('Quality Gate') {
 | Thông số | Giá trị |
 |----------|---------|
 | Tài khoản Snyk | `https://app.snyk.io` |
-| Phương thức xác thực | API Token (lưu trong Jenkins Credentials) |
-| Phương thức tích hợp | Snyk CLI |
+| Phương thức xác thực | API Token (lưu trong Jenkins Credentials với ID `snyk-token`) |
+| Phương thức tích hợp | Snyk CLI (`snyk test` + `snyk monitor`) |
+
+Các bước cấu hình:
+1. Đăng ký tài khoản tại `https://app.snyk.io`
+2. Vào `Account Settings > Auth Token` → copy token
+3. Thêm vào Jenkins: `Manage Jenkins > Credentials > Global > Add Credentials` (Kind: `Secret text`, ID: `snyk-token`)
+4. TV1 cài Snyk CLI trên Jenkins agent: `npm install -g snyk`
 
 ### 3.2 Cấu Hình Stage Trong Jenkinsfile
 
@@ -155,41 +161,47 @@ stage('Dependency Scan') {
         withCredentials([string(credentialsId: 'snyk-token', variable: 'SNYK_TOKEN')]) {
             sh 'snyk auth $SNYK_TOKEN'
             sh 'snyk test --all-projects --json > snyk-report.json || true'
+            sh 'snyk monitor --all-projects || true'
         }
     }
     post {
         always {
-            archiveArtifacts artifacts: 'snyk-report.json', allowEmptyArchive: true
+            archiveArtifacts artifacts: 'snyk-report.json',
+                             allowEmptyArchive: true
         }
     }
 }
 ```
 
-> Sử dụng `|| true` để pipeline không dừng lại khi Snyk tìm thấy vulnerability có mức độ thấp. Có thể điều chỉnh ngưỡng với flag `--severity-threshold=high`.
+> `snyk test` quét và báo cáo vulnerability ra console/file. `snyk monitor` đẩy kết quả lên Snyk dashboard để theo dõi liên tục. Cả hai dùng `|| true` để pipeline không FAIL khi phát hiện vulnerability mức thấp.
 
-### 3.3 Hình Ảnh Minh Chứng
+### 3.3 Kết Quả Quét
 
-**Hình 3.1 — Snyk Dashboard: danh sách vulnerability được phát hiện**
+Snyk phát hiện vulnerability trong toàn bộ monorepo `com-suon-bi-cha/yas` với tổng cộng **55 Critical, 179 High, 140 Medium, 71 Low** trên tất cả các module. Đây là các lỗ hổng trong dependency (thư viện bên thứ ba) mà các service đang sử dụng.
 
-```
-[HÌNH: https://app.snyk.io > Projects > yas — danh sách các dependency có lỗ hổng]
-```
+### 3.4 Hình Ảnh Minh Chứng
 
-**Hình 3.2 — Stage Dependency Scan trong Jenkins: output kết quả quét**
+**Hình 3.1 — Snyk Dashboard: danh sách project và vulnerability được phát hiện**
 
-```
-[HÌNH: Jenkins Console Output của lệnh snyk test với kết quả]
-```
+![Snyk Monitor](../images/tv3/snyk_monitor.png)
+
+**Hình 3.2 — Stage Dependency Scan trong Jenkins pipeline chạy thành công**
+
+![Snyk Success](../images/tv3/snyk_success.png)
 
 ---
 
 ## 4. Tổng Hợp Pipeline Sau Khi Tích Hợp Security Stages
 
-**Hình 4.1 — Toàn bộ pipeline bao gồm các stage quét bảo mật**
+Pipeline hoàn chỉnh bao gồm các stage theo thứ tự:
 
 ```
-[HÌNH: Blue Ocean hoặc Stage View thể hiện đầy đủ: Secret Scanning, Code Quality, Quality Gate, Dependency Scan]
+Pre-check → Secret Scanning → Monorepo Execution → Coverage Report → Dependency Scan
 ```
+
+**Hình 4.1 — Toàn bộ pipeline chạy thành công với stage Dependency Scan**
+
+![Snyk Success](../images/tv3/snyk_pipeline.png)
 
 ---
 
@@ -197,7 +209,9 @@ stage('Dependency Scan') {
 
 | Vấn đề | Nguyên nhân | Giải pháp |
 |--------|-------------|-----------|
-| [Điền vào] | | |
+| `gitleaks: command not found` tại Pre-check | Gitleaks chưa được cài trên Jenkins agent | Phối hợp TV1 cài `brew install gitleaks` trên agent |
+| Gitleaks phát hiện 13 findings, pipeline FAIL | Keycloak client secret từ upstream repo bị nhận nhầm là secret thật | Thêm `commits` allowlist vào `gitleaks.toml` cho 8 commit từ upstream |
+| Snyk chạy xong nhưng không thấy project trên dashboard | `snyk test` chỉ quét local, không đẩy lên dashboard | Thêm `snyk monitor` vào stage để đăng ký project lên Snyk dashboard |
 
 ---
 
