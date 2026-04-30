@@ -18,6 +18,7 @@ stage('Secret Scanning') {
     steps {
         sh '''
             gitleaks detect --source . \
+                --config gitleaks.toml \
                 --report-format json \
                 --report-path gitleaks-report.json \
                 --exit-code 1
@@ -25,7 +26,8 @@ stage('Secret Scanning') {
     }
     post {
         always {
-            archiveArtifacts artifacts: 'gitleaks-report.json', allowEmptyArchive: true
+            archiveArtifacts artifacts: 'gitleaks-report.json',
+                             allowEmptyArchive: true
         }
     }
 }
@@ -33,27 +35,45 @@ stage('Secret Scanning') {
 
 > Pipeline sẽ dừng lại (FAIL) ngay tại stage này nếu Gitleaks phát hiện secret bị lộ.
 
-### 1.3 Cấu Hình File `.gitleaksignore` (Nếu Có)
+### 1.3 Xử Lý False Positive
 
-> Trong trường hợp phát sinh false positive (cảnh báo nhầm), thêm exception vào file `.gitleaksignore`:
+Sau lần chạy đầu tiên, Gitleaks phát hiện **13 findings** trong lịch sử commit — tất cả đều là Keycloak client secret từ **upstream repository** (nashtech-garage/yas), không phải secret thật của nhóm. Các giá trị này là credential cố định dùng cho môi trường dev/demo.
 
+Xử lý bằng cách thêm `commits` vào `allowlist` trong `gitleaks.toml`:
+
+```toml
+[allowlist]
+description = "global allow list"
+paths = [
+  '''test-realm.json''',
+  '''realm-export''',
+  '''keycloak-yas-realm-import.yaml''',
+  '''target'''
+]
+# False positives from upstream YAS repository (dev/demo Keycloak credentials, not real secrets)
+commits = [
+  "af2c9421030761ec4eccb0994a6c576592be113b",
+  "8dc5e08456e8fa8c970b7b0cadcffdcd15d77e39",
+  "f3d6c4a83259ca06fc9bc1889b9369d11b423256",
+  "2192b03da8ca22e188ecf17f693fb9fbe9376811",
+  "b2294a232aa1eea10b9814cf6ece03c5871b98d7",
+  "e8fb3139974eb1a27b224416742c6902300ffee3",
+  "0cac9558db4e4aa004d72e47e652384d6f32a666",
+  "14f0528e9d235c13db92db3bf5e9f3b1cf5b1a7e"
+]
 ```
-[Điền nội dung file .gitleaksignore nếu nhóm có cấu hình]
-```
+
+Sử dụng `commits` allowlist thay vì `paths` để đảm bảo chính xác — chỉ bỏ qua đúng các commit từ upstream, không bỏ qua các secret thật có thể xuất hiện trong tương lai tại cùng file đó.
 
 ### 1.4 Hình Ảnh Minh Chứng
 
 **Hình 1.1 — Stage Secret Scanning chạy thành công (không phát hiện secret)**
 
-```
-[HÌNH: Jenkins Console Output — Gitleaks chạy và kết thúc với trạng thái SUCCESS]
-```
+![Gitleaks Success](../images/tv3/gitleak_success.png)
 
-**Hình 1.2 — Pipeline thất bại khi Gitleaks phát hiện secret (trường hợp demo)**
+**Hình 1.2 — Pipeline thất bại khi Gitleaks phát hiện secret**
 
-```
-[HÌNH: Jenkins build FAIL với thông báo Gitleaks tìm thấy secret trong commit]
-```
+![Gitleaks Failed](../images/tv3/gitleaks_failed.png)
 
 ---
 
@@ -138,8 +158,14 @@ SonarQube phân tích toàn bộ monorepo `yas` với **21k Lines of Code** (Jav
 | Thông số | Giá trị |
 |----------|---------|
 | Tài khoản Snyk | `https://app.snyk.io` |
-| Phương thức xác thực | API Token (lưu trong Jenkins Credentials) |
-| Phương thức tích hợp | Snyk CLI |
+| Phương thức xác thực | API Token (lưu trong Jenkins Credentials với ID `snyk-token`) |
+| Phương thức tích hợp | Snyk CLI (`snyk test` + `snyk monitor`) |
+
+Các bước cấu hình:
+1. Đăng ký tài khoản tại `https://app.snyk.io`
+2. Vào `Account Settings > Auth Token` → copy token
+3. Thêm vào Jenkins: `Manage Jenkins > Credentials > Global > Add Credentials` (Kind: `Secret text`, ID: `snyk-token`)
+4. TV1 cài Snyk CLI trên Jenkins agent: `npm install -g snyk`
 
 ### 3.2 Cấu Hình Stage Trong Jenkinsfile
 
@@ -149,41 +175,47 @@ stage('Dependency Scan') {
         withCredentials([string(credentialsId: 'snyk-token', variable: 'SNYK_TOKEN')]) {
             sh 'snyk auth $SNYK_TOKEN'
             sh 'snyk test --all-projects --json > snyk-report.json || true'
+            sh 'snyk monitor --all-projects || true'
         }
     }
     post {
         always {
-            archiveArtifacts artifacts: 'snyk-report.json', allowEmptyArchive: true
+            archiveArtifacts artifacts: 'snyk-report.json',
+                             allowEmptyArchive: true
         }
     }
 }
 ```
 
-> Sử dụng `|| true` để pipeline không dừng lại khi Snyk tìm thấy vulnerability có mức độ thấp. Có thể điều chỉnh ngưỡng với flag `--severity-threshold=high`.
+> `snyk test` quét và báo cáo vulnerability ra console/file. `snyk monitor` đẩy kết quả lên Snyk dashboard để theo dõi liên tục. Cả hai dùng `|| true` để pipeline không FAIL khi phát hiện vulnerability mức thấp.
 
-### 3.3 Hình Ảnh Minh Chứng
+### 3.3 Kết Quả Quét
 
-**Hình 3.1 — Snyk Dashboard: danh sách vulnerability được phát hiện**
+Snyk phát hiện vulnerability trong toàn bộ monorepo `com-suon-bi-cha/yas` với tổng cộng **55 Critical, 179 High, 140 Medium, 71 Low** trên tất cả các module. Đây là các lỗ hổng trong dependency (thư viện bên thứ ba) mà các service đang sử dụng.
 
-```
-[HÌNH: https://app.snyk.io > Projects > yas — danh sách các dependency có lỗ hổng]
-```
+### 3.4 Hình Ảnh Minh Chứng
 
-**Hình 3.2 — Stage Dependency Scan trong Jenkins: output kết quả quét**
+**Hình 3.1 — Snyk Dashboard: danh sách project và vulnerability được phát hiện**
 
-```
-[HÌNH: Jenkins Console Output của lệnh snyk test với kết quả]
-```
+![Snyk Monitor](../images/tv3/snyk_monitor.png)
+
+**Hình 3.2 — Stage Dependency Scan trong Jenkins pipeline chạy thành công**
+
+![Snyk Success](../images/tv3/snyk_success.png)
 
 ---
 
 ## 4. Tổng Hợp Pipeline Sau Khi Tích Hợp Security Stages
 
-**Hình 4.1 — Toàn bộ pipeline bao gồm các stage quét bảo mật**
+Pipeline hoàn chỉnh bao gồm các stage theo thứ tự:
 
 ```
-[HÌNH: Blue Ocean hoặc Stage View thể hiện đầy đủ: Secret Scanning, Code Quality, Quality Gate, Dependency Scan]
+Pre-check → Secret Scanning → Monorepo Execution → Coverage Report → Dependency Scan
 ```
+
+**Hình 4.1 — Toàn bộ pipeline chạy thành công với stage Dependency Scan**
+
+![Snyk Success](../images/tv3/snyk_pipeline.png)
 
 ---
 
@@ -191,7 +223,9 @@ stage('Dependency Scan') {
 
 | Vấn đề | Nguyên nhân | Giải pháp |
 |--------|-------------|-----------|
-| [Điền vào] | | |
+| `gitleaks: command not found` tại Pre-check | Gitleaks chưa được cài trên Jenkins agent | Phối hợp TV1 cài `brew install gitleaks` trên agent |
+| Gitleaks phát hiện 13 findings, pipeline FAIL | Keycloak client secret từ upstream repo bị nhận nhầm là secret thật | Thêm `commits` allowlist vào `gitleaks.toml` cho 8 commit từ upstream |
+| Snyk chạy xong nhưng không thấy project trên dashboard | `snyk test` chỉ quét local, không đẩy lên dashboard | Thêm `snyk monitor` vào stage để đăng ký project lên Snyk dashboard |
 
 ---
 
