@@ -114,6 +114,8 @@ pipeline {
         stage('Pre-check')          { ... } // Kiểm tra môi trường (Java, Maven, Gitleaks)
         stage('Secret Scanning')    { ... } // Quét lộ bí mật (Secret) bằng Gitleaks
         stage('Monorepo Execution') { ... } // Tự động phát hiện thay đổi và Build/Test service tương ứng
+        stage('Code Quality')           { ... } // Kiểm tra chất lượng code (SonarQube)
+        stage('Quality Gate')           { ... } // Kiểm tra chất lượng code (SonarQube)
         stage('Coverage Report')    { ... } // Tổng hợp báo cáo độ phủ code JaCoCo
     }
 }
