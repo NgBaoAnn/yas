@@ -13,23 +13,6 @@ pipeline {
                 }
             }
         }
-        stage('Secret Scanning') {
-            steps {
-                sh '''
-                    gitleaks detect --source . \
-                        --config gitleaks.toml \
-                        --report-format json \
-                        --report-path gitleaks-report.json \
-                        --exit-code 1
-                '''
-            }
-            post {
-                always {
-                    archiveArtifacts artifacts: 'gitleaks-report.json',
-                                     allowEmptyArchive: true
-                }
-            }
-        }
 
         stage('Secret Scanning') {
             steps {
