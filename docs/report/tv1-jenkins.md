@@ -109,7 +109,6 @@ Pipeline gồm các stage theo thứ tự:
 
 ```groovy
 pipeline {
-    agent { label 'individual-agent' }
     stages {
         stage('Pre-check')          { ... } // Kiểm tra môi trường (Java, Maven, Gitleaks)
         stage('Secret Scanning')    { ... } // Quét lộ bí mật (Secret) bằng Gitleaks
