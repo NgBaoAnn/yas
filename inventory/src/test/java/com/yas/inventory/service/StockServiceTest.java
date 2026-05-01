@@ -46,7 +46,8 @@ class StockServiceTest {
     void addProductIntoWarehouse_whenExists_shouldThrowStockExistingException() {
         StockPostVm postVm = new StockPostVm(1L, 1L);
         when(stockRepository.existsByWarehouseIdAndProductId(1L, 1L)).thenReturn(true);
-        assertThrows(StockExistingException.class, () -> stockService.addProductIntoWarehouse(List.of(postVm)));
+        List<StockPostVm> postVms = List.of(postVm);
+        assertThrows(StockExistingException.class, () -> stockService.addProductIntoWarehouse(postVms));
     }
 
     @Test
@@ -54,7 +55,8 @@ class StockServiceTest {
         StockPostVm postVm = new StockPostVm(1L, 1L);
         when(stockRepository.existsByWarehouseIdAndProductId(1L, 1L)).thenReturn(false);
         when(productService.getProduct(1L)).thenReturn(null);
-        assertThrows(NotFoundException.class, () -> stockService.addProductIntoWarehouse(List.of(postVm)));
+        List<StockPostVm> postVms = List.of(postVm);
+        assertThrows(NotFoundException.class, () -> stockService.addProductIntoWarehouse(postVms));
     }
 
     @Test
@@ -63,7 +65,8 @@ class StockServiceTest {
         when(stockRepository.existsByWarehouseIdAndProductId(1L, 1L)).thenReturn(false);
         when(productService.getProduct(1L)).thenReturn(new ProductInfoVm(1L, "P1", "S1", false));
         when(warehouseRepository.findById(1L)).thenReturn(Optional.empty());
-        assertThrows(NotFoundException.class, () -> stockService.addProductIntoWarehouse(List.of(postVm)));
+        List<StockPostVm> postVms = List.of(postVm);
+        assertThrows(NotFoundException.class, () -> stockService.addProductIntoWarehouse(postVms));
     }
 
     @Test
