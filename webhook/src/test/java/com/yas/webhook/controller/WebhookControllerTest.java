@@ -3,7 +3,6 @@ package com.yas.webhook.controller;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.yas.webhook.model.viewmodel.webhook.WebhookDetailVm;
 import com.yas.webhook.model.viewmodel.webhook.WebhookListGetVm;
