@@ -1167,7 +1167,24 @@ Yêu cầu tối thiểu: >= 70% ✅
 
 ![Báo cáo JaCoCo coverage cho webhook](../assets/coverage/webhook-coverage.png)
 
-##### 2.8 Bảng Tổng Hợp Kết Quả Coverage (6 modules)
+##### 2.8 Module `common-library`
+
+- **Branch:** `test/common-library`
+- **Pull Request:** `[Link PR]`
+
+**Danh Sách File Test:**
+| File Test | Lớp được kiểm thử | Số test case |
+|-----------|-------------------|:------------:|
+| `ErrorVmTest.java` | `ErrorVm` | 2 |
+| `AuthenticationUtilsTest.java` | `AuthenticationUtils` | 1 |
+
+**Kết Quả Coverage:** Instructions **93.9%** | Branches **68.8%**
+
+**Hình Ảnh Minh Chứng:**
+
+![Báo cáo JaCoCo coverage cho common-library](../assets/coverage/common-library-coverage.png)
+
+##### 2.9 Bảng Tổng Hợp Kết Quả Coverage (7 modules)
 
 Yêu cầu tối thiểu: >= 70%
 
@@ -1179,10 +1196,11 @@ Yêu cầu tối thiểu: >= 70%
 | `tax` | 87% | 100% | ✅ |
 | `search` | 85% | 61% | ✅ |
 | `webhook` | 78% | 65% | ✅ |
+| `common-library` | 93.9% | 68.8% | ✅ |
 
 ---
 
-## VII. Tổng Hợp Kết Quả Coverage (Toàn Dự Án — 16 Modules)
+## VII. Tổng Hợp Kết Quả Coverage (Toàn Dự Án — 17 Modules)
 
 Yêu cầu tối thiểu: >= 70% Instruction Coverage
 
@@ -1204,8 +1222,9 @@ Yêu cầu tối thiểu: >= 70% Instruction Coverage
 | tax     | 87%                     | 100%                | ✅          |
 | search  | 85%                     | 61%                 | ✅          |
 | webhook | 78%                     | 65%                 | ✅          |
+| common-library| 93.9%             | 68.8%               | ✅          |
 
-**Tất cả 16 module đều đạt yêu cầu tối thiểu >= 70% Instruction Coverage.**
+**Tất cả 17 module đều đạt yêu cầu tối thiểu >= 70% Instruction Coverage.**
 
 ---
 
