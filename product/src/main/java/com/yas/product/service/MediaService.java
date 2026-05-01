@@ -21,12 +21,19 @@ public class MediaService extends AbstractCircuitBreakFallbackHandler {
     private final RestClient restClient;
     private final ServiceUrlConfig serviceUrlConfig;
 
+    private String getJwt() {
+        org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || !(authentication.getPrincipal() instanceof Jwt)) {
+            throw new org.springframework.security.access.AccessDeniedException("Authentication is required");
+        }
+        return ((Jwt) authentication.getPrincipal()).getTokenValue();
+    }
+
     @Retry(name = "restApi")
     @CircuitBreaker(name = "restCircuitBreaker", fallbackMethod = "handleMediaFallback")
     public NoFileMediaVm saveFile(MultipartFile multipartFile, String caption, String fileNameOverride) {
         final URI url = UriComponentsBuilder.fromUriString(serviceUrlConfig.media()).path("/medias").build().toUri();
-        final String jwt = ((Jwt) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
-            .getTokenValue();
+        final String jwt = getJwt();
 
         final MultipartBodyBuilder builder = new MultipartBodyBuilder();
         builder.part("multipartFile", multipartFile.getResource());
@@ -62,8 +69,7 @@ public class MediaService extends AbstractCircuitBreakFallbackHandler {
     public void removeMedia(Long id) {
         final URI url = UriComponentsBuilder.fromUriString(serviceUrlConfig.media()).path("/medias/{id}")
             .buildAndExpand(id).toUri();
-        final String jwt = ((Jwt) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
-            .getTokenValue();
+        final String jwt = getJwt();
         restClient.delete()
                 .uri(url)
                 .headers(h -> h.setBearerAuth(jwt))
