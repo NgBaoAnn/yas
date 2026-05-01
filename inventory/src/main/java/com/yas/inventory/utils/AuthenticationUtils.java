@@ -27,9 +27,13 @@ public class AuthenticationUtils {
 
     public static String extractJwt() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication == null || authentication.getPrincipal() == null) {
+        if (authentication == null) {
             throw new AccessDeniedException(ApiConstant.ACCESS_DENIED);
         }
-        return ((Jwt) authentication.getPrincipal()).getTokenValue();
+        Object principal = authentication.getPrincipal();
+        if (!(principal instanceof Jwt jwt)) {
+            throw new AccessDeniedException(ApiConstant.ACCESS_DENIED);
+        }
+        return jwt.getTokenValue();
     }
 }
