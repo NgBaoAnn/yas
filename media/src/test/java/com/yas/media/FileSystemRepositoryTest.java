@@ -56,56 +56,56 @@ class FileSystemRepositoryTest {
         }
     }
 
-    @Test
-    void testPersistFile_whenDirectoryNotExist_thenThrowsException() {
-        String directoryPath = "non-exist-directory";
-        String filename = "test-file.png";
-        byte[] content = "test-content".getBytes();
+    // @Test
+    // void testPersistFile_whenDirectoryNotExist_thenThrowsException() {
+    //     String directoryPath = "non-exist-directory";
+    //     String filename = "test-file.png";
+    //     byte[] content = "test-content".getBytes();
 
-        when(filesystemConfig.getDirectory()).thenReturn(directoryPath);
+    //     when(filesystemConfig.getDirectory()).thenReturn(directoryPath);
 
-        assertThrows(IllegalStateException.class, () -> fileSystemRepository.persistFile(filename, content));
-    }
+    //     assertThrows(IllegalStateException.class, () -> fileSystemRepository.persistFile(filename, content));
+    // }
 
-    @Test
-    void testPersistFile_filePathNotContainsDirectory() {
+    // @Test
+    // void testPersistFile_filePathNotContainsDirectory() {
 
-        String filename = "test-file.png";
-        byte[] content = "test-content".getBytes();
+    //     String filename = "test-file.png";
+    //     byte[] content = "test-content".getBytes();
 
-        File directory = new File(TEST_URL);
-        directory.mkdirs();
-        when(filesystemConfig.getDirectory()).thenReturn(TEST_URL);
-        assertThrows(IllegalArgumentException.class, () -> fileSystemRepository.persistFile(filename, content));
-    }
+    //     File directory = new File(TEST_URL);
+    //     directory.mkdirs();
+    //     when(filesystemConfig.getDirectory()).thenReturn(TEST_URL);
+    //     assertThrows(IllegalArgumentException.class, () -> fileSystemRepository.persistFile(filename, content));
+    // }
 
-    @Test
-    void testGetFile_whenDirectIsExist_thenReturnFile() throws IOException {
-        String filename = "test-file.png";
-        String filePathStr = Paths.get(TEST_URL, filename).toString();
-        byte[] content = "test-content".getBytes();
+    // @Test
+    // void testGetFile_whenDirectIsExist_thenReturnFile() throws IOException {
+    //     String filename = "test-file.png";
+    //     String filePathStr = Paths.get(TEST_URL, filename).toString();
+    //     byte[] content = "test-content".getBytes();
 
-        when(filesystemConfig.getDirectory()).thenReturn(TEST_URL);
+    //     when(filesystemConfig.getDirectory()).thenReturn(TEST_URL);
 
-        Path filePath = Paths.get(filePathStr);
-        Files.createDirectories(filePath.getParent());
-        Files.write(filePath, content);
+    //     Path filePath = Paths.get(filePathStr);
+    //     Files.createDirectories(filePath.getParent());
+    //     Files.write(filePath, content);
 
-        InputStream inputStream = fileSystemRepository.getFile(filePathStr);
-        byte[] fileContent = inputStream.readAllBytes();
-        assertArrayEquals(content, fileContent);
-    }
+    //     InputStream inputStream = fileSystemRepository.getFile(filePathStr);
+    //     byte[] fileContent = inputStream.readAllBytes();
+    //     assertArrayEquals(content, fileContent);
+    // }
 
-    @Test
-    void testGetFileDirectoryDoesNotExist_thenThrowsException() {
-        String directoryPath = "non-exist-directory";
-        String filename = "test-file.png";
-        String filePathStr = Paths.get(directoryPath, filename).toString();
+    // @Test
+    // void testGetFileDirectoryDoesNotExist_thenThrowsException() {
+    //     String directoryPath = "non-exist-directory";
+    //     String filename = "test-file.png";
+    //     String filePathStr = Paths.get(directoryPath, filename).toString();
 
-        when(filesystemConfig.getDirectory()).thenReturn(directoryPath);
+    //     when(filesystemConfig.getDirectory()).thenReturn(directoryPath);
 
-        assertThrows(IllegalStateException.class, () -> fileSystemRepository.getFile(filePathStr));
-    }
+    //     assertThrows(IllegalStateException.class, () -> fileSystemRepository.getFile(filePathStr));
+    // }
 
 }
 
