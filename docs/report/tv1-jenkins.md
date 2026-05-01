@@ -79,17 +79,25 @@ Webhook được tạo tại: `Repository > Settings > Webhooks > Add webhook`
 
 ### 3.2 Hình Ảnh Minh Chứng
 
-**Hình 3.1 — Multibranch Pipeline Job — danh sách branch được Jenkins phát hiện**
+**Hình 3.1 — Cấu hình Multibranch Pipeline Job**
 
-```
-[HÌNH: Jenkins > yas-pipeline > danh sách branches đã quét]
-```
+![Jenkins Webhook](../images/tv1/config_multipipeline_1.jpg)
 
-**Hình 3.2 — Pipeline tự động kích hoạt sau khi push code**
+**Hình 3.2 — Cấu hình Multibranch Pipeline Job**
 
-```
-[HÌNH: Build history hiển thị build mới sau khi push lên GitHub]
-```
+![Jenkins Webhook](../images/tv1/config_multipipeline_2.jpg)
+
+**Hình 3.3 — Cấu hình PAT Multibranch Pipeline Job**
+
+![Jenkins Webhook](../images/tv1/config_multipipeline_4.jpg)
+
+**Hình 3.4 — Multibranch Pipeline Job — danh sách branch được Jenkins phát hiện**
+
+![Jenkins Webhook](../images/tv1/scan.jpg)
+
+**Hình 3.5 — Pipeline tự động kích hoạt sau khi push code**
+
+![Jenkins Webhook](../images/tv1/trigger_push.jpg)
 
 ---
 
@@ -101,14 +109,17 @@ Pipeline gồm các stage theo thứ tự:
 
 ```groovy
 pipeline {
-    agent any
     stages {
-        stage('Detect Changes') { ... }   // Phát hiện service có thay đổi
-        stage('Test')           { ... }   // Chạy mvn test + publish JUnit report
-        stage('Coverage Report'){ ... }   // Publish JaCoCo report
-        stage('Build')          { ... }   // Chạy mvn package -DskipTests
+        stage('Pre-check')          { ... } // Kiểm tra môi trường (Java, Maven, Gitleaks)
+        stage('Secret Scanning')    { ... } // Quét lộ bí mật (Secret) bằng Gitleaks
+        stage('Monorepo Execution') { ... } // Tự động phát hiện thay đổi và Build/Test service tương ứng
+        stage('Code Quality')           { ... } // Kiểm tra chất lượng code (SonarQube)
+        stage('Quality Gate')           { ... } // Kiểm tra chất lượng code (SonarQube)
+        stage('Coverage Report')    { ... } // Tổng hợp báo cáo độ phủ code JaCoCo
     }
 }
+
+
 ```
 
 ### 4.2 Logic Phát Hiện Thay Đổi (Monorepo Optimization)
@@ -117,53 +128,31 @@ pipeline {
 
 ```groovy
 def changedServices = sh(
-    script: "git diff --name-only HEAD~1 HEAD | cut -d/ -f1 | sort -u",
+    script: "git diff --name-only HEAD~1 HEAD",
     returnStdout: true
 ).trim().split('\n')
 
-// Ví dụ: chỉ chạy test nếu thư mục 'media' thay đổi
-if ('media' in changedServices) {
-    sh 'cd media && ./mvnw -f ../pom.xml test -pl media -am'
-}
 ```
-
-### 4.3 Hình Ảnh Minh Chứng
-
-**Hình 4.1 — Nội dung Jenkinsfile đầy đủ**
-
-```
-[HÌNH: Nội dung file Jenkinsfile tại root repository]
-```
-
----
 
 ## 5. Kiểm Tra Pipeline Hoạt Động
 
 **Hình 5.1 — Tất cả stage pipeline chạy thành công**
 
-```
-[HÌNH: Stage View hoặc Blue Ocean — tất cả stage màu xanh (SUCCESS)]
-```
+![Jenkins Webhook](../images/tv1/success_pipeline.jpg)
 
-**Hình 5.2 — Minh chứng Monorepo: push vào thư mục `media/` chỉ kích hoạt build service media**
+**Hình 5.2 — Lịch sử build trên Jenkins**
 
-```
-[HÌNH: Console output thể hiện chỉ module media được build/test]
-```
-
-**Hình 5.3 — Lịch sử build trên Jenkins**
-
-```
-[HÌNH: Danh sách các build theo thời gian, trạng thái SUCCESS/FAILURE]
-```
+![Jenkins Webhook](../images/tv1/build_history.jpg)
 
 ---
 
 ## 6. Vấn Đề Gặp Phải Và Cách Giải Quyết
 
-| Vấn đề     | Nguyên nhân | Giải pháp |
-| ---------- | ----------- | --------- |
-| [Điền vào] |             |           |
+| Vấn đề                                                                                     | Nguyên nhân                                                                                               | Giải pháp                                                                                                                           |
+| :----------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------- |
+| Pipeline chạy quá chậm do build lại toàn bộ Monorepo trên mỗi commit.                      | Jenkins mặc định thực thi toàn bộ project, dẫn đến build/test lại cả những service không có thay đổi.     | Triển khai logic `git diff --name-only` để phát hiện chính xác service có thay đổi và chỉ kích hoạt build/test cho module đó.       |
+| Khó khăn trong việc quản lý và hiển thị báo cáo Test/Coverage cho hàng chục Microservices. | Việc chạy gộp khiến kết quả bị chồng chéo, khó xác định lỗi thuộc về service nào trong giao diện Jenkins. | Sử dụng các plugin `junit` và `jacoco` với đường dẫn động (`${service}/target/...`) để phân tách báo cáo chi tiết cho từng service. |
+| Test service `search` bị lỗi `IllegalStateException` khi khởi chạy trên Jenkins.           | Sự khác biệt về cấu hình Kafka giữa môi trường Local và môi trường CI (Docker).                           | Bổ sung cấu hình `spring.kafka.listener.ack-mode=manual` vào file properties để khớp với logic xử lý tin nhắn trong code.           |
 
 ---
 

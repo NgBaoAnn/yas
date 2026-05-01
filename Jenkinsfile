@@ -13,6 +13,7 @@ pipeline {
                 }
             }
         }
+
         stage('Secret Scanning') {
             steps {
                 sh '''
@@ -30,7 +31,6 @@ pipeline {
                 }
             }
         }
-
         stage('Monorepo Execution') {
             steps {
                 script {
