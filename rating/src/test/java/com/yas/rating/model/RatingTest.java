@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class RatingTest {
 
@@ -22,7 +21,7 @@ class RatingTest {
         assertEquals(rating1, rating2);
         assertNotEquals(rating1, rating3);
         assertNotEquals(rating1, new Object());
-        assertTrue(rating1.equals(rating1));
+        assertEquals(rating1, rating1);
 
         assertEquals(rating1.hashCode(), rating2.hashCode());
     }

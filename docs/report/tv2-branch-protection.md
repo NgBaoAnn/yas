@@ -24,39 +24,27 @@ Cấu hình tại: `GitHub Repository > Settings > Branches > Add branch protect
 
 **Hình 1.1 — Cấu hình bắt buộc tạo Pull Request và số lượng Approval**
 
-```
-[HÌNH: Ảnh chụp màn hình tích chọn "Require a pull request before merging" và "Require approvals"]
-```
+![Hình 1.1](../screenshots/branch-protection/01.png)
 
 **Hình 1.2 — Cấu hình bắt buộc Status Checks (Jenkins CI) phải pass**
 
-```
-[HÌNH: Ảnh chụp màn hình tích chọn "Require status checks to pass"]
-```
+![Hình 1.2](../screenshots/branch-protection/02.png)
 
 **Hình 1.3 — Cấu hình bắt buộc cập nhật nhánh trước khi merge**
 
-```
-[HÌNH: Ảnh chụp màn hình tích chọn "Require branches to be up to date before merging"]
-```
+![Hình 1.3](../screenshots/branch-protection/03.png)
 
 **Hình 1.4 — Cấu hình không cho phép Admin lách luật**
 
-```
-[HÌNH: Ảnh chụp màn hình tích chọn "Do not allow bypassing the above settings"]
-```
+![Hình 1.4](../screenshots/branch-protection/04.png)
 
 **Hình 1.5 — Push trực tiếp vào nhánh `main` bị từ chối**
 
-```
-[HÌNH: Terminal output với thông báo "remote: error: GH006: Protected branch update failed"]
-```
+![Hình 1.5](../screenshots/branch-protection/05.png)
 
 **Hình 1.6 — Pull Request hiển thị yêu cầu 2 lượt approve và CI check phải pass**
 
-```
-[HÌNH: Trang PR trên GitHub với phần "Review required" và "Checks" đang chờ]
-```
+![Hình 1.6](../screenshots/branch-protection/06.png)
 
 ---
 
