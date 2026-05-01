@@ -33,7 +33,7 @@
 
 **Hình 1.1 — Jenkins Dashboard sau khi cài đặt thành công**
 
-![Jenkins Dashboard](../images/tv1/jenkins_dashboard.jpg)
+![Jenkins Dashboard](../assets/jenkins/jenkins-dashboard.jpg)
 
 ## 2. Cấu Hình GitHub Webhook
 
@@ -52,15 +52,15 @@ Webhook được tạo tại: `Repository > Settings > Webhooks > Add webhook`
 
 **Hình 2.1 — Cấu hình Webhook trên GitHub**
 
-![Jenkins Webhook](../images/tv1/webhook.jpg)
+![Jenkins Webhook](../assets/jenkins/webhook-config.jpg)
 
 **Hình 2.2 — Cấu hình Webhook trên GitHub**
 
-![Jenkins Webhook](../images/tv1/webhook_pr.jpg)
+![Jenkins Webhook](../assets/jenkins/webhook-pr-trigger.jpg)
 
 **Hình 2.3 — Webhook delivery thành công (ping event trả về HTTP 200)**
 
-![Jenkins Webhook](../images/tv1/webhook_ping.jpg)
+![Jenkins Webhook](../assets/jenkins/webhook-ping-success.jpg)
 
 ---
 
@@ -81,23 +81,23 @@ Webhook được tạo tại: `Repository > Settings > Webhooks > Add webhook`
 
 **Hình 3.1 — Cấu hình Multibranch Pipeline Job**
 
-![Jenkins Webhook](../images/tv1/config_multipipeline_1.jpg)
+![Jenkins Webhook](../assets/jenkins/multibranch-config-1.jpg)
 
 **Hình 3.2 — Cấu hình Multibranch Pipeline Job**
 
-![Jenkins Webhook](../images/tv1/config_multipipeline_2.jpg)
+![Jenkins Webhook](../assets/jenkins/multibranch-config-2.jpg)
 
 **Hình 3.3 — Cấu hình PAT Multibranch Pipeline Job**
 
-![Jenkins Webhook](../images/tv1/config_multipipeline_4.jpg)
+![Jenkins Webhook](../assets/jenkins/multibranch-config-pat.jpg)
 
 **Hình 3.4 — Multibranch Pipeline Job — danh sách branch được Jenkins phát hiện**
 
-![Jenkins Webhook](../images/tv1/scan.jpg)
+![Jenkins Webhook](../assets/jenkins/multibranch-scan-branches.jpg)
 
 **Hình 3.5 — Pipeline tự động kích hoạt sau khi push code**
 
-![Jenkins Webhook](../images/tv1/trigger_push.jpg)
+![Jenkins Webhook](../assets/jenkins/pipeline-auto-trigger.jpg)
 
 ---
 
@@ -138,11 +138,11 @@ def changedServices = sh(
 
 **Hình 5.1 — Tất cả stage pipeline chạy thành công**
 
-![Jenkins Webhook](../images/tv1/success_pipeline.jpg)
+![Jenkins Webhook](../assets/jenkins/pipeline-all-stages-success.jpg)
 
 **Hình 5.2 — Lịch sử build trên Jenkins**
 
-![Jenkins Webhook](../images/tv1/build_history.jpg)
+![Jenkins Webhook](../assets/jenkins/pipeline-build-history.jpg)
 
 ---
 

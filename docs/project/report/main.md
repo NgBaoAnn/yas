@@ -33,12 +33,13 @@ Developer Push / Pull Request
             v
     Jenkins (Multibranch Pipeline)
             |
-            |-- Stage 1: Secret Scanning    (Gitleaks)
-            |-- Stage 2: Test               (Maven + JUnit)
-            |-- Stage 3: Coverage Report    (JaCoCo >= 70%)
+            |-- Stage 1: Pre-check          (Kiểm tra Java, Maven, Gitleaks, Snyk)
+            |-- Stage 2: Secret Scanning    (Gitleaks)
+            |-- Stage 3: Monorepo Execution (Test + Build chỉ service có thay đổi)
             |-- Stage 4: Code Quality       (SonarQube)
-            |-- Stage 5: Dependency Scan    (Snyk)
-            |-- Stage 6: Build              (Maven package)
+            |-- Stage 5: Quality Gate       (SonarQube Quality Gate)
+            |-- Stage 6: Coverage Report    (JaCoCo >= 70%)
+            |-- Stage 7: Dependency Scan    (Snyk)
             |
             v
     GitHub Branch Protection
@@ -96,22 +97,22 @@ Developer Push / Pull Request
 
 | Service | Coverage (Instructions) | Coverage (Branches) | Đạt >= 70% |
 |---------|:-----------------------:|:-------------------:|:----------:|
-| media   | %                       | %                   |            |
-| product | %                       | %                   |            |
-| order   | %                       | %                   |            |
-| inventory| %                       | %                   |            |
-| payment | %                       | %                   |            |
-| promotion| %                       | %                   |            |
-| rating  | %                       | %                   |            |
-| delivery| %                       | %                   |            |
-| sampledata| %                      | %                   |            |
-| recommendation| %                  | %                   |            |
-| customer| %                       | %                   |            |
-| location| %                       | %                   |            |
-| cart    | %                       | %                   |            |
-| tax     | %                       | %                   |            |
-| search  | %                       | %                   |            |
-| webhook | %                       | %                   |            |
+| media   | 80%                     | 65%                 | ✅          |
+| product | 71%                     | 47%                 | ✅          |
+| order   | 76%                     | 47%                 | ✅          |
+| inventory| 89%                    | 70%                 | ✅          |
+| payment | 72%                     | —                   | ✅          |
+| promotion| 82%                    | —                   | ✅          |
+| rating  | 85%                     | —                   | ✅          |
+| delivery| 100%                    | N/A                 | ✅          |
+| sampledata| 81%                   | N/A                 | ✅          |
+| recommendation| 86%               | 48%                 | ✅          |
+| customer| 87%                     | 87%                 | ✅          |
+| location| 88%                     | 88%                 | ✅          |
+| cart    | 88%                     | 68%                 | ✅          |
+| tax     | 87%                     | 100%                | ✅          |
+| search  | 85%                     | 61%                 | ✅          |
+| webhook | 78%                     | 65%                 | ✅          |
 
 ---
 

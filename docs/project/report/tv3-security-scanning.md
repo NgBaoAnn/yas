@@ -69,11 +69,11 @@ Sử dụng `commits` allowlist thay vì `paths` để đảm bảo chính xác 
 
 **Hình 1.1 — Stage Secret Scanning chạy thành công (không phát hiện secret)**
 
-![Gitleaks Success](../images/tv3/gitleak_success.png)
+![Gitleaks Success](../assets/security/gitleaks-scan-success.png)
 
 **Hình 1.2 — Pipeline thất bại khi Gitleaks phát hiện secret**
 
-![Gitleaks Failed](../images/tv3/gitleaks_failed.png)
+![Gitleaks Failed](../assets/security/gitleaks-scan-failed.png)
 
 ---
 
@@ -135,19 +135,21 @@ SonarQube phân tích toàn bộ monorepo `yas` với **21k Lines of Code** (Jav
 | Coverage | 0.0% |
 | Duplications | 3.5% |
 
+> **Lưu ý:** Coverage hiển thị 0.0% trên SonarQube vì pipeline chưa cấu hình `sonar.coverage.jacoco.xmlReportPaths` để đẩy báo cáo JaCoCo lên SonarQube. Độ phủ test thực tế được đo và enforce bằng JaCoCo plugin trực tiếp trên Jenkins (xem phần Coverage Gate của TV4).
+
 ### 2.5 Hình Ảnh Minh Chứng
 
 **Hình 2.1 — SonarQube Dashboard: project `yas` với Quality Gate Passed**
 
-![SonarQube Dashboard](../images/tv3/sonar_monitor.png)
+![SonarQube Dashboard](../assets/security/sonarqube-dashboard.png)
 
 **Hình 2.2 — Jenkins pipeline: stage Code Quality (29s) và Quality Gate (23s) chạy thành công**
 
-![SonarQube Pipeline](../images/tv3/sonar_pipeline.png)
+![SonarQube Pipeline](../assets/security/sonarqube-pipeline-stages.png)
 
 **Hình 2.3 — Jenkins build summary: pipeline hoàn thành thành công**
 
-![SonarQube Success](../images/tv3/sonar_success.png)
+![SonarQube Success](../assets/security/sonarqube-build-success.png)
 
 ---
 
@@ -197,11 +199,11 @@ Snyk phát hiện vulnerability trong toàn bộ monorepo `com-suon-bi-cha/yas` 
 
 **Hình 3.1 — Snyk Dashboard: danh sách project và vulnerability được phát hiện**
 
-![Snyk Monitor](../images/tv3/snyk_monitor.png)
+![Snyk Monitor](../assets/security/snyk-dashboard.png)
 
 **Hình 3.2 — Stage Dependency Scan trong Jenkins pipeline chạy thành công**
 
-![Snyk Success](../images/tv3/snyk_success.png)
+![Snyk Success](../assets/security/snyk-scan-success.png)
 
 ---
 
@@ -210,12 +212,12 @@ Snyk phát hiện vulnerability trong toàn bộ monorepo `com-suon-bi-cha/yas` 
 Pipeline hoàn chỉnh bao gồm các stage theo thứ tự:
 
 ```
-Pre-check → Secret Scanning → Monorepo Execution → Coverage Report → Dependency Scan
+Pre-check → Secret Scanning → Monorepo Execution → Code Quality → Quality Gate → Coverage Report → Dependency Scan
 ```
 
 **Hình 4.1 — Toàn bộ pipeline chạy thành công với stage Dependency Scan**
 
-![Snyk Success](../images/tv3/snyk_pipeline.png)
+![Snyk Success](../assets/security/snyk-full-pipeline.png)
 
 ---
 

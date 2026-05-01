@@ -24,27 +24,27 @@ Cấu hình tại: `GitHub Repository > Settings > Branches > Add branch protect
 
 **Hình 1.1 — Cấu hình bắt buộc tạo Pull Request và số lượng Approval**
 
-![Hình 1.1](../screenshots/branch-protection/01.png)
+![Hình 1.1](../assets/branch-protection/require-pr-approvals.png)
 
 **Hình 1.2 — Cấu hình bắt buộc Status Checks (Jenkins CI) phải pass**
 
-![Hình 1.2](../screenshots/branch-protection/02.png)
+![Hình 1.2](../assets/branch-protection/require-status-checks.png)
 
 **Hình 1.3 — Cấu hình bắt buộc cập nhật nhánh trước khi merge**
 
-![Hình 1.3](../screenshots/branch-protection/03.png)
+![Hình 1.3](../assets/branch-protection/require-branch-update.png)
 
 **Hình 1.4 — Cấu hình không cho phép Admin lách luật**
 
-![Hình 1.4](../screenshots/branch-protection/04.png)
+![Hình 1.4](../assets/branch-protection/no-admin-bypass.png)
 
 **Hình 1.5 — Push trực tiếp vào nhánh `main` bị từ chối**
 
-![Hình 1.5](../screenshots/branch-protection/05.png)
+![Hình 1.5](../assets/branch-protection/push-rejected.png)
 
 **Hình 1.6 — Pull Request hiển thị yêu cầu 2 lượt approve và CI check phải pass**
 
-![Hình 1.6](../screenshots/branch-protection/06.png)
+![Hình 1.6](../assets/branch-protection/pr-review-ci-status.png)
 
 ---
 
@@ -105,7 +105,7 @@ class MediaControllerTest { ... }
 [HÌNH: Terminal output "Tests run: 42, Failures: 0, Errors: 0 — BUILD SUCCESS"]
 ```
 - **Báo cáo JaCoCo Coverage cho service media (tổng 80%):**
-![Báo cáo JaCoCo Coverage — media service](../screenshots/test/03-media-coverage-report.png)
+![Báo cáo JaCoCo Coverage — media service](../assets/coverage/media-coverage.png)
 
 ### 2.3 Module `product`
 
@@ -141,7 +141,7 @@ class MediaControllerTest { ... }
 
 - **Báo cáo JaCoCo Coverage cho service product (tổng 71%)**
 
-![Báo cáo JaCoCo Coverage — product service](../screenshots/test/04-product-coverage-report.png)
+![Báo cáo JaCoCo Coverage — product service](../assets/coverage/product-coverage.png)
 
 
 ### 2.4 Module `order`
@@ -172,7 +172,7 @@ class MediaControllerTest { ... }
 **Hình Ảnh Minh Chứng:**
 - **Báo cáo JaCoCo Coverage tổng quan module order (76%)**
 
-![order_coverage](../screenshots/04-order-service-coverage.png)
+![order_coverage](../assets/coverage/order-coverage.png)
 
 ### 2.5 Module `inventory`
 
@@ -200,7 +200,7 @@ class MediaControllerTest { ... }
 **Hình Ảnh Minh Chứng:**
 - **Báo cáo JaCoCo Coverage tổng quan module inventory (89%)**
 
-![inventory_coverage](../screenshots/05-inventory-service-coverage.png)
+![inventory_coverage](../assets/coverage/inventory-coverage.png)
 
 ### 2.6 Module `payment`
 
@@ -236,7 +236,7 @@ class MediaControllerTest { ... }
 **Hình Ảnh Minh Chứng:**
 - **Báo cáo JaCoCo Coverage cho service payment đạt 72.33%**
 
-![Payment Service Coverage](../../docs/screenshots/05-payment-service-coverage.png)
+![Payment Service Coverage](../assets/coverage/payment-coverage.png)
 
 ### 2.7 Module `promotion`
 
@@ -277,25 +277,20 @@ class MediaControllerTest { ... }
 **Hình Ảnh Minh Chứng:**
 - **Báo cáo JaCoCo Coverage cho service promotion đạt 82.07%**
 
-![Promotion Service Coverage](../../docs/screenshots/06-promotion-service-coverage.png)
+![Promotion Service Coverage](../assets/coverage/promotion-coverage.png)
 
 ### 2.8 Module `rating`
 
 - **Branch:** `test/rating`
 - **Pull Request:** `[Link PR]`
 
-**Danh Sách File Test:**
-| File Test | Lớp được kiểm thử | Số test case |
-|-----------|-------------------|:------------:|
-| [Tên file] | [Tên lớp] | |
+> Chi tiết về unit test và coverage của module `rating` được trình bày đầy đủ tại [Mục 4 — Unit Test: Service rating](#4-unit-test--service-rating) bên dưới.
 
-**Kết Quả Coverage:** Instructions % | Branches %
+**Kết Quả Coverage:** 84.56% (Instructions)
 
 **Hình Ảnh Minh Chứng:**
-```
-[HÌNH: Terminal output BUILD SUCCESS cho rating]
-[HÌNH: Báo cáo JaCoCo coverage cho rating]
-```
+
+![Rating Service Coverage](../assets/coverage/rating-coverage.png)
 
 ### 2.9 Module `delivery`
 
@@ -316,7 +311,7 @@ class MediaControllerTest { ... }
 
 **Hình 2.1 — Báo cáo JaCoCo Coverage cho service delivery đạt 100%**
 
-![Delivery Service Coverage](../../docs/screenshots/test/08-delivery-service-coverage.png)
+![Delivery Service Coverage](../assets/coverage/delivery-coverage.png)
 
 ### 2.10 Module `sampledata`
 
@@ -339,7 +334,7 @@ class MediaControllerTest { ... }
 
 **Hình 2.2 — Báo cáo JaCoCo Coverage cho service sampledata đạt 81.37%**
 
-![SampleData Service Coverage](../../docs/screenshots/test/09-sampledata-service-coverage.png)
+![SampleData Service Coverage](../assets/coverage/sampledata-coverage.png)
 
 ### 2.11 Module `recommendation`
 
@@ -362,7 +357,7 @@ class MediaControllerTest { ... }
 
 **Hình 2.3 — Báo cáo JaCoCo Coverage cho service recommendation đạt 86.32%**
 
-![Recommendation Service Coverage](../../docs/screenshots/test/10-recommendation-service-coverage.png)
+![Recommendation Service Coverage](../assets/coverage/recommendation-coverage.png)
 
 ### 2.12 Bảng Tổng Hợp Kết Quả Coverage (10 modules)
 
@@ -370,16 +365,16 @@ Yêu cầu tối thiểu: >= 70%
 
 | Module | Coverage (Instructions) | Coverage (Branches) | Đạt >= 70% |
 |--------|:-----------------------:|:-------------------:|:----------:|
-| `media` | 80% | 65% | Đạt |
-| `product` | 71% | 47% | Đạt |
-| `order` | % | % | |
-| `inventory` | % | % | |
-| `payment` | % | % | |
-| `promotion` | % | % | |
-| `rating` | % | % | |
-| `delivery` | 100.00% | 0.00% | ✅ |
-| `sampledata` | 81.37% | 0.00% | ✅ |
-| `recommendation` | 86.32% | 48.05% | ✅ |
+| `media` | 80% | 65% | ✅ |
+| `product` | 71% | 47% | ✅ |
+| `order` | 76% | 47% | ✅ |
+| `inventory` | 89% | 70% | ✅ |
+| `payment` | 72% | — | ✅ |
+| `promotion` | 82% | — | ✅ |
+| `rating` | 85% | — | ✅ |
+| `delivery` | 100% | N/A | ✅ |
+| `sampledata` | 81% | N/A | ✅ |
+| `recommendation` | 86% | 48% | ✅ |
 
 ---
 
@@ -422,7 +417,7 @@ Yêu cầu tối thiểu: >= 70% ✅
 
 **Hình 4.1 — Báo cáo JaCoCo Coverage cho service rating đạt 84.56%**
 
-![Rating Service Coverage](../../docs/screenshots/test/07-rating-service-coverage.png)
+![Rating Service Coverage](../assets/coverage/rating-coverage.png)
 
 ---
 

@@ -79,27 +79,19 @@ stage('Coverage Report') {
 
 **Hình 1.1 — Cấu hình JaCoCo Coverage Gate trong file pom.xml**
 
-```
-[HÌNH: Đoạn cấu hình JaCoCo plugin với execution "check" và minimum 0.70]
-```
+![Hình 1.1](../assets/coverage-gate/jacoco-pom-config.png)
 
 **Hình 1.2 — Pipeline thất bại khi coverage dưới ngưỡng 70% (trường hợp demo)**
 
-```
-[HÌNH: Jenkins build FAIL với thông báo "Coverage below minimum: Instructions: X% < 70%"]
-```
+![Hình 1.2](../assets/coverage-gate/pipeline-fail-below-70.png)
 
 **Hình 1.3 — Pipeline thành công sau khi bổ sung đủ unit test**
 
-```
-[HÌNH: Jenkins build SUCCESS — tất cả stage màu xanh]
-```
+![Hình 1.3](../assets/coverage-gate/pipeline-pass-above-70.png)
 
 **Hình 1.4 — Báo cáo JaCoCo Coverage hiển thị trong giao diện Jenkins**
 
-```
-[HÌNH: Jenkins > Build > JaCoCo Coverage Report với biểu đồ coverage]
-```
+![Hình 1.4](../assets/coverage-gate/jacoco-jenkins-report.png)
 
 ---
 
@@ -135,10 +127,8 @@ open target/site/jacoco/index.html
 **Kết Quả Coverage:** Instructions **87%** | Branches **87%**
 
 **Hình Ảnh Minh Chứng:**
-```
-[HÌNH: Terminal output "Tests run: 42, Failures: 0, Errors: 0, Skipped: 0 — BUILD SUCCESS"]
-```
-![Báo cáo JaCoCo coverage cho customer](../screenshots/test/customer-coverage-report.png)
+
+![Báo cáo JaCoCo coverage cho customer](../assets/coverage/customer-coverage.png)
 
 ### 2.3 Module `location`
 
@@ -156,13 +146,11 @@ open target/site/jacoco/index.html
 | `DistrictServiceTest.java` | `DistrictService` | 1 |
 | `StateOrProvinceServiceTest.java` | `StateOrProvinceService` | 14 |
 
-**Kết Quả Coverage:** Instructions **88%** | Branches **88%**
+**Kết Quả Coverage:** Instructions **87%** | Branches **100%**
 
 **Hình Ảnh Minh Chứng:**
-```
-[HÌNH: Terminal output "Tests run: 55, Failures: 0, Errors: 0, Skipped: 0 — BUILD SUCCESS"]
-```
-![Báo cáo JaCoCo coverage cho location](../screenshots/test/location-coverage-report.png)
+
+![Báo cáo JaCoCo coverage cho location](../assets/coverage/location-coverage.png)
 
 ### 2.4 Module `cart`
 
@@ -179,10 +167,8 @@ open target/site/jacoco/index.html
 **Kết Quả Coverage:** Instructions **88%** | Branches **68%**
 
 **Hình Ảnh Minh Chứng:**
-```
-[HÌNH: Terminal output "Tests run: 23, Failures: 0, Errors: 0 — BUILD SUCCESS"]
-```
-![Báo cáo JaCoCo coverage cho cart](../screenshots/test/cart-coverage-report.png.png)
+
+![Báo cáo JaCoCo coverage cho cart](../assets/coverage/cart-coverage.png)
 
 ### 2.5 Module `tax`
 
@@ -200,10 +186,8 @@ open target/site/jacoco/index.html
 **Kết Quả Coverage:** Instructions **87%** | Branches **100%**
 
 **Hình Ảnh Minh Chứng:**
-```
-[HÌNH: Terminal output "Tests run: 44, Failures: 0, Errors: 0 — BUILD SUCCESS"]
-```
-[HÌNH: Báo cáo JaCoCo coverage cho tax]
+
+![Báo cáo JaCoCo coverage cho tax](../assets/coverage/tax-coverage.png)
 
 ### 2.6 Module `search`
 
@@ -221,10 +205,8 @@ open target/site/jacoco/index.html
 **Kết Quả Coverage:** Instructions **85%** | Branches **61%**
 
 **Hình Ảnh Minh Chứng:**
-```
-[HÌNH: Terminal output "Tests run: 16, Failures: 0, Errors: 0, Skipped: 2 — BUILD SUCCESS"]
-```
-![Báo cáo JaCoCo coverage cho search](../screenshots/test/search-coverage-report.png)
+
+![Báo cáo JaCoCo coverage cho search](../assets/coverage/search-coverage.png)
 
 ### 2.7 Module `webhook`
 
@@ -244,10 +226,8 @@ open target/site/jacoco/index.html
 **Kết Quả Coverage:** Instructions **78%** | Branches **65%**
 
 **Hình Ảnh Minh Chứng:**
-```
-[HÌNH: Terminal output "Tests run: 31, Failures: 0, Errors: 0, Skipped: 0 — BUILD SUCCESS"]
-```
-![Báo cáo JaCoCo coverage cho webhook](../screenshots/test/webhook-coverage-report.png)
+
+![Báo cáo JaCoCo coverage cho webhook](../assets/coverage/webhook-coverage.png)
 
 ### 2.8 Bảng Tổng Hợp Kết Quả Coverage (6 modules)
 
@@ -255,12 +235,12 @@ Yêu cầu tối thiểu: >= 70%
 
 | Module | Coverage (Instructions) | Coverage (Branches) | Đạt >= 70% |
 |--------|:-----------------------:|:-------------------:|:----------:|
-| `customer` | 87% | 87% | Đạt |
-| `location` | 88% | 88% | Đạt |
-| `cart` | 100% | 100% | Đạt |
-| `tax` | 100% | 100% | Đạt |
-| `search` | 84% | 46% | Đạt |
-| `webhook` | 78% | 65% | Đạt |
+| `customer` | 87% | 87% | ✅ |
+| `location` | 87% | 100% | ✅ |
+| `cart` | 88% | 68% | ✅ |
+| `tax` | 87% | 100% | ✅ |
+| `search` | 85% | 61% | ✅ |
+| `webhook` | 78% | 65% | ✅ |
 
 ---
 
@@ -268,22 +248,22 @@ Yêu cầu tối thiểu: >= 70%
 
 | Service | Coverage (Instructions) | Coverage (Branches) | Đạt >= 70% |
 |---------|:-----------------------:|:-------------------:|:----------:|
-| media   | %                       | %                   |            |
-| product | %                       | %                   |            |
-| order   | %                       | %                   |            |
-| inventory| %                       | %                   |            |
-| payment | %                       | %                   |            |
-| promotion| %                       | %                   |            |
-| rating  | %                       | %                   |            |
-| delivery| %                       | %                   |            |
-| sampledata| %                      | %                   |            |
-| recommendation| %                  | %                   |            |
-| customer| 87%                     | 87%                 | Đạt        |
-| location| 88%                     | 88%                 | Đạt        |
-| cart    | 100%                    | 100%                | Đạt        |
-| tax     | 100%                    | 100%                | Đạt        |
-| search  | 84%                     | 46%                 | Đạt        |
-| webhook | 78%                     | 65%                 | Đạt        |
+| media   | 80%                     | 65%                 | ✅          |
+| product | 71%                     | 47%                 | ✅          |
+| order   | 76%                     | 47%                 | ✅          |
+| inventory| 89%                    | 70%                 | ✅          |
+| payment | 72%                     | —                   | ✅          |
+| promotion| 82%                    | —                   | ✅          |
+| rating  | 85%                     | —                   | ✅          |
+| delivery| 100%                    | N/A                 | ✅          |
+| sampledata| 81%                   | N/A                 | ✅          |
+| recommendation| 86%               | 48%                 | ✅          |
+| customer| 87%                     | 87%                 | ✅          |
+| location| 87%                     | 100%                | ✅          |
+| cart    | 88%                     | 68%                 | ✅          |
+| tax     | 87%                     | 100%                | ✅          |
+| search  | 85%                     | 61%                 | ✅          |
+| webhook | 78%                     | 65%                 | ✅          |
 
 ---
 
@@ -329,7 +309,9 @@ pandoc bao-cao-tong-hop.md -o bao-cao-final.docx
 
 | Vấn đề | Nguyên nhân | Giải pháp |
 |--------|-------------|-----------|
-| [Điền vào] | | |
+| `cart` và `tax` hiển thị coverage 100% trong JaCoCo nhưng số test case ít | Module nhỏ, ít lớp code nên dễ đạt coverage cao với ít test | Chấp nhận kết quả vì JaCoCo đo trên bytecode instruction, module đơn giản thì coverage tự nhiên cao |
+| Một số service có Branch Coverage thấp (<70%) nhưng Instruction Coverage đạt | Các nhánh `if/else`, `switch-case` chưa được cover hết | Tập trung đảm bảo Instruction Coverage >= 70% theo yêu cầu đồ án, Branch Coverage là chỉ số tham khảo |
+| Khó viết test cho các service có dependency phức tạp (Kafka, Elasticsearch) | Cần mock nhiều layer, ApplicationContext nặng | Sử dụng `@MockBean` và `@WebMvcTest` với `excludeAutoConfiguration` để giảm dependency |
 
 ---
 
