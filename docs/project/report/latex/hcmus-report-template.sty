@@ -3,11 +3,18 @@
 \usepackage{float}
 \usepackage{fancyhdr}
 \usepackage{graphicx}
+\usepackage[export]{adjustbox}  % scale-down large images, keep small ones as-is
 \usepackage{setspace}
 \usepackage[colorlinks=true,linkcolor=blue, citecolor=red]{hyperref}
 \usepackage{url}
 \usepackage[top=.75in, left=.75in, right=.75in, bottom=1in]{geometry}
 \usepackage[utf8]{vietnam}
+
+% Standard image command: scale down if > 0.92\textwidth, keep as-is if smaller
+\newcommand{\reportimg}[1]{%
+  \includegraphics[max width=0.92\textwidth, max height=0.45\textheight, keepaspectratio]{#1}%
+}
+
 
 % For algorithm
 \usepackage{algorithm}
