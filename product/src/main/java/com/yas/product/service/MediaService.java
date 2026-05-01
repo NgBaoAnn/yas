@@ -23,10 +23,14 @@ public class MediaService extends AbstractCircuitBreakFallbackHandler {
 
     private String getJwt() {
         org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication == null || !(authentication.getPrincipal() instanceof Jwt)) {
+        if (authentication == null) {
             throw new org.springframework.security.access.AccessDeniedException("Authentication is required");
         }
-        return ((Jwt) authentication.getPrincipal()).getTokenValue();
+        Object principal = authentication.getPrincipal();
+        if (!(principal instanceof Jwt jwt)) {
+            throw new org.springframework.security.access.AccessDeniedException("Authentication is required");
+        }
+        return jwt.getTokenValue();
     }
 
     @Retry(name = "restApi")
