@@ -8,33 +8,31 @@
 % Line spacing 1.5
 \renewcommand{\baselinestretch}{1.5}
 
-% Optional: graphic path
-% \graphicspath{PATH_TO_GRAPHIC_FOLDER}
-
-% To use Times font family, uncomment this row
-% \usepackage{mathptmx}
-
-% To use roman section / subsection, uncomment these rows
-% \renewcommand{\thesection}{\Roman{section}}
-% \renewcommand{\thesubsection}{\thesection.\Roman{subsection}}
+% Graphic path
+\graphicspath{{img/}}
 
 % Define course name, report name and report title.
-\newcommand{\coursename}{Môn Học Gì Đấy}
-\newcommand{\reportname}{Tên Báo Cáo Gì Đấy}
-\newcommand{\reporttitle}{Báo cáo Bài Tập Gì Đấy}
+\newcommand{\coursename}{DevOps}
+\newcommand{\reportname}{Xây dựng CI Pipeline cho hệ thống YAS --- Yet Another Shop}
+\newcommand{\reporttitle}{Báo Cáo Đồ Án 1: Triển Khai Hệ Thống CI}
 
-\newcommand{\studentname}{Quan, Tran Hoang (19120338)\\meadoge(19120000)\\Hwang S. Wan (19120000)}
-\newcommand{\teachername}{GS. TS. Nguyễn Văn Hướng Dẫn}
+\newcommand{\studentname}{%
+  Ngô Gia An (23120205)\\%
+  Nguyễn Bảo An (23120207)\\%
+  Dương Tuấn Anh (23120208)\\%
+  Trương Nhật Đạt (23120231)%
+}
+\newcommand{\teachername}{Giáo viên hướng dẫn}
 
 % Header
 \lhead{\reporttitle}
-\rhead{
-Trường Đại học Khoa học Tự nhiên - ĐHQG HCM\\
-\coursename
+\rhead{%
+  Trường Đại học Khoa học Tự nhiên - ĐHQG HCM\\%
+  \coursename%
 }
 
 % Footer
-\newcommand{\leftfooter}{\LaTeX\ by \href{https://github.com/trhgquan}{Quan, Tran Hoang}}
+\newcommand{\leftfooter}{Nhóm: com-suon-bi-cha}
 \lfoot{\leftfooter}
 
 % ============ DOCUMENT ============
@@ -45,28 +43,21 @@ Trường Đại học Khoa học Tự nhiên - ĐHQG HCM\\
 
 \tableofcontents
 \pagebreak
-\listoftables
-\pagebreak
 \listoffigures
 \pagebreak
 
 \pagenumbering{arabic}
 \setcounter{page}{1}
 
-\input{content/section}
-\input{content/hinhanh}
-\input{content/bangbieu}
-\input{content/congthuctoan}
-\input{content/thuattoan}
-\input{content/code}
-\input{content/ngonngu}
-\input{content/cite}
+\input{content/01-thong-tin-nhom.tex}
+\input{content/02-checklist.tex}
+\input{content/03-phan-cong.tex}
+\input{content/04-tong-quan.tex}
+\input{content/05-jenkins.tex}
+\input{content/06-branch-protection.tex}
+\input{content/07-security.tex}
+\input{content/08-coverage-gate.tex}
+\input{content/09-unit-test.tex}
+\input{content/10-ket-qua-coverage.tex}
 
-% References
-\input{ref/ref.tex}
-
-% Appendix
-\appendix
-% Add \cleardoublepage to move appendices to next page.
-\input{appendix/appendix.tex}
 \end{document}
