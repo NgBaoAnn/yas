@@ -1,15 +1,9 @@
 package com.yas.product.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import com.yas.commonlibrary.exception.BadRequestException;
-import com.yas.commonlibrary.exception.DuplicatedException;
-import com.yas.commonlibrary.exception.NotFoundException;
-import com.yas.product.model.Brand;
 import com.yas.product.model.Product;
 import com.yas.product.repository.BrandRepository;
 import com.yas.product.repository.CategoryRepository;
@@ -20,31 +14,15 @@ import com.yas.product.repository.ProductOptionRepository;
 import com.yas.product.repository.ProductOptionValueRepository;
 import com.yas.product.repository.ProductRelatedRepository;
 import com.yas.product.repository.ProductRepository;
-import com.yas.product.viewmodel.NoFileMediaVm;
 import com.yas.product.viewmodel.product.ProductListVm;
-import com.yas.product.viewmodel.product.ProductPostVm;
-import com.yas.product.viewmodel.product.ProductPutVm;
-import com.yas.product.viewmodel.product.ProductGetDetailVm;
-import com.yas.product.viewmodel.product.ProductDetailGetVm;
-import com.yas.product.viewmodel.product.ProductsGetVm;
-import com.yas.product.viewmodel.product.ProductInfoVm;
-import com.yas.product.viewmodel.product.ProductFeatureGetVm;
-import com.yas.product.model.enumeration.FilterExistInWhSelection;
-import com.yas.product.viewmodel.product.ProductSlugGetVm;
-import com.yas.product.viewmodel.product.ProductEsDetailVm;
-import com.yas.product.viewmodel.product.ProductListGetVm;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 
 @ExtendWith(MockitoExtension.class)
 class ProductServiceGetByIdsTest {
