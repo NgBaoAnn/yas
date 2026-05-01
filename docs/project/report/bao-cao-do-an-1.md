@@ -17,7 +17,7 @@
 | Trương Nhật Đạt | `23120231` | Coverage Gate và Unit Test (6 modules) |
 
 **Link GitHub Repository:** `https://github.com/com-suon-bi-cha/yas`  
-**Link Pull Request (Open):** `https://github.com/com-suon-bi-cha/yas/pull/<so>`
+**Link Pull Request (Open):** `https://github.com/com-suon-bi-cha/yas/pull/33`
 
 ---
 ## II. Checklist Yêu Cầu Đồ Án
@@ -47,7 +47,7 @@
 | # | Yêu cầu | Giá trị |
 |:-:|---------|---------| 
 | 1 | Link GitHub Repository | `https://github.com/com-suon-bi-cha/yas` |
-| 2 | Pull Request đang ở trạng thái Open | `https://github.com/com-suon-bi-cha/yas/pull/<so>` |
+| 2 | Pull Request đang ở trạng thái Open | `https://github.com/com-suon-bi-cha/yas/pull/33` |
 | 3 | File báo cáo | `23120205_23120207_23120208_23120231.docx` |
 
 ---
@@ -375,9 +375,7 @@ Theo yêu cầu nộp bài, nhóm duy trì ít nhất một PR ở trạng thái
 
 **Hình 5.1 — Pull Request đang ở trạng thái Open, chờ review**
 
-```
-[HÌNH: Trang PR trên GitHub với nhãn "Open", hiển thị reviewer và CI status]
-```
+![PR #33 đang Open, yêu cầu 2 approvals và CI pass](../assets/branch-protection/pr-open-demo.png)
 
 ---
 
@@ -765,7 +763,7 @@ class MediaControllerTest { ... }
 ##### 2.3 Module `product`
 
 - **Branch:** `test/product`
-- **Pull Request:** `https://github.com/com-suon-bi-cha/yas/pull/<so>`
+- **Pull Request:** `https://github.com/com-suon-bi-cha/yas/pull/33`
 
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
@@ -801,7 +799,7 @@ class MediaControllerTest { ... }
 ##### 2.4 Module `order`
 
 - **Branch:** `test/order`
-- **Pull Request:** `https://github.com/com-suon-bi-cha/yas/pull/<so>`
+- **Pull Request:** `https://github.com/com-suon-bi-cha/yas/pull/33`
 
 **Danh Sách File Test:**
 | File Test | Lớp/Phương thức được kiểm thử | Số test case |
@@ -858,7 +856,7 @@ class MediaControllerTest { ... }
 ##### 2.6 Module `payment`
 
 - **Branch:** `test/payment`
-- **Pull Request:** `https://github.com/com-suon-bi-cha/yas/pull/<so>`
+- **Pull Request:** `https://github.com/com-suon-bi-cha/yas/pull/33`
 
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
@@ -894,7 +892,7 @@ class MediaControllerTest { ... }
 ##### 2.7 Module `promotion`
 
 - **Branch:** `test/promotion`
-- **Pull Request:** `https://github.com/com-suon-bi-cha/yas/pull/<so>`
+- **Pull Request:** `https://github.com/com-suon-bi-cha/yas/pull/33`
 
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
@@ -940,7 +938,7 @@ class MediaControllerTest { ... }
 |-----------|---------|
 | Tên branch | `test/rating` |
 | Branch gốc | `main` |
-| Link PR | `https://github.com/com-suon-bi-cha/yas/pull/<so>` |
+| Link PR | `https://github.com/com-suon-bi-cha/yas/pull/33` |
 
 ##### 4.2 Danh Sách File Test
 
