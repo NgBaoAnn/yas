@@ -724,7 +724,6 @@ open target/site/jacoco/index.html
 ##### 2.2 Module `media`
 
 - **Branch:** `test/media`
-- **Pull Request:** `[Link PR]`
 
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
@@ -832,7 +831,6 @@ class MediaControllerTest { ... }
 ##### 2.5 Module `inventory`
 
 - **Branch:** `test/inventory`
-- **Pull Request:** `[Link PR]`
 
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
@@ -978,7 +976,6 @@ Yêu cầu tối thiểu: >= 70% ✅
 ##### 2.9 Module `delivery`
 
 - **Branch:** `test/delivery`
-- **Pull Request:** `[Link PR]`
 
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
@@ -999,7 +996,6 @@ Yêu cầu tối thiểu: >= 70% ✅
 ##### 2.10 Module `sampledata`
 
 - **Branch:** `test/sampledata`
-- **Pull Request:** `[Link PR]`
 
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
@@ -1022,7 +1018,6 @@ Yêu cầu tối thiểu: >= 70% ✅
 ##### 2.11 Module `recommendation`
 
 - **Branch:** `test/recommendation`
-- **Pull Request:** `[Link PR]`
 
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
@@ -1049,7 +1044,6 @@ Yêu cầu tối thiểu: >= 70% ✅
 ##### 2.2 Module `customer`
 
 - **Branch:** `test/customer`
-- **Pull Request:** `[Link PR]`
 
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
@@ -1071,7 +1065,6 @@ Yêu cầu tối thiểu: >= 70% ✅
 ##### 2.3 Module `location`
 
 - **Branch:** `test/location`
-- **Pull Request:** `[Link PR]`
 
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
@@ -1093,7 +1086,6 @@ Yêu cầu tối thiểu: >= 70% ✅
 ##### 2.4 Module `cart`
 
 - **Branch:** `test/cart`
-- **Pull Request:** `[Link PR]`
 
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
@@ -1111,7 +1103,6 @@ Yêu cầu tối thiểu: >= 70% ✅
 ##### 2.5 Module `tax`
 
 - **Branch:** `test/tax`
-- **Pull Request:** `[Link PR]`
 
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
@@ -1130,7 +1121,6 @@ Yêu cầu tối thiểu: >= 70% ✅
 ##### 2.6 Module `search`
 
 - **Branch:** `test/search`
-- **Pull Request:** `[Link PR]`
 
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
@@ -1149,7 +1139,6 @@ Yêu cầu tối thiểu: >= 70% ✅
 ##### 2.7 Module `webhook`
 
 - **Branch:** `test/webhook`
-- **Pull Request:** `[Link PR]`
 
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
@@ -1170,7 +1159,6 @@ Yêu cầu tối thiểu: >= 70% ✅
 ##### 2.8 Module `common-library`
 
 - **Branch:** `test/common-library`
-- **Pull Request:** `[Link PR]`
 
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
