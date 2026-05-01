@@ -2,7 +2,6 @@ package com.yas.commonlibrary.kafka.cdc;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.kafka.support.KafkaHeaders;
@@ -21,15 +20,15 @@ class BaseCdcConsumerTest {
     @Test
     void processMessage_SingleConsumer_Success() {
         TestCdcConsumer consumer = new TestCdcConsumer();
-        String record = "test-record";
+        String messageRecord = "test-record";
         Map<String, Object> headerMap = new HashMap<>();
         headerMap.put(KafkaHeaders.RECEIVED_KEY, "test-key");
         MessageHeaders headers = new MessageHeaders(headerMap);
         Consumer<String> mockConsumer = mock(Consumer.class);
 
-        consumer.processMessage(record, headers, mockConsumer);
+        consumer.processMessage(messageRecord, headers, mockConsumer);
 
-        verify(mockConsumer).accept(record);
+        verify(mockConsumer).accept(messageRecord);
     }
 
     @Test
