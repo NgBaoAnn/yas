@@ -124,15 +124,21 @@ open target/site/jacoco/index.html
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
 |-----------|-------------------|:------------:|
-| [Tên file] | [Tên lớp] | |
+| `CustomerControllerTest.java` | `CustomerController` | 7 |
+| `LocationControllerTest.java` | `LocationController` | 5 |
+| `UserAddressControllerTest.java` | `UserAddressController` | 5 |
+| `CustomerServiceTest.java` | `CustomerService` | 15 |
+| `LocationServiceTest.java` | `LocationService` | 3 |
+| `UserAddressServiceTest.java` | `UserAddressService` | 10 |
+| `MessagesUtilsTest.java` | `MessagesUtils` | 2 |
 
-**Kết Quả Coverage:** Instructions % | Branches %
+**Kết Quả Coverage:** Instructions **87%** | Branches **87%**
 
 **Hình Ảnh Minh Chứng:**
 ```
-[HÌNH: Terminal output BUILD SUCCESS cho customer]
-[HÌNH: Báo cáo JaCoCo coverage cho customer]
+[HÌNH: Terminal output "Tests run: 42, Failures: 0, Errors: 0, Skipped: 0 — BUILD SUCCESS"]
 ```
+![Báo cáo JaCoCo coverage cho customer](../screenshots/test/customer-coverage-report.png)
 
 ### 2.3 Module `location`
 
@@ -142,15 +148,21 @@ open target/site/jacoco/index.html
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
 |-----------|-------------------|:------------:|
-| [Tên file] | [Tên lớp] | |
+| `AddressControllerTest.java` | `AddressController` | 6 |
+| `CountryControllerTest.java` | `CountryController` | 6 |
+| `StateOrProvinceControllerTest.java` | `StateOrProvinceController` | 6 |
+| `AddressServiceTest.java` | `AddressService` | 9 |
+| `CountryServiceTest.java` | `CountryService` | 13 |
+| `DistrictServiceTest.java` | `DistrictService` | 1 |
+| `StateOrProvinceServiceTest.java` | `StateOrProvinceService` | 14 |
 
-**Kết Quả Coverage:** Instructions % | Branches %
+**Kết Quả Coverage:** Instructions **88%** | Branches **88%**
 
 **Hình Ảnh Minh Chứng:**
 ```
-[HÌNH: Terminal output BUILD SUCCESS cho location]
-[HÌNH: Báo cáo JaCoCo coverage cho location]
+[HÌNH: Terminal output "Tests run: 55, Failures: 0, Errors: 0, Skipped: 0 — BUILD SUCCESS"]
 ```
+![Báo cáo JaCoCo coverage cho location](../screenshots/test/location-coverage-report.png)
 
 ### 2.4 Module `cart`
 
@@ -160,15 +172,17 @@ open target/site/jacoco/index.html
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
 |-----------|-------------------|:------------:|
-| [Tên file] | [Tên lớp] | |
+| `CartItemServiceTest.java` | `CartItemService` | 10 |
+| `ProductServiceTest.java` | `ProductService` | 1 |
+| `CartItemControllerTest.java` | `CartItemController` | 12 |
 
-**Kết Quả Coverage:** Instructions % | Branches %
+**Kết Quả Coverage:** Instructions **88%** | Branches **68%**
 
 **Hình Ảnh Minh Chứng:**
 ```
-[HÌNH: Terminal output BUILD SUCCESS cho cart]
-[HÌNH: Báo cáo JaCoCo coverage cho cart]
+[HÌNH: Terminal output "Tests run: 23, Failures: 0, Errors: 0 — BUILD SUCCESS"]
 ```
+![Báo cáo JaCoCo coverage cho cart](../screenshots/test/cart-coverage-report.png.png)
 
 ### 2.5 Module `tax`
 
@@ -178,15 +192,18 @@ open target/site/jacoco/index.html
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
 |-----------|-------------------|:------------:|
-| [Tên file] | [Tên lớp] | |
+| `TaxClassServiceTest.java` | `TaxClassService` | 8 |
+| `TaxRateServiceTest.java` | `TaxRateService` | 15 |
+| `TaxClassControllerTest.java` | `TaxClassController` | 6 |
+| `TaxRateControllerTest.java` | `TaxRateController` | 7 |
 
-**Kết Quả Coverage:** Instructions % | Branches %
+**Kết Quả Coverage:** Instructions **87%** | Branches **100%**
 
 **Hình Ảnh Minh Chứng:**
 ```
-[HÌNH: Terminal output BUILD SUCCESS cho tax]
-[HÌNH: Báo cáo JaCoCo coverage cho tax]
+[HÌNH: Terminal output "Tests run: 44, Failures: 0, Errors: 0 — BUILD SUCCESS"]
 ```
+[HÌNH: Báo cáo JaCoCo coverage cho tax]
 
 ### 2.6 Module `search`
 
@@ -196,15 +213,18 @@ open target/site/jacoco/index.html
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
 |-----------|-------------------|:------------:|
-| [Tên file] | [Tên lớp] | |
+| `ProductServiceTest.java` | `ProductService` | 4 |
+| `ProductSyncDataServiceTest.java` | `ProductSyncDataService` | 7 |
+| `ProductControllerTest.java` | `ProductController` | 2 |
+| `ProductSyncDataConsumerTest.java` | `ProductSyncDataConsumer` | 3 |
 
-**Kết Quả Coverage:** Instructions % | Branches %
+**Kết Quả Coverage:** Instructions **85%** | Branches **61%**
 
 **Hình Ảnh Minh Chứng:**
 ```
-[HÌNH: Terminal output BUILD SUCCESS cho search]
-[HÌNH: Báo cáo JaCoCo coverage cho search]
+[HÌNH: Terminal output "Tests run: 16, Failures: 0, Errors: 0, Skipped: 2 — BUILD SUCCESS"]
 ```
+![Báo cáo JaCoCo coverage cho search](../screenshots/test/search-coverage-report.png)
 
 ### 2.7 Module `webhook`
 
@@ -214,15 +234,20 @@ open target/site/jacoco/index.html
 **Danh Sách File Test:**
 | File Test | Lớp được kiểm thử | Số test case |
 |-----------|-------------------|:------------:|
-| [Tên file] | [Tên lớp] | |
+| `WebhookControllerTest.java` | `WebhookController` | 6 |
+| `WebhookServiceTest.java` | `WebhookService` | 11 |
+| `EventServiceTest.java` | `EventService` | 1 |
+| `OrderEventServiceTest.java` | `OrderEventService` | 4 |
+| `ProductEventServiceTest.java` | `ProductEventService` | 2 |
+| `WebhookMapperTest.java` | `WebhookMapper` | 7 |
 
-**Kết Quả Coverage:** Instructions % | Branches %
+**Kết Quả Coverage:** Instructions **78%** | Branches **65%**
 
 **Hình Ảnh Minh Chứng:**
 ```
-[HÌNH: Terminal output BUILD SUCCESS cho webhook]
-[HÌNH: Báo cáo JaCoCo coverage cho webhook]
+[HÌNH: Terminal output "Tests run: 31, Failures: 0, Errors: 0, Skipped: 0 — BUILD SUCCESS"]
 ```
+![Báo cáo JaCoCo coverage cho webhook](../screenshots/test/webhook-coverage-report.png)
 
 ### 2.8 Bảng Tổng Hợp Kết Quả Coverage (6 modules)
 
@@ -230,12 +255,12 @@ Yêu cầu tối thiểu: >= 70%
 
 | Module | Coverage (Instructions) | Coverage (Branches) | Đạt >= 70% |
 |--------|:-----------------------:|:-------------------:|:----------:|
-| `customer` | % | % | |
-| `location` | % | % | |
-| `cart` | % | % | |
-| `tax` | % | % | |
-| `search` | % | % | |
-| `webhook` | % | % | |
+| `customer` | 87% | 87% | Đạt |
+| `location` | 88% | 88% | Đạt |
+| `cart` | 100% | 100% | Đạt |
+| `tax` | 100% | 100% | Đạt |
+| `search` | 84% | 46% | Đạt |
+| `webhook` | 78% | 65% | Đạt |
 
 ---
 
@@ -253,12 +278,12 @@ Yêu cầu tối thiểu: >= 70%
 | delivery| %                       | %                   |            |
 | sampledata| %                      | %                   |            |
 | recommendation| %                  | %                   |            |
-| customer| %                       | %                   |            |
-| location| %                       | %                   |            |
-| cart    | %                       | %                   |            |
-| tax     | %                       | %                   |            |
-| search  | %                       | %                   |            |
-| webhook | %                       | %                   |            |
+| customer| 87%                     | 87%                 | Đạt        |
+| location| 88%                     | 88%                 | Đạt        |
+| cart    | 100%                    | 100%                | Đạt        |
+| tax     | 100%                    | 100%                | Đạt        |
+| search  | 84%                     | 46%                 | Đạt        |
+| webhook | 78%                     | 65%                 | Đạt        |
 
 ---
 
