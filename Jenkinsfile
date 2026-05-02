@@ -37,9 +37,9 @@ pipeline {
                     def changedFiles = sh(script: 'git diff --name-only HEAD~1 HEAD', returnStdout: true).trim().split('\n')
                     def services = [
                         'media', 'product', 'order', 'inventory', 'payment', 'promotion', 
-                        'rating', 'delivery', 'sampledata', 'recommendation', // TV2 (10 modules)
-                        'customer', 'location', 'cart', 'tax', 'search', 'webhook', // TV4 (6 modules)
-                        'common-library', 'backoffice-bff', 'storefront-bff', 'payment-paypal' // Other modules
+                        'rating', 'delivery', 'sampledata', 'recommendation', 
+                        'customer', 'location', 'cart', 'tax', 'search', 'webhook', 
+                        'common-library', 'backoffice-bff', 'storefront-bff', 'payment-paypal' 
                     ]
 
                     for (service in services) {
