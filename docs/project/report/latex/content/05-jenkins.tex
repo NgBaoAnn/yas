@@ -262,20 +262,4 @@ pipeline {
 \caption{Danh sách Nodes trên Jenkins: 4 agent + Built-In Node}
 \end{figure}
 
-\subsubsection{Vấn Đề Gặp Phải Và Cách Giải Quyết}
 
-\begin{table}[H]
-\centering
-\caption{Vấn đề gặp phải khi triển khai Jenkins}
-\begin{tabular}{|p{4.5cm}|p{4.5cm}|p{4.5cm}|}
-\hline
-\textbf{Vấn đề} & \textbf{Nguyên nhân} & \textbf{Giải pháp} \\
-\hline
-Pipeline chạy quá chậm do build lại toàn bộ Monorepo & Jenkins mặc định thực thi toàn bộ project & Triển khai logic \texttt{git diff --name-only} để phát hiện service có thay đổi \\
-\hline
-Khó quản lý báo cáo Test/Coverage cho nhiều Microservices & Chạy gộp khiến kết quả chồng chéo & Dùng plugin \texttt{junit} và \texttt{jacoco} với đường dẫn động \texttt{\$\{service\}/target/...} \\
-\hline
-Test service \texttt{search} bị lỗi \texttt{IllegalStateException} & Khác biệt cấu hình Kafka giữa Local và CI & Bổ sung \texttt{spring.kafka.listener.ack-mode=manual} vào file properties \\
-\hline
-\end{tabular}
-\end{table}

@@ -202,20 +202,4 @@ Snyk phát hiện tổng cộng \textbf{55 Critical, 179 High, 140 Medium, 71 Lo
 \caption{Toàn bộ pipeline chạy thành công với đầy đủ Security Stages}
 \end{figure}
 
-\subsubsection{Vấn Đề Gặp Phải Và Cách Giải Quyết}
 
-\begin{table}[H]
-\centering
-\caption{Vấn đề gặp phải khi tích hợp Security Scanning}
-\begin{tabular}{|p{4.5cm}|p{4.5cm}|p{4.5cm}|}
-\hline
-\textbf{Vấn đề} & \textbf{Nguyên nhân} & \textbf{Giải pháp} \\
-\hline
-\texttt{gitleaks: command not found} tại Pre-check & Gitleaks chưa được cài trên Jenkins agent & Cài \texttt{brew install gitleaks} trên agent \\
-\hline
-Gitleaks phát hiện 13 findings, pipeline FAIL & Keycloak client secret từ upstream repo bị nhận nhầm là secret thật & Thêm \texttt{commits} allowlist vào \texttt{gitleaks.toml} cho 8 commit từ upstream \\
-\hline
-Snyk chạy xong nhưng không thấy project trên dashboard & \texttt{snyk test} chỉ quét local, không đẩy lên dashboard & Thêm \texttt{snyk monitor} vào stage \\
-\hline
-\end{tabular}
-\end{table}
